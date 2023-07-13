@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "242413427221",
+    "firebase_url": "https://urban-management-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "urban-management-app",
+    "storage_bucket": "urban-management-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242413427221:android:b1f8e15ef6a7c2b6898c1c",
+        "android_client_info": {
+          "package_name": "com.example.urban_management_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "242413427221-ugepqcmrp0vshkd7a5aji1k6m25a4n6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKijtx3I4n5qv7t-blmF9C-F1uvN2N-oU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "242413427221-ugepqcmrp0vshkd7a5aji1k6m25a4n6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
