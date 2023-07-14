@@ -33,6 +33,7 @@ public class RegistrationActivity extends AppCompatActivity {
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+
         buttonRegister = findViewById(R.id.buttonRegister);
         buttonReturn = findViewById(R.id.buttonReturn);
 
@@ -68,7 +69,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Return to the home page or any desired activity
-                // e.g., startActivity(new Intent(RegistrationActivity.this, HomeActivity.class));
+                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
             }
         });
     }

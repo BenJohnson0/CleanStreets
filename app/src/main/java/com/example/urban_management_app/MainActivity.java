@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* //TODO: should this be on the main screen?
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,5 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PasswordResetActivity.class));
             }
         });
+        */
     }
 }
