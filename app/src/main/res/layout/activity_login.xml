@@ -1,32 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:hint="Username" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextEmail"
-        android:layout_marginTop="16dp"
         android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
+    <Button
+        android:id="@+id/buttonHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Home" />
+
+    <TextView
+        android:id="@+id/textViewForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextPassword"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Log in" />
+        android:text="Forgot Password?"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/buttonForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Password"
+        android:textColor="@android:color/darker_gray"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

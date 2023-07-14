@@ -1,5 +1,6 @@
 package com.example.urban_management_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,12 +14,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin;
+    private EditText editTextUsername, editTextPassword;
+    private Button buttonLogin, buttonHome, buttonForgotPassword;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -26,43 +26,55 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // Bind views
-        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
+        buttonHome = findViewById(R.id.buttonHome);
+        buttonForgotPassword = findViewById(R.id.buttonForgotPassword);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editTextEmail.getText().toString().trim();
+                String username = editTextUsername.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
 
-                // Perform login
+                // Validate the user inputs (e.g., check for empty fields)
 
-                //*********
-                // TODO: error handling
-                //*********
-                firebaseAuth.signInWithEmailAndPassword(email, password)
+                // Perform login authentication using the entered data
+                firebaseAuth.signInWithEmailAndPassword(username, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Login success
-                                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                                    // Proceed to the next activity
+                                    Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
+                                    // Proceed to the home page or any desired activity
                                     // e.g., startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 } else {
                                     // Login failed
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
             }
         });
+
+        buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Return to the home page or any desired activity
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        });
+
+        buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the PasswordResetActivity
+                startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class));
+            }
+        });
     }
 }
-

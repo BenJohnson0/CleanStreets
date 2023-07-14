@@ -1,23 +1,49 @@
 package com.example.urban_management_app;
 
-import com.google.firebase.FirebaseApp;
-import android.app.Application;
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import com.google.firebase.FirebaseApp;
 
-public class MainActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Button buttonRegister, buttonLogin, buttonForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
-    }
+        setContentView(R.layout.activity_main);
+        FirebaseApp.initializeApp(this);
 
-    public class MyApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            FirebaseApp.initializeApp(this);
-        }
+        buttonRegister = findViewById(R.id.buttonRegister);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        buttonForgotPassword = findViewById(R.id.buttonForgotPassword);
+
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the RegistrationActivity
+                startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
+            }
+        });
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the LoginActivity
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
+        });
+
+        buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open the PasswordResetActivity
+                startActivity(new Intent(MainActivity.this, PasswordResetActivity.class));
+            }
+        });
     }
 }
