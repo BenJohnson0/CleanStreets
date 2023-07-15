@@ -50,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Login success
                                     Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                                    // Proceed to the home page or any desired activity
-                                    // e.g., startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                    // Proceed to the home page
+                                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 } else {
                                     // Login failed
                                     Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();

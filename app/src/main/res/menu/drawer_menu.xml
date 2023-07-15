@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_add_report"
+            android:icon="@drawable/add"
+            android:title="Add New Report" />
+        <item
+            android:id="@+id/nav_statistics"
+            android:icon="@drawable/stats"
+            android:title="View Statistics Dashboard" />
+        <item
+            android:id="@+id/nav_saved_reports"
+            android:icon="@drawable/bookmark"
+            android:title="View Saved Reports" />
+        <item
+            android:id="@+id/nav_your_reports"
+            android:icon="@drawable/people"
+            android:title="Your Reports" />
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/account"
+            android:title="Account Management" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/setting"
+            android:title="App Settings" />
+    </group>
+
+    <item
+        android:id="@+id/nav_sign_out"
+        android:icon="@drawable/logout"
+        android:title="Sign Out" />
+
+</menu>

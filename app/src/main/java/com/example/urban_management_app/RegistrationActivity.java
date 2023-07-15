@@ -55,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     // Registration success
                                     Toast.makeText(RegistrationActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
                                     // Proceed to the home page or any desired activity
-                                    // e.g., startActivity(new Intent(RegistrationActivity.this, HomeActivity.class));
+                                    startActivity(new Intent(RegistrationActivity.this, HomeActivity.class));
                                 } else {
                                     // Registration failed
                                     Toast.makeText(RegistrationActivity.this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
