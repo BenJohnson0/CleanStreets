@@ -68,6 +68,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         boolean isLoggedIn = (userEmail != null);
         navigationView.getMenu().findItem(R.id.nav_your_reports).setVisible(isLoggedIn);
         navigationView.getMenu().findItem(R.id.nav_sign_out).setVisible(isLoggedIn);
+        navigationView.getMenu().findItem(R.id.nav_account).setVisible(isLoggedIn);
+        navigationView.getMenu().findItem(R.id.nav_saved_reports).setVisible(isLoggedIn);
     }
 
     @Override
@@ -78,7 +80,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 showToast("Home selected");
                 break;
             case R.id.nav_account:
-                // Handle Account management option
+                // Handle Account management option (visible only to logged-in users)
                 showToast("Account selected");
                 break;
             case R.id.nav_settings:
@@ -90,7 +92,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 showToast("Statistics selected");
                 break;
             case R.id.nav_saved_reports:
-                // Handle View saved reports option
+                // Handle View saved reports option (visible only to logged-in users)
                 showToast("Saved reports selected");
                 break;
             case R.id.nav_add_report:
