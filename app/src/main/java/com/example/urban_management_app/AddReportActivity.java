@@ -42,8 +42,6 @@ public class AddReportActivity extends AppCompatActivity {
 
     private EditText editTextX;
     private EditText editTextY;
-    private EditText editTextSize;
-    private EditText editTextUrgency;
     private ImageView imageViewAttachment;
     private Uri imageUri;
     private ProgressDialog progressDialog;

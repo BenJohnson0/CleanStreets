@@ -76,6 +76,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_saved_reports).setVisible(true);
             navMenu.findItem(R.id.nav_your_reports).setVisible(true);
             navMenu.findItem(R.id.nav_map).setVisible(true);
+            navMenu.findItem(R.id.nav_education).setVisible(true);
             navMenu.findItem(R.id.nav_account).setVisible(true);
             navMenu.findItem(R.id.nav_settings).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(true);
@@ -88,6 +89,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_saved_reports).setVisible(false);
             navMenu.findItem(R.id.nav_your_reports).setVisible(false);
             navMenu.findItem(R.id.nav_map).setVisible(true);
+            navMenu.findItem(R.id.nav_education).setVisible(true);
             navMenu.findItem(R.id.nav_account).setVisible(false);
             navMenu.findItem(R.id.nav_settings).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(false);
@@ -127,6 +129,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_your_reports:
                 // Handle User-created reports option (visible only to logged-in users)
                 showToast("User reports selected");
+                break;
+            case R.id.nav_education:
+                // Handle User-created reports option (visible only to logged-in users)
+                showToast("Education selected");
                 break;
             case R.id.nav_sign_out:
                 // Handle Sign out option (visible only to logged-in users)

@@ -12,9 +12,9 @@
 
     <string-array name="urgency_options">
         <item>Not urgent</item>
-        <item>Low</item>
-        <item>Medium</item>
-        <item>High</item>
+        <item>Low urgency</item>
+        <item>Medium urgency</item>
+        <item>High urgency</item>
         <item>Very urgent</item>
     </string-array>
 </resources>

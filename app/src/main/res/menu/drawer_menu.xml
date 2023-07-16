@@ -28,6 +28,10 @@
             android:icon="@drawable/map"
             android:title="Map" />
         <item
+            android:id="@+id/nav_education"
+            android:icon="@drawable/education"
+            android:title="Educational Resources" />
+        <item
             android:id="@+id/nav_account"
             android:icon="@drawable/account"
             android:title="Account Management" />
