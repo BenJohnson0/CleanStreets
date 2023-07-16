@@ -108,7 +108,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_account:
                 // Handle Account management option (visible only to logged-in users)
-                showToast("Account selected");
+                startActivity(new Intent(HomeActivity.this, AccountManagementActivity.class));
                 break;
             case R.id.nav_settings:
                 // Handle App settings option

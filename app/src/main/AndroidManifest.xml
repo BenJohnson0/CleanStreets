@@ -45,6 +45,10 @@
             android:name=".AddReportActivity"
             android:label="@string/app_name">
         </activity>
+        <activity
+            android:name=".AccountManagementActivity"
+            android:label="@string/app_name">
+        </activity>
 
 
 
