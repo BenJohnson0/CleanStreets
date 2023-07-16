@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".AddReportActivity">
+
+    <TextView
+        android:id="@+id/text_view_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report Title"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edit_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_title"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Report Title"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/text_view_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_title"
+        android:layout_marginTop="16dp"
+        android:text="X Coordinate"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edit_text_x"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_x"
+        android:layout_marginTop="8dp"
+        android:hint="Enter X Coordinate"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/text_view_y"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_x"
+        android:layout_marginTop="16dp"
+        android:text="Y Coordinate"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edit_text_y"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_y"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Y Coordinate"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/text_view_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_y"
+        android:layout_marginTop="16dp"
+        android:text="Size"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edit_text_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_size"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Size"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/text_view_urgency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_size"
+        android:layout_marginTop="16dp"
+        android:text="Urgency"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edit_text_urgency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_urgency"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Urgency"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/text_view_attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_urgency"
+        android:layout_marginTop="16dp"
+        android:text="Attachment"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/image_view_attachment"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/text_view_attachment"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop" />
+
+    <Button
+        android:id="@+id/button_attach_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view_attachment"
+        android:layout_marginTop="8dp"
+        android:text="Attach Image" />
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/button_attach_image"
+        android:layout_marginLeft="70dp"
+        android:text="Submit Report" />
+
+</RelativeLayout>

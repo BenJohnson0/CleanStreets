@@ -24,6 +24,10 @@
             android:icon="@drawable/people"
             android:title="Your Reports" />
         <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/map"
+            android:title="Map" />
+        <item
             android:id="@+id/nav_account"
             android:icon="@drawable/account"
             android:title="Account Management" />
@@ -37,5 +41,13 @@
         android:id="@+id/nav_sign_out"
         android:icon="@drawable/logout"
         android:title="Sign Out" />
+    <item
+        android:id="@+id/nav_register"
+        android:icon="@drawable/register"
+        android:title="Register" />
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/login"
+        android:title="Login" />
 
 </menu>

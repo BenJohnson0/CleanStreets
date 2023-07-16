@@ -3,6 +3,7 @@ package com.example.urban_management_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -64,13 +65,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         userNameTextView.setText(userName);
         userEmailTextView.setText(userEmail);
 
+        Menu navMenu = navigationView.getMenu();
+
         // Show/hide user-specific options based on login status
-        boolean isLoggedIn = (userEmail != null);
-        navigationView.getMenu().findItem(R.id.nav_your_reports).setVisible(isLoggedIn);
-        navigationView.getMenu().findItem(R.id.nav_sign_out).setVisible(isLoggedIn);
-        navigationView.getMenu().findItem(R.id.nav_account).setVisible(isLoggedIn);
-        navigationView.getMenu().findItem(R.id.nav_saved_reports).setVisible(isLoggedIn);
+        if (userEmail != null) {
+            // User is logged in
+            navMenu.findItem(R.id.nav_home).setVisible(true);
+            navMenu.findItem(R.id.nav_add_report).setVisible(true);
+            navMenu.findItem(R.id.nav_statistics).setVisible(true);
+            navMenu.findItem(R.id.nav_saved_reports).setVisible(true);
+            navMenu.findItem(R.id.nav_your_reports).setVisible(true);
+            navMenu.findItem(R.id.nav_map).setVisible(true);
+            navMenu.findItem(R.id.nav_account).setVisible(true);
+            navMenu.findItem(R.id.nav_settings).setVisible(true);
+            navMenu.findItem(R.id.nav_sign_out).setVisible(true);
+            navMenu.findItem(R.id.nav_register).setVisible(false); // Hide "Register" option
+            navMenu.findItem(R.id.nav_login).setVisible(false); // Hide "Login" option
+        } else {
+            navMenu.findItem(R.id.nav_home).setVisible(true);
+            navMenu.findItem(R.id.nav_add_report).setVisible(true);
+            navMenu.findItem(R.id.nav_statistics).setVisible(true);
+            navMenu.findItem(R.id.nav_saved_reports).setVisible(false);
+            navMenu.findItem(R.id.nav_your_reports).setVisible(false);
+            navMenu.findItem(R.id.nav_map).setVisible(true);
+            navMenu.findItem(R.id.nav_account).setVisible(false);
+            navMenu.findItem(R.id.nav_settings).setVisible(true);
+            navMenu.findItem(R.id.nav_sign_out).setVisible(false);
+            navMenu.findItem(R.id.nav_register).setVisible(true); // show "Register" option
+            navMenu.findItem(R.id.nav_login).setVisible(true); // show "Login" option
+        }
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -97,7 +122,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_add_report:
                 // Handle Add new report option
-                showToast("Add report selected");
+                startActivity(new Intent(HomeActivity.this, AddReportActivity.class));
                 break;
             case R.id.nav_your_reports:
                 // Handle User-created reports option (visible only to logged-in users)
@@ -106,6 +131,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_sign_out:
                 // Handle Sign out option (visible only to logged-in users)
                 signOut();
+                break;
+            case R.id.nav_map:
+                // Handle View saved reports option (visible only to logged-in users)
+                showToast("Map selected");
+                break;
+            case R.id.nav_register:
+                // Handle View saved reports option (visible only to anonymous users)
+                showToast("Register selected");
+                break;
+            case R.id.nav_login:
+                // Handle View saved reports option (visible only to anonymous users)
+                showToast("Login selected");
                 break;
         }
 
