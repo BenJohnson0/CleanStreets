@@ -2,5 +2,19 @@
     <string name="app_name">urban-management-app</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="size_options">
+        <item>Very small</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Very large</item>
+    </string-array>
 
+    <string-array name="urgency_options">
+        <item>Not urgent</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Very urgent</item>
+    </string-array>
 </resources>

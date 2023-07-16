@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ public class AddReportActivity extends AppCompatActivity {
     private ImageView imageViewAttachment;
     private Uri imageUri;
     private ProgressDialog progressDialog;
+    private Spinner spinnerSize;
+    private Spinner spinnerUrgency;
 
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
@@ -57,11 +60,11 @@ public class AddReportActivity extends AppCompatActivity {
 
         editTextX = findViewById(R.id.edit_text_x);
         editTextY = findViewById(R.id.edit_text_y);
-        editTextSize = findViewById(R.id.edit_text_size);
-        editTextUrgency = findViewById(R.id.edit_text_urgency);
         imageViewAttachment = findViewById(R.id.image_view_attachment);
         Button buttonAttachImage = findViewById(R.id.button_attach_image);
         Button buttonSubmit = findViewById(R.id.button_submit);
+        spinnerSize = findViewById(R.id.spinner_size);
+        spinnerUrgency = findViewById(R.id.spinner_urgency);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading Report...");
@@ -107,9 +110,10 @@ public class AddReportActivity extends AppCompatActivity {
     private void uploadReport() {
         final String x = editTextX.getText().toString().trim();
         final String y = editTextY.getText().toString().trim();
-        final String size = editTextSize.getText().toString().trim();
-        final String urgency = editTextUrgency.getText().toString().trim();
+        final String size = spinnerSize.getSelectedItem().toString();
+        final String urgency = spinnerUrgency.getSelectedItem().toString();
 
+        // Check if the x, y, size, and urgency values are not empty
         if (TextUtils.isEmpty(x) || TextUtils.isEmpty(y) || TextUtils.isEmpty(size)
                 || TextUtils.isEmpty(urgency)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
