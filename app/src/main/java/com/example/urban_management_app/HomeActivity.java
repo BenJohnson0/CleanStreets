@@ -16,15 +16,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth firebaseAuth;
+    private RecyclerView recentReportsRecyclerView;
+    private RecentReportsAdapter recentReportsAdapter;
+    private List<Report> recentReportsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +69,45 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             // User is anonymous or not logged in
             updateNavigationDrawer("Anonymous", null);
         }
+
+        // Initialize the RecyclerView and set its layout manager
+        recentReportsRecyclerView = findViewById(R.id.recent_reports_recycler_view);
+        recentReportsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Create a new empty list to hold the recent reports
+        recentReportsList = new ArrayList<>();
+
+        // Create an instance of the RecentReportsAdapter and set it as the adapter for the RecyclerView
+        recentReportsAdapter = new RecentReportsAdapter(recentReportsList);
+        recentReportsRecyclerView.setAdapter(recentReportsAdapter);
+
+        // Load the recent reports from the database and update the RecyclerView
+        loadRecentReports();
+    }
+
+    private void loadRecentReports() {
+        DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");
+        Query recentReportsQuery = reportsRef.limitToLast(10); // Fetch the 10 most recent reports
+
+        recentReportsQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                recentReportsList.clear(); // Clear the existing list of reports
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Report report = snapshot.getValue(Report.class);
+                    recentReportsList.add(report); // Add the report to the list
+                }
+
+                recentReportsAdapter.notifyDataSetChanged(); // Notify the adapter of the data change
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error, if any
+                Toast.makeText(HomeActivity.this, "Failed to load recent reports.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void updateNavigationDrawer(String userName, String userEmail) {

@@ -42,6 +42,7 @@ public class AddReportActivity extends AppCompatActivity {
 
     private EditText editTextX;
     private EditText editTextY;
+    private EditText editTextTitle;
     private ImageView imageViewAttachment;
     private Uri imageUri;
     private ProgressDialog progressDialog;
@@ -58,6 +59,7 @@ public class AddReportActivity extends AppCompatActivity {
 
         editTextX = findViewById(R.id.edit_text_x);
         editTextY = findViewById(R.id.edit_text_y);
+        editTextTitle = findViewById(R.id.edit_text_title);
         imageViewAttachment = findViewById(R.id.image_view_attachment);
         Button buttonAttachImage = findViewById(R.id.button_attach_image);
         Button buttonSubmit = findViewById(R.id.button_submit);
@@ -108,6 +110,7 @@ public class AddReportActivity extends AppCompatActivity {
     private void uploadReport() {
         final String x = editTextX.getText().toString().trim();
         final String y = editTextY.getText().toString().trim();
+        final String title = editTextTitle.getText().toString().trim();
         final String size = spinnerSize.getSelectedItem().toString();
         final String urgency = spinnerUrgency.getSelectedItem().toString();
 
@@ -130,7 +133,7 @@ public class AddReportActivity extends AppCompatActivity {
                     .addOnSuccessListener(taskSnapshot -> fileReference.getDownloadUrl()
                             .addOnSuccessListener(uri -> {
                                 Report report = new Report(reportId, timeStamp, x, y, size,
-                                        urgency, uri.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                        urgency, uri.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), title);
                                 saveReportToDatabase(report);
                             }))
                     .addOnFailureListener(e -> {
@@ -139,7 +142,7 @@ public class AddReportActivity extends AppCompatActivity {
                                 "Failed to upload image", Toast.LENGTH_SHORT).show();
                     });
         } else {
-            Report report = new Report(reportId, timeStamp, x, y, size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid());
+            Report report = new Report(reportId, timeStamp, x, y, size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title);
             saveReportToDatabase(report);
         }
     }

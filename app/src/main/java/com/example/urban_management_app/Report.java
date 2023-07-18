@@ -9,13 +9,14 @@ public class Report {
     private String urgency;
     private String imageUrl;
     private String userId;
+    private String title;
 
     public Report() {
         // Default constructor required for Firebase
     }
 
     public Report(String reportId, String timestamp, String xCoordinates, String yCoordinates,
-                  String size, String urgency, String imageUrl, String userId) {
+                  String size, String urgency, String imageUrl, String userId, String title) {
         this.reportId = reportId;
         this.timestamp = timestamp;
         this.xCoordinates = xCoordinates;
@@ -24,6 +25,7 @@ public class Report {
         this.urgency = urgency;
         this.imageUrl = imageUrl;
         this.userId = userId;
+        this.title = title;
     }
 
     public String getReportId() {
@@ -89,5 +91,12 @@ public class Report {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-}
+
+    public String getTitle() { return title;}
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    }
 
