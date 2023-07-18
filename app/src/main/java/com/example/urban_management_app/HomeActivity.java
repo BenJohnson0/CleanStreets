@@ -1,5 +1,6 @@
 package com.example.urban_management_app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -45,12 +46,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if (currentUser != null) {
-            // User is logged in
+        if (currentUser != null && !currentUser.isAnonymous()) {
+            // User is logged in with a non-anonymous account
             updateNavigationDrawer(currentUser.getDisplayName(), currentUser.getEmail());
         } else {
-            // User is not logged in
-            updateNavigationDrawer("Anon", null);
+            // User is anonymous or not logged in
+            updateNavigationDrawer("Anonymous", null);
         }
     }
 
@@ -99,6 +100,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -128,7 +130,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_your_reports:
                 // Handle User-created reports option (visible only to logged-in users)
-                showToast("User reports selected");
+                showToast("Your reports selected");
                 break;
             case R.id.nav_education:
                 // Handle User-created reports option (visible only to logged-in users)
@@ -144,11 +146,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_register:
                 // Handle View saved reports option (visible only to anonymous users)
-                showToast("Register selected");
+                startActivity(new Intent(HomeActivity.this, RegistrationActivity.class));
                 break;
             case R.id.nav_login:
                 // Handle View saved reports option (visible only to anonymous users)
-                showToast("Login selected");
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 break;
         }
 
