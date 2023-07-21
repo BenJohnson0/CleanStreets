@@ -1,5 +1,7 @@
 package com.example.urban_management_app;
 
+import static com.example.urban_management_app.MapSelectionActivity.REQUEST_MAP_SELECTION;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -37,7 +39,7 @@ import java.util.Locale;
 
 public class AddReportActivity extends AppCompatActivity {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_PERMISSION_CAMERA = 2;
 
     private EditText editTextX;
@@ -63,6 +65,7 @@ public class AddReportActivity extends AppCompatActivity {
         imageViewAttachment = findViewById(R.id.image_view_attachment);
         Button buttonAttachImage = findViewById(R.id.button_attach_image);
         Button buttonSubmit = findViewById(R.id.button_submit);
+        Button buttonSelectMap = findViewById(R.id.button_select_map);
         spinnerSize = findViewById(R.id.spinner_size);
         spinnerUrgency = findViewById(R.id.spinner_urgency);
 
@@ -86,6 +89,15 @@ public class AddReportActivity extends AppCompatActivity {
                 uploadReport();
             }
         });
+
+        buttonSelectMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Launch the MapSelectionActivity to let the user select a location
+                startActivityForResult(new Intent(AddReportActivity.this, MapSelectionActivity.class), REQUEST_MAP_SELECTION);
+            }
+        });
+
     }
 
     private void checkCameraPermission() {
@@ -169,9 +181,16 @@ public class AddReportActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            if (data != null && data.getExtras() != null) {
-                imageUri = data.getData();
-                imageViewAttachment.setImageURI(imageUri);
+            // ... (your existing image capture handling)
+        } else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
+            if (data != null) {
+                // Retrieve the selected coordinates from the MapSelectionActivity
+                double selectedLatitude = data.getDoubleExtra("latitude", 0);
+                double selectedLongitude = data.getDoubleExtra("longitude", 0);
+
+                // Update the X and Y coordinate fields
+                editTextX.setText(String.valueOf(selectedLatitude));
+                editTextY.setText(String.valueOf(selectedLongitude));
             }
         }
     }
