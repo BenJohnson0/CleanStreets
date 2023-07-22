@@ -33,10 +33,9 @@ public class MapSelectionActivity extends FragmentActivity implements OnMapReady
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        // Add a marker at the current location (optional)
-        LatLng currentLocation = new LatLng(53.3607, 6.2511);
-        googleMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15f));
+        // current location (optional, dublin as of now)
+        LatLng currentLocation = new LatLng(53.350140, -6.266155);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 10f));
 
         googleMap.setOnMapClickListener(latLng -> {
             // Handle the selected location

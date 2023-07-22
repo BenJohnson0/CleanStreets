@@ -196,8 +196,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 signOut();
                 break;
             case R.id.nav_map:
-                // Handle View saved reports option (visible only to logged-in users)
-                showToast("Map selected");
+                // Handle Account management option (visible only to logged-in users)
+                startActivity(new Intent(HomeActivity.this, ReportsMapActivity.class));
                 break;
             case R.id.nav_register:
                 // Handle View saved reports option (visible only to anonymous users)

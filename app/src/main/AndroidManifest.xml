@@ -47,6 +47,8 @@
             android:name=".AccountManagementActivity" />
         <activity
             android:name=".MapSelectionActivity" />
+        <activity
+            android:name=".ReportsMapActivity" />
     </application>
 
 </manifest>
