@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -31,6 +32,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -43,6 +45,8 @@ public class AddReportActivity extends AppCompatActivity {
 
     private double selectedLatitude = 0;
     private double selectedLongitude = 0;
+    private boolean isLocationSelected = false;
+
 
     private EditText editTextTitle;
     private ImageView imageViewAttachment;
@@ -120,21 +124,40 @@ public class AddReportActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // ... (your existing image capture handling)
+            // display image in ImageViewAttachment
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageViewAttachment.setImageBitmap(imageBitmap);
         } else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
             if (data != null) {
                 // Retrieve the selected coordinates from the MapSelectionActivity
                 selectedLatitude = data.getDoubleExtra("latitude", 0);
                 selectedLongitude = data.getDoubleExtra("longitude", 0);
 
-                // You can display a message here to inform the user that the location is selected
+                isLocationSelected = true;
+
+                // display a message to inform the user that the location is selected
                 Toast.makeText(AddReportActivity.this, "Location selected", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
+    private Uri getImageUriFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Image", null);
+        return Uri.parse(path);
+    }
+
     @SuppressLint("SimpleDateFormat")
     private void uploadReport() {
+
+        // Check if the location data is added
+        if (!isLocationSelected) {
+            Toast.makeText(this, "Please select a location before submitting the report", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         final String title = editTextTitle.getText().toString().trim();
         final String size = spinnerSize.getSelectedItem().toString();
         final String urgency = spinnerUrgency.getSelectedItem().toString();
