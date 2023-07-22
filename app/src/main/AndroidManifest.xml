@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Urbanmanagementapp"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -26,36 +31,19 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:name=".LoginActivity" />
         <activity
-            android:name=".RegistrationActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:name=".RegistrationActivity" />
         <activity
-            android:name=".PasswordResetActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:name=".PasswordResetActivity" />
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:name=".HomeActivity" />
         <activity
-            android:name=".AddReportActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:name=".AddReportActivity" />
         <activity
-            android:name=".AccountManagementActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:name=".AccountManagementActivity" />
         <activity
-            android:name=".MapSelectionActivity"
-            android:label="@string/app_name">
-        </activity>
-
-
-
+            android:name=".MapSelectionActivity" />
     </application>
 
 </manifest>

@@ -93,8 +93,7 @@ public class AddReportActivity extends AppCompatActivity {
         buttonSelectMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Launch the MapSelectionActivity to let the user select a location
-                startActivityForResult(new Intent(AddReportActivity.this, MapSelectionActivity.class), REQUEST_MAP_SELECTION);
+                startActivity(new Intent(AddReportActivity.this, MapSelectionActivity.class));
             }
         });
 

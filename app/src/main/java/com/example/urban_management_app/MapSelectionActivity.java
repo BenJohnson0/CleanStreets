@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,11 +17,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapSelectionActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapSelectionActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
-    // Add a new constant for the map selection request code
-    static final int REQUEST_MAP_SELECTION = 3;
+    static final int REQUEST_MAP_SELECTION = 3; //map selection request code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

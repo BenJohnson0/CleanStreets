@@ -17,4 +17,5 @@
         <item>High urgency</item>
         <item>Very urgent</item>
     </string-array>
+    <string name="title_activity_maps_test">MapsActivityTEST</string>
 </resources>
