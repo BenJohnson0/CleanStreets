@@ -173,7 +173,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_statistics:
                 // Handle View statistics dashboard option
-                showToast("Statistics selected");
+                startActivity(new Intent(HomeActivity.this, DashboardActivity.class));
                 break;
             case R.id.nav_saved_reports:
                 // Handle View saved reports option (visible only to logged-in users)

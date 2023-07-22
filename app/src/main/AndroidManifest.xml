@@ -49,6 +49,8 @@
             android:name=".MapSelectionActivity" />
         <activity
             android:name=".ReportsMapActivity" />
+        <activity
+            android:name=".DashboardActivity" />
     </application>
 
 </manifest>
