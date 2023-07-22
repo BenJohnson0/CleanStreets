@@ -1,7 +1,5 @@
 package com.example.urban_management_app;
 
-import static com.example.urban_management_app.MapSelectionActivity.REQUEST_MAP_SELECTION;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -41,9 +39,11 @@ public class AddReportActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_PERMISSION_CAMERA = 2;
+    private static final int REQUEST_MAP_SELECTION = 3;
 
-    private EditText editTextX;
-    private EditText editTextY;
+    private double selectedLatitude = 0;
+    private double selectedLongitude = 0;
+
     private EditText editTextTitle;
     private ImageView imageViewAttachment;
     private Uri imageUri;
@@ -59,15 +59,13 @@ public class AddReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_report);
 
-        editTextX = findViewById(R.id.edit_text_x);
-        editTextY = findViewById(R.id.edit_text_y);
-        editTextTitle = findViewById(R.id.edit_text_title);
-        imageViewAttachment = findViewById(R.id.image_view_attachment);
-        Button buttonAttachImage = findViewById(R.id.button_attach_image);
-        Button buttonSubmit = findViewById(R.id.button_submit);
-        Button buttonSelectMap = findViewById(R.id.button_select_map);
-        spinnerSize = findViewById(R.id.spinner_size);
-        spinnerUrgency = findViewById(R.id.spinner_urgency);
+        editTextTitle = findViewById(R.id.edit_text_title); // title of the report
+        imageViewAttachment = findViewById(R.id.image_view_attachment); // [optional] image attached to the report
+        Button buttonAttachImage = findViewById(R.id.button_attach_image); // [optional] button for uploading / taking an image
+        Button buttonSubmit = findViewById(R.id.button_submit); // submit the report
+        Button buttonSelectMap = findViewById(R.id.button_select_map); // for selecting the exact location of the report
+        spinnerSize = findViewById(R.id.spinner_size); // for selecting the size of the issue
+        spinnerUrgency = findViewById(R.id.spinner_urgency); // for selecting the urgency of the issue
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading Report...");
@@ -86,6 +84,7 @@ public class AddReportActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Call the uploadReport() method with the selected latitude and longitude
                 uploadReport();
             }
         });
@@ -93,7 +92,7 @@ public class AddReportActivity extends AppCompatActivity {
         buttonSelectMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AddReportActivity.this, MapSelectionActivity.class));
+                startActivityForResult(new Intent(AddReportActivity.this, MapSelectionActivity.class), REQUEST_MAP_SELECTION);
             }
         });
 
@@ -117,17 +116,31 @@ public class AddReportActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            // ... (your existing image capture handling)
+        } else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
+            if (data != null) {
+                // Retrieve the selected coordinates from the MapSelectionActivity
+                selectedLatitude = data.getDoubleExtra("latitude", 0);
+                selectedLongitude = data.getDoubleExtra("longitude", 0);
+
+                // You can display a message here to inform the user that the location is selected
+                Toast.makeText(AddReportActivity.this, "Location selected", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     @SuppressLint("SimpleDateFormat")
     private void uploadReport() {
-        final String x = editTextX.getText().toString().trim();
-        final String y = editTextY.getText().toString().trim();
         final String title = editTextTitle.getText().toString().trim();
         final String size = spinnerSize.getSelectedItem().toString();
         final String urgency = spinnerUrgency.getSelectedItem().toString();
 
-        // Check if the x, y, size, and urgency values are not empty
-        if (TextUtils.isEmpty(x) || TextUtils.isEmpty(y) || TextUtils.isEmpty(size)
-                || TextUtils.isEmpty(urgency)) {
+        // Check if the title, size, and urgency values are not empty
+        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(size) || TextUtils.isEmpty(urgency)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -143,7 +156,7 @@ public class AddReportActivity extends AppCompatActivity {
             fileReference.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> fileReference.getDownloadUrl()
                             .addOnSuccessListener(uri -> {
-                                Report report = new Report(reportId, timeStamp, x, y, size,
+                                Report report = new Report(reportId, timeStamp, String.valueOf(selectedLatitude), String.valueOf(selectedLongitude), size,
                                         urgency, uri.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), title);
                                 saveReportToDatabase(report);
                             }))
@@ -153,7 +166,9 @@ public class AddReportActivity extends AppCompatActivity {
                                 "Failed to upload image", Toast.LENGTH_SHORT).show();
                     });
         } else {
-            Report report = new Report(reportId, timeStamp, x, y, size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title);
+            // If no image is attached, still create the report with empty image URL
+            Report report = new Report(reportId, timeStamp, String.valueOf(selectedLatitude), String.valueOf(selectedLongitude),
+                    size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title);
             saveReportToDatabase(report);
         }
     }
@@ -177,24 +192,6 @@ public class AddReportActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // ... (your existing image capture handling)
-        } else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
-            if (data != null) {
-                // Retrieve the selected coordinates from the MapSelectionActivity
-                double selectedLatitude = data.getDoubleExtra("latitude", 0);
-                double selectedLongitude = data.getDoubleExtra("longitude", 0);
-
-                // Update the X and Y coordinate fields
-                editTextX.setText(String.valueOf(selectedLatitude));
-                editTextY.setText(String.valueOf(selectedLongitude));
-            }
-        }
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -207,4 +204,3 @@ public class AddReportActivity extends AppCompatActivity {
         }
     }
 }
-
