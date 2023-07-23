@@ -42,14 +42,27 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView reportTitleTextView;
+        private TextView reportTimestampTextView;
+        private TextView reportSizeTextView;
+        private TextView reportUrgencyTextView;
+        private TextView reportStatusTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             reportTitleTextView = itemView.findViewById(R.id.report_title_textview);
+            reportTimestampTextView = itemView.findViewById(R.id.report_timestamp_textview);
+            reportSizeTextView = itemView.findViewById(R.id.report_size_textview);
+            reportUrgencyTextView = itemView.findViewById(R.id.report_urgency_textview);
+            reportStatusTextView = itemView.findViewById(R.id.report_status_textview);
         }
 
         public void bind(Report report) {
-            reportTitleTextView.setText(report.getTitle());
+
+            reportTitleTextView.setText("Title: " + report.getTitle());
+            reportTimestampTextView.setText("Timestamp: " + report.getTimestamp());
+            reportSizeTextView.setText("Size: " + report.getSize());
+            reportUrgencyTextView.setText("Urgency: " + report.getUrgency());
+            reportStatusTextView.setText("Status: " + report.getStatus());
         }
     }
 }

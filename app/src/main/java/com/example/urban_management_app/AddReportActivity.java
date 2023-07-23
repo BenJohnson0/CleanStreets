@@ -46,8 +46,7 @@ public class AddReportActivity extends AppCompatActivity {
     private double selectedLatitude = 0;
     private double selectedLongitude = 0;
     private boolean isLocationSelected = false;
-
-
+    
     private EditText editTextTitle;
     private ImageView imageViewAttachment;
     private Uri imageUri;
@@ -161,6 +160,7 @@ public class AddReportActivity extends AppCompatActivity {
         final String title = editTextTitle.getText().toString().trim();
         final String size = spinnerSize.getSelectedItem().toString();
         final String urgency = spinnerUrgency.getSelectedItem().toString();
+        final String status = null; //TODO: fix with notifications etc.
 
         // Check if the title, size, and urgency values are not empty
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(size) || TextUtils.isEmpty(urgency)) {
@@ -179,8 +179,8 @@ public class AddReportActivity extends AppCompatActivity {
             fileReference.putFile(imageUri)
                     .addOnSuccessListener(taskSnapshot -> fileReference.getDownloadUrl()
                             .addOnSuccessListener(uri -> {
-                                Report report = new Report(reportId, timeStamp, String.valueOf(selectedLatitude), String.valueOf(selectedLongitude), size,
-                                        urgency, uri.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), title);
+                                Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude, size,
+                                        urgency, uri.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
                                 saveReportToDatabase(report);
                             }))
                     .addOnFailureListener(e -> {
@@ -190,8 +190,8 @@ public class AddReportActivity extends AppCompatActivity {
                     });
         } else {
             // If no image is attached, still create the report with empty image URL
-            Report report = new Report(reportId, timeStamp, String.valueOf(selectedLatitude), String.valueOf(selectedLongitude),
-                    size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title);
+            Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude,
+                    size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
             saveReportToDatabase(report);
         }
     }

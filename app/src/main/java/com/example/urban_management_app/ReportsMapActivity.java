@@ -1,6 +1,11 @@
 package com.example.urban_management_app;
 
+import android.annotation.SuppressLint;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -11,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -85,14 +92,70 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
         });
     }
 
+    private Report getReportFromMarker(Marker marker) {
+        LatLng markerPosition = marker.getPosition();
+        for (Report report : reportList) {
+            double latitude = report.getXCoordinates();
+            double longitude = report.getYCoordinates();
+            LatLng reportPosition = new LatLng(latitude, longitude);
+            if (reportPosition.equals(markerPosition)) {
+                return report;
+            }
+        }
+        return null; // Return null if no matching report is found
+    }
+
     private void plotReportsOnMap() {
         if (googleMap != null) {
+            googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                @Override
+                public View getInfoWindow(Marker marker) {
+                    return null; // Return null to use the default info window background
+                }
+
+                @SuppressLint("SetTextI18n")
+                @Override
+                public View getInfoContents(Marker marker) {
+                    View infoView = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+
+                    TextView titleTextView = infoView.findViewById(R.id.info_window_title);
+                    TextView sizeTextView = infoView.findViewById(R.id.info_window_size);
+                    TextView timestampTextView = infoView.findViewById(R.id.info_window_timestamp);
+                    TextView urgencyTextView = infoView.findViewById(R.id.info_window_urgency);
+                    TextView statusTextView = infoView.findViewById(R.id.info_window_status);
+                    TextView addressTextView = infoView.findViewById(R.id.info_window_address);
+
+                    titleTextView.setText(marker.getTitle());
+
+                    // Get the Report associated with the marker and set data to TextViews
+                    Report report = getReportFromMarker(marker);
+                    if (report != null) {
+                        sizeTextView.setText("Size: " + report.getSize());
+                        timestampTextView.setText("Timestamp: " + report.getTimestamp());
+                        urgencyTextView.setText("Urgency: " + report.getUrgency());
+                        statusTextView.setText("Status: " + report.getStatus());
+                        addressTextView.setText("Location: " + geocodeToAddress(report.getXCoordinates(), report.getYCoordinates()));
+                    }
+
+                    return infoView;
+                }
+            });
+
             for (Report report : reportList) {
-                double latitude = Double.parseDouble(report.getXCoordinates());
-                double longitude = Double.parseDouble(report.getYCoordinates());
+                double latitude = report.getXCoordinates();
+                double longitude = report.getYCoordinates();
 
                 LatLng location = new LatLng(latitude, longitude);
-                googleMap.addMarker(new MarkerOptions().position(location).title(report.getTitle()));
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(location)
+                        .title(report.getTitle())
+                        .snippet("Size: " + report.getSize() +
+                                "\nUrgency: " + report.getUrgency() +
+                                "\nTimestamp: " + report.getTimestamp() +
+                                "\nStatus: " + report.getStatus() +
+                                "\nLocation: " + geocodeToAddress(latitude, longitude));
+
+                googleMap.addMarker(markerOptions);
             }
 
             if (!reportList.isEmpty()) {
@@ -102,5 +165,20 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
             }
         }
     }
+
+    private String geocodeToAddress(double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && addresses.size() > 0) {
+                Address address = addresses.get(0);
+                return address.getAddressLine(0); // Return the first line of the address
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ""; // Return an empty string if geocoding fails
+    }
+
 }
 
