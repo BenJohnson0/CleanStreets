@@ -85,6 +85,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         loadRecentReports();
     }
 
+    //TODO: the reports should show title, size, urgency, timestamp, status, image and (geocoded?) location
+
     private void loadRecentReports() {
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");
         Query recentReportsQuery = reportsRef.limitToLast(10); // Fetch the 10 most recent reports
