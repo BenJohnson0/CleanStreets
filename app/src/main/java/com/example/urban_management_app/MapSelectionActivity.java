@@ -11,7 +11,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MapSelectionActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -33,16 +37,28 @@ public class MapSelectionActivity extends FragmentActivity implements OnMapReady
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        // current location (optional, dublin as of now)
+        //load custom map style
+        try {
+            InputStream inputStream = getResources().openRawResource(R.raw.map_style);
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            String json = new String(buffer, "UTF-8");
+
+            // Set the map style
+            googleMap.setMapStyle(new MapStyleOptions(json));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //TODO: Make map open at location of user (right now its just Dublin hardcoded)
         LatLng currentLocation = new LatLng(53.350140, -6.266155);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 10f));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12f));
 
         googleMap.setOnMapClickListener(latLng -> {
-            // Handle the selected location
             double selectedLatitude = latLng.latitude;
             double selectedLongitude = latLng.longitude;
 
-            // Pass the selected coordinates back to the AddReportActivity
+            //pass the selected coordinates back to the AddReportActivity
             Intent resultIntent = new Intent();
             resultIntent.putExtra("latitude", selectedLatitude);
             resultIntent.putExtra("longitude", selectedLongitude);

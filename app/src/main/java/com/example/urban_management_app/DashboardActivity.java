@@ -47,6 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
                         // Initialize other lists for other charts here
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            //TODO: firebase data
                             // Parse your data from dataSnapshot and add to the corresponding lists
                             // Example: For a field "value1", you can do:
                             // float value = snapshot.child("value1").getValue(Float.class);
