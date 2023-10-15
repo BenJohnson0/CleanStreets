@@ -13,12 +13,20 @@ import java.util.List;
 
 public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdapter.ViewHolder> {
 
+    public interface OnItemClickListener {
+        void onItemClick(String reportId);
+    }
+
     private List<Report> reportList;
     private Context context;
+    private OnItemClickListener listener;
 
     public RecentReportsAdapter(List<Report> reportList) {
         this.reportList = reportList;
-        this.context = context;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -54,6 +62,21 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
             reportSizeTextView = itemView.findViewById(R.id.report_size_textview);
             reportUrgencyTextView = itemView.findViewById(R.id.report_urgency_textview);
             reportStatusTextView = itemView.findViewById(R.id.report_status_textview);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            // Get the report at this position
+                            Report clickedReport = reportList.get(position);
+                            // Call the onItemClick method on the listener
+                            listener.onItemClick(clickedReport.getReportId());
+                        }
+                    }
+                }
+            });
         }
 
         public void bind(Report report) {

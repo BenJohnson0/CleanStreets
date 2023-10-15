@@ -50,6 +50,8 @@ public class AddReportActivity extends AppCompatActivity {
     private EditText editTextTitle;
     private ImageView imageViewAttachment;
     private Uri imageUri;
+
+    private byte[] imageBytes;
     private ProgressDialog progressDialog;
     private Spinner spinnerSize;
     private Spinner spinnerUrgency;
@@ -119,6 +121,8 @@ public class AddReportActivity extends AppCompatActivity {
         }
     }
 
+    //TODO: Image doesn't get saved to the database as a file or as a URI ?????
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,6 +130,9 @@ public class AddReportActivity extends AppCompatActivity {
             // display image in ImageViewAttachment
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            imageBytes = byteArrayOutputStream.toByteArray();
             imageViewAttachment.setImageBitmap(imageBitmap);
         } else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
             if (data != null) {

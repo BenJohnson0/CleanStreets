@@ -81,6 +81,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         recentReportsAdapter = new RecentReportsAdapter(recentReportsList);
         recentReportsRecyclerView.setAdapter(recentReportsAdapter);
 
+        recentReportsAdapter.setOnItemClickListener(new RecentReportsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String reportId) {
+                // When a report in the RecyclerView is clicked, open the DetailedReportActivity
+                Intent intent = new Intent(HomeActivity.this, DetailedReportActivity.class);
+                intent.putExtra("report_id", reportId);
+                startActivity(intent);
+            }
+        });
+
+
         // Load the recent reports from the database and update the RecyclerView
         loadRecentReports();
     }
@@ -89,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void loadRecentReports() {
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");
-        Query recentReportsQuery = reportsRef.limitToLast(10); // Fetch the 10 most recent reports
+        Query recentReportsQuery = reportsRef.limitToLast(20); // fetch the 20 most recent reports
 
         recentReportsQuery.addValueEventListener(new ValueEventListener() {
             @Override
