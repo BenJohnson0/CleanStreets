@@ -1,10 +1,15 @@
 package com.example.urban_management_app;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +26,7 @@ import java.util.Locale;
 import android.location.Address;
 import android.location.Geocoder;
 import android.content.Context;
+import android.widget.Toast;
 
 public class DetailedReportActivity extends AppCompatActivity {
 
@@ -37,6 +43,8 @@ public class DetailedReportActivity extends AppCompatActivity {
         sizeTextView = findViewById(R.id.sizeTextView);
         urgencyTextView = findViewById(R.id.urgencyTextView);
         imageView = findViewById(R.id.reportImageView);
+
+        Button amendButton = findViewById(R.id.amendButton);
 
         // Retrieve report_id from the intent
         String reportId = getIntent().getStringExtra("report_id");
@@ -70,6 +78,13 @@ public class DetailedReportActivity extends AppCompatActivity {
                 // Handle database read error
             }
         });
+
+        amendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAmendOrDeleteDialog(reportId); // Pass the reportId to the dialog
+            }
+        });
     }
 
     // Geocode latitude and longitude coordinates into an address
@@ -88,5 +103,26 @@ public class DetailedReportActivity extends AppCompatActivity {
         }
 
         return addressText;
+    }
+
+    private void showAmendOrDeleteDialog(final String reportId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Amend or Delete Report");
+        builder.setMessage("Are you sure you want to amend or delete this report?");
+        builder.setPositiveButton("Amend", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // todo: amendment logic
+                Toast.makeText(DetailedReportActivity.this, "Report amended", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // todo: deletion logic
+                Toast.makeText(DetailedReportActivity.this, "Report deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
     }
 }
