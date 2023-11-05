@@ -42,11 +42,13 @@ public class PasswordResetActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    // Password reset email sent successfully
+                                    // password reset email sent successfully
+                                    //TODO: redirect to login?
                                     Toast.makeText(PasswordResetActivity.this, "Password reset email sent.",
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    // Password reset email sending failed
+                                    // password reset email sending failed
+                                    //TODO: error handling?
                                     Toast.makeText(PasswordResetActivity.this, "Failed to send password reset email.",
                                             Toast.LENGTH_SHORT).show();
                                 }

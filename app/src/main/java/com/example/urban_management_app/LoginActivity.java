@@ -42,18 +42,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 //TODO: Validate the user inputs (e.g., check for empty fields)
 
-                // Perform login authentication using the entered data
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Login success
+                                    // login success
                                     Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
-                                    // Proceed to the home page
+
+                                    // launch HomeActivity
                                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 } else {
-                                    // Login failed
+                                    // login failed
+                                    // TODO: login failed handling (3 tries, etc...?)
                                     Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Return to the home page or any desired activity
+                // return to the MainActivity
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
@@ -72,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open the PasswordResetActivity
+                // launch PasswordResetActivity
                 startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class));
             }
         });

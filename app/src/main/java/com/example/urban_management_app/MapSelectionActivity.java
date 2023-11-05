@@ -37,14 +37,14 @@ public class MapSelectionActivity extends FragmentActivity implements OnMapReady
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        //load custom map style
+        // load custom map style
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.map_style);
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             String json = new String(buffer, "UTF-8");
 
-            // Set the map style
+            // set the map style
             googleMap.setMapStyle(new MapStyleOptions(json));
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class MapSelectionActivity extends FragmentActivity implements OnMapReady
             double selectedLatitude = latLng.latitude;
             double selectedLongitude = latLng.longitude;
 
-            //pass the selected coordinates back to the AddReportActivity
+            // pass the selected coordinates back to the AddReportActivity
             Intent resultIntent = new Intent();
             resultIntent.putExtra("latitude", selectedLatitude);
             resultIntent.putExtra("longitude", selectedLongitude);

@@ -62,37 +62,37 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
+        // verify if user is logged in with a non-anonymous account
         if (currentUser != null && !currentUser.isAnonymous()) {
-            // User is logged in with a non-anonymous account
             updateNavigationDrawer(currentUser.getDisplayName(), currentUser.getEmail());
-        } else {
-            // User is anonymous or not logged in
+        }
+        // otherwise the user is anonymous / guest
+        else {
             updateNavigationDrawer("Anonymous", null);
         }
 
-        // Initialize the RecyclerView and set its layout manager
+        // initialize the RecyclerView and set layout
         recentReportsRecyclerView = findViewById(R.id.recent_reports_recycler_view);
         recentReportsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Create a new empty list to hold the recent reports
+        // empty list to hold the recent reports
         recentReportsList = new ArrayList<>();
 
-        // Create an instance of the RecentReportsAdapter and set it as the adapter for the RecyclerView
+        // instantiate the RecentReportsAdapter and set adapter for the RecyclerView
         recentReportsAdapter = new RecentReportsAdapter(recentReportsList);
         recentReportsRecyclerView.setAdapter(recentReportsAdapter);
 
         recentReportsAdapter.setOnItemClickListener(new RecentReportsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(String reportId) {
-                // When a report in the RecyclerView is clicked, open the DetailedReportActivity
+                // open DetailedReportActivity when RecyclerView report is clicked (using report id)
                 Intent intent = new Intent(HomeActivity.this, DetailedReportActivity.class);
                 intent.putExtra("report_id", reportId);
                 startActivity(intent);
             }
         });
 
-
-        // Load the recent reports from the database and update the RecyclerView
+        // load recent reports and populate RecyclerView
         loadRecentReports();
     }
 
@@ -105,19 +105,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         recentReportsQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                recentReportsList.clear(); // Clear the existing list of reports
+                // clear existing list of reports
+                recentReportsList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Report report = snapshot.getValue(Report.class);
-                    recentReportsList.add(report); // Add the report to the list
+                    // add report to the list
+                    recentReportsList.add(report);
                 }
-
-                recentReportsAdapter.notifyDataSetChanged(); // Notify the adapter of the data change
+                // notify adapter of data change
+                recentReportsAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error, if any
+                // TODO: error handling?
                 Toast.makeText(HomeActivity.this, "Failed to load recent reports.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -131,12 +133,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         TextView userNameTextView = headerView.findViewById(R.id.user_name_textview);
         TextView userEmailTextView = headerView.findViewById(R.id.user_email_textview);
 
+        // TODO: show name or username?
         userNameTextView.setText(userName);
         userEmailTextView.setText(userEmail);
 
         Menu navMenu = navigationView.getMenu();
 
-        // Show/hide user-specific options based on login status
+        // show or hide user-specific options based on login status
         if (userEmail != null) {
             // User is logged in
             navMenu.findItem(R.id.nav_home).setVisible(true);
@@ -149,9 +152,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_account).setVisible(true);
             navMenu.findItem(R.id.nav_settings).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(true);
-            navMenu.findItem(R.id.nav_register).setVisible(false); // Hide "Register" option
-            navMenu.findItem(R.id.nav_login).setVisible(false); // Hide "Login" option
-        } else {
+            // hide "Register" & "Login" options
+            navMenu.findItem(R.id.nav_register).setVisible(false);
+            navMenu.findItem(R.id.nav_login).setVisible(false);
+        }
+        else {
             navMenu.findItem(R.id.nav_home).setVisible(true);
             navMenu.findItem(R.id.nav_add_report).setVisible(true);
             navMenu.findItem(R.id.nav_statistics).setVisible(true);
@@ -162,62 +167,63 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_account).setVisible(false);
             navMenu.findItem(R.id.nav_settings).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(false);
-            navMenu.findItem(R.id.nav_register).setVisible(true); // show "Register" option
-            navMenu.findItem(R.id.nav_login).setVisible(true); // show "Login" option
+            // show "Register" & "Login" options
+            navMenu.findItem(R.id.nav_register).setVisible(true);
+            navMenu.findItem(R.id.nav_login).setVisible(true);
         }
     }
 
-
+    // handle user choice in a switch statement
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                // Handle Home option
+                // home
                 showToast("Home selected");
                 break;
             case R.id.nav_account:
-                // Handle Account management option (visible only to logged-in users)
+                // account management (only logged-in users)
                 startActivity(new Intent(HomeActivity.this, AccountManagementActivity.class));
                 break;
             case R.id.nav_settings:
-                // Handle App settings option
+                // app settings
                 showToast("Settings selected");
                 break;
             case R.id.nav_statistics:
-                // Handle View statistics dashboard option
+                // statistics dashboard
                 startActivity(new Intent(HomeActivity.this, DashboardActivity.class));
                 break;
             case R.id.nav_saved_reports:
-                // Handle View saved reports option (visible only to logged-in users)
+                // saved reports (only logged-in users)
                 showToast("Saved reports selected");
                 break;
             case R.id.nav_add_report:
-                // Handle Add new report option
+                // add new report
                 startActivity(new Intent(HomeActivity.this, AddReportActivity.class));
                 break;
             case R.id.nav_your_reports:
-                // Handle User-created reports option (visible only to logged-in users)
+                // user-created reports (only logged-in users)
                 showToast("Your reports selected");
                 break;
             case R.id.nav_education:
-                // Handle User-created reports option (visible only to logged-in users)
+                // educational resources
                 showToast("Education selected");
                 break;
             case R.id.nav_sign_out:
-                // Handle Sign out option (visible only to logged-in users)
+                // sign out (only logged-in users)
                 signOut();
                 break;
             case R.id.nav_map:
-                // Handle Account management option (visible only to logged-in users)
+                // map
                 startActivity(new Intent(HomeActivity.this, ReportsMapActivity.class));
                 break;
             case R.id.nav_register:
-                // Handle View saved reports option (visible only to anonymous users)
+                // register (only anonymous users)
                 startActivity(new Intent(HomeActivity.this, RegistrationActivity.class));
                 break;
             case R.id.nav_login:
-                // Handle View saved reports option (visible only to anonymous users)
+                // login (only anonymous users)
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 break;
         }
@@ -229,7 +235,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void signOut() {
         firebaseAuth.signOut();
         showToast("Signed out");
-        // Redirect to LoginActivity or any other desired activity
+        // redirect to LoginActivity after sign out
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }

@@ -89,7 +89,7 @@ public class AddReportActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Call the uploadReport() method with the selected latitude and longitude
+                // call uploadReport() method with the selected latitude and longitude
                 uploadReport();
             }
         });
@@ -136,7 +136,7 @@ public class AddReportActivity extends AppCompatActivity {
             imageViewAttachment.setImageBitmap(imageBitmap);
         } else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
             if (data != null) {
-                // Retrieve the selected coordinates from the MapSelectionActivity
+                // retrieve selected coordinates from MapSelectionActivity
                 selectedLatitude = data.getDoubleExtra("latitude", 0);
                 selectedLongitude = data.getDoubleExtra("longitude", 0);
 
@@ -158,7 +158,7 @@ public class AddReportActivity extends AppCompatActivity {
     @SuppressLint("SimpleDateFormat")
     private void uploadReport() {
 
-        // Check if the location data is added
+        // check if the location data is added
         if (!isLocationSelected) {
             Toast.makeText(this, "Please select a location before submitting the report", Toast.LENGTH_SHORT).show();
             return;

@@ -44,20 +44,20 @@ public class RegistrationActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
 
-                // Validate the user inputs (e.g., check for empty fields)
+                // TODO: validate user inputs (check for empty fields, etc.)
 
-                // Register the user with Firebase Authentication
+                // register the user with Firebase Authentication
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Registration success
+                                    // registration success
                                     Toast.makeText(RegistrationActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
-                                    // Proceed to the home page or any desired activity
+                                    // launch HomeActivity
                                     startActivity(new Intent(RegistrationActivity.this, HomeActivity.class));
                                 } else {
-                                    // Registration failed
+                                    // registration failed
                                     Toast.makeText(RegistrationActivity.this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -68,7 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
         buttonReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Return to the home page or any desired activity
+                // return to MainActivity
                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
             }
         });

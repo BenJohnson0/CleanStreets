@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open the RegistrationActivity
+                // launch RegistrationActivity
                 startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
             }
         });
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Open the LoginActivity
+                // launch LoginActivity
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
@@ -46,21 +45,22 @@ public class MainActivity extends AppCompatActivity {
         buttonAnon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Log in anonymously
+                // call signInAnonymously() function
                 signInAnonymously();
             }
         });
     }
 
+    // function that allows anonymous sign-in from Firebase
     private void signInAnonymously() {
         firebaseAuth.signInAnonymously()
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Anonymous login successful
+                        // anonymous login successful
                         startActivity(new Intent(MainActivity.this, HomeActivity.class));
                         finish();
                     } else {
-                        // Anonymous login failed
+                        // anonymous login failed
                         Toast.makeText(MainActivity.this, "Anonymous login failed.", Toast.LENGTH_SHORT).show();
                     }
                 });

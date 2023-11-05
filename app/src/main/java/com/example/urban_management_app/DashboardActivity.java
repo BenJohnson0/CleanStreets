@@ -23,7 +23,7 @@ import java.util.List;
 public class DashboardActivity extends AppCompatActivity {
 
     private LineChart chart1;
-    // Define other chart views here
+    // TODO: define other chart views here
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,9 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         chart1 = findViewById(R.id.chart1);
-        // Initialize other chart views here
+        // TODO: initialize other chart views
 
-        // Load data from Firebase Database and update the charts
+        // load data from Firebase Database and update the charts
         loadChartData();
     }
 
