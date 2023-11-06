@@ -43,4 +43,13 @@
         android:text="Guest"
         />
 
+    <Button
+        android:id="@+id/route_finder_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorSecondary"
+        android:layout_marginTop="16dp"
+        android:text="route finder testing"
+        />
+
 </LinearLayout>

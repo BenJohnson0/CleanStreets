@@ -9,7 +9,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -39,26 +40,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".LoginActivity" />
-        <activity
-            android:name=".RegistrationActivity" />
-        <activity
-            android:name=".PasswordResetActivity" />
-        <activity
-            android:name=".HomeActivity" />
-        <activity
-            android:name=".AddReportActivity" />
-        <activity
-            android:name=".AccountManagementActivity" />
-        <activity
-            android:name=".MapSelectionActivity" />
-        <activity
-            android:name=".ReportsMapActivity" />
-        <activity
-            android:name=".DashboardActivity" />
-        <activity
-            android:name=".DetailedReportActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".PasswordResetActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".AddReportActivity" />
+        <activity android:name=".AccountManagementActivity" />
+        <activity android:name=".MapSelectionActivity" />
+        <activity android:name=".ReportsMapActivity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".DetailedReportActivity" />
+        <activity android:name=".RouteFinderActivity" />
     </application>
 
 </manifest>

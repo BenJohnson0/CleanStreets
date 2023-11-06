@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonRegister, buttonLogin, buttonAnon;
+    private Button buttonRegister, buttonLogin, buttonAnon, route_finder_button;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         buttonRegister = findViewById(R.id.buttonRegister);
         buttonLogin = findViewById(R.id.buttonLogin);
         buttonAnon = findViewById(R.id.anonymous_login_button);
+        route_finder_button = findViewById(R.id.route_finder_button);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // call signInAnonymously() function
                 signInAnonymously();
+            }
+        });
+
+        route_finder_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // launch route finder activity
+                startActivity(new Intent(MainActivity.this, RouteFinderActivity.class));
             }
         });
     }
