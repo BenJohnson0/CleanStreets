@@ -22,6 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Urbanmanagementapp"
         tools:targetApi="31">
+        <activity
+            android:name=".AccessibilityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

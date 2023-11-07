@@ -180,7 +180,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.nav_home:
                 // home
-                showToast("Home selected");
+                showToast("Home");
                 break;
             case R.id.nav_account:
                 // account management (only logged-in users)
@@ -188,7 +188,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_settings:
                 // app settings
-                showToast("Settings selected");
+                showToast("Settings");
+                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
                 break;
             case R.id.nav_statistics:
                 // statistics dashboard
@@ -196,7 +197,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_saved_reports:
                 // saved reports (only logged-in users)
-                showToast("Saved reports selected");
+                showToast("Saved reports");
                 break;
             case R.id.nav_add_report:
                 // add new report
@@ -204,11 +205,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_your_reports:
                 // user-created reports (only logged-in users)
-                showToast("Your reports selected");
+                showToast("Your reports");
                 break;
             case R.id.nav_education:
                 // educational resources
-                showToast("Education selected");
+                showToast("Education");
                 break;
             case R.id.nav_sign_out:
                 // sign out (only logged-in users)
