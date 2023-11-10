@@ -40,6 +40,10 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
     private DatabaseReference reportsRef;
     private List<Report> reportList = new ArrayList<>();
 
+    //TODO: focus map on dublin city at launch
+    // route finder to nearest report for now
+    // scope for nearest 3-5
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

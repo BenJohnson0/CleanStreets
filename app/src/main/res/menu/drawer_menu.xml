@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
-            android:tint="@color/colorAccent"
+            android:tint="@color/colorSecondary"
             android:title="Home" />
         <item
             android:id="@+id/nav_add_report"

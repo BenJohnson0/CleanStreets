@@ -187,7 +187,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(HomeActivity.this, AccountManagementActivity.class));
                 break;
             case R.id.nav_settings:
-                // app settings
+                // app settings TODO: need to be buttons, not imageview / icon
                 showToast("Settings");
                 startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
                 break;

@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:gravity="center"
+    android:padding="20dp"
     tools:context=".LoginActivity">
 
     <EditText
@@ -23,24 +26,29 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
         android:text="Login" />
 
     <Button
         android:id="@+id/buttonHome"
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Home" />
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
+        android:layout_marginTop="20dp"
+        android:text="back to home" />
 
     <TextView
         android:id="@+id/textViewForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="70dp"
         android:text="Forgot Password?"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp" />
 
     <Button
@@ -48,8 +56,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reset Password"
-        android:textColor="@android:color/darker_gray"
-        android:background="@android:color/transparent"
-        android:layout_marginTop="8dp" />
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="5dp" />
 
 </LinearLayout>

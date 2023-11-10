@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@color/colorPrimary"
     tools:context=".DetailedReportActivity">
 
     <ImageView
@@ -52,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/urgencyTextView"
         android:text="Delete Report"
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 </RelativeLayout>

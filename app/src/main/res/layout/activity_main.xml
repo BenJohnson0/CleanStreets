@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:gravity="center"
@@ -16,41 +17,48 @@
         android:layout_marginBottom="50dp"
         android:text="CleanStreets"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="55sp"
         android:textStyle="bold"
         />
 
     <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
-        android:text="Register"
-        />
-
-    <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
-        android:layout_marginTop="16dp"
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
+        android:layout_marginTop="10dp"
         android:text="Login" />
 
     <Button
-        android:id="@+id/anonymous_login_button"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonRegister"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
-        android:layout_marginTop="16dp"
-        android:text="Guest"
+        app:backgroundTint="@color/colorSecondary"
+        android:text="New? Register here!"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_corner"
+        />
+
+
+
+    <Button
+        android:id="@+id/anonymous_login_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
+        android:layout_marginTop="30dp"
+        android:text="use as a Guest"
         />
 
     <Button
         android:id="@+id/route_finder_button"
-        android:layout_width="match_parent"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorSecondary"
-        android:layout_marginTop="16dp"
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
+        android:layout_marginTop="30dp"
         android:text="route finder testing"
         />
 

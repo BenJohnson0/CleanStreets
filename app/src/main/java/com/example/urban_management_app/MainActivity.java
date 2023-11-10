@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //TODO: button background should be yellow accent
         route_finder_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

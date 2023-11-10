@@ -8,9 +8,9 @@
     <color name="teal_200">#B46617</color>
     <color name="teal_700">#FFBA00</color>
 
-    <color name="colorPrimary">#008374</color>
-    <color name="colorPrimaryDark">#fefefe</color>
-    <color name="colorAccent">#89ba16</color>
-    <color name="colorSecondary">#FFBA00</color>
+    <color name="colorPrimary">#8ECDDD</color>
+    <color name="colorPrimaryDark">#22668D</color>
+    <color name="colorAccent">#496800</color>
+    <color name="colorSecondary">#B48D26</color>
 
 </resources>

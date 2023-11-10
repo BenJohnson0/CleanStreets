@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="@android:color/white">
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/info_window_title"
