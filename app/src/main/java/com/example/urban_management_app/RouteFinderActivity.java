@@ -1,18 +1,21 @@
 package com.example.urban_management_app;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.urban_management_app.R;
-import com.example.urban_management_app.Report;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,60 +23,127 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.android.PolyUtil;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.TravelMode;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RouteFinderActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Button btnFindReport;
-    private TextView textView;
-    private FusedLocationProviderClient fusedLocationClient;
-
-    private DatabaseReference reportsRef;
+    private FusedLocationProviderClient fusedLocationClient; // for getting user location
+    private LatLng userLatLng;
     private List<Report> reportList = new ArrayList<>();
+    private boolean isUserLocationAvailable = false;
+    private boolean areReportsAvailable = false;
+    private Button buttonFindNearest;
 
-    //TODO: focus map on dublin city at launch
-    // route finder to nearest report for now
-    // scope for nearest 3-5
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_finder);
 
-        btnFindReport = findViewById(R.id.btnFindReport);
-        textView = findViewById(R.id.textView);
+        buttonFindNearest = findViewById(R.id.btnFindReport); // declare the button
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        // create SupportMapFragment and get notified when the map is ready to be used
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Request location permission and initialize the fused location client
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        getUserLocation();
 
-        // Initialize Firebase references
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        reportsRef = database.getReference("reports");
+        // on click listener for the nearest report button
+        buttonFindNearest.setOnClickListener(new View.OnClickListener() {
 
-        btnFindReport.setOnClickListener(view -> findNearestReportLocation());
+            @Override
+            public void onClick(View v) {
+                // get user location x1,y1
+                getUserLocation();
+
+                // get report location x2,y2
+                getReportCoordinates();
+
+                // call Directions API for (x1,y1) and (x2,y2)
+
+                // display on the map
+
+            }
+        });
+    }
+
+    // function for getting the current user location
+    private void getUserLocation() {
+        // check if user has allowed location check
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, location -> {
+                        if (location != null) { //TODO: remove current location toast
+                            Toast.makeText(RouteFinderActivity.this, "Current Location: " + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                            userLatLng = new LatLng(location.getLatitude(), location.getLongitude()); // store user coordinates
+                        } else {
+                            Toast.makeText(RouteFinderActivity.this, "Location not available. Allow location services in order to proceed.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            // request location permission
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+    }
+
+    // currently cycles through all reports, only need the nearest
+    private List<LatLng> getReportCoordinates() {
+        List<LatLng> coordinates = new ArrayList<>();
+
+        Query reportsQuery = FirebaseDatabase.getInstance().getReference("reports");
+
+        reportsQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                coordinates.clear(); // assuming coordinates is a List<LatLng>
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Report report = snapshot.getValue(Report.class);
+
+                    if (report != null) { //TODO: check here for the nearest report to user
+                        LatLng reportLatLng = new LatLng(report.getXCoordinates(), report.getYCoordinates());
+                        Toast.makeText(RouteFinderActivity.this, "Report Location: " + reportLatLng.latitude + ", " + reportLatLng.longitude, Toast.LENGTH_SHORT).show();
+                        coordinates.add(reportLatLng);
+                    } else {
+                        Toast.makeText(RouteFinderActivity.this, "No coordinates in report.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // TODO: Handle this
+            }
+        });
+
+        return coordinates;
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-    }
-
-    private void findNearestReportLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -84,34 +154,10 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-            if (location != null) {
-                double userLatitude = location.getLatitude();
-                double userLongitude = location.getLongitude();
-
-                // Calculate the nearest report location
-                LatLng nearestReportLocation = getNearestReportLocation(userLatitude, userLongitude);
-
-                // Display the nearest report location on the map
-                mMap.clear(); // Clear any previous markers
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(nearestReportLocation));
-                mMap.addMarker(new MarkerOptions().position(nearestReportLocation).title("Nearest Report Location"));
-            }
-        });
-    }
-
-    private LatLng getNearestReportLocation(double userLatitude, double userLongitude) {
-        // Implement the logic to find the nearest report location from your reportList
-        // You can calculate the distances using the Haversine formula
-        // For simplicity, we'll assume the first report is the nearest
-        double nearestLat = reportList.get(0).getXCoordinates();
-        double nearestLng = reportList.get(0).getYCoordinates();
-        LatLng nearestLocation = new LatLng(nearestLat, nearestLng);
-
-        // You should iterate through your reportList and calculate the distances
-        // to find the actual nearest report location
-        // Here, we just assume the first report is the nearest
-
-        return nearestLocation;
+        LatLng currentLocation = new LatLng(53.350140, -6.266155);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12f));
+        mMap.setMyLocationEnabled(true); // uncomment to show user location on the map, san jose USA
     }
 }
+
+
