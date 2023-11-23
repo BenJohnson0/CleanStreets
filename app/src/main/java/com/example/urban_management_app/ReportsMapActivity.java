@@ -102,15 +102,16 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
                 return report;
             }
         }
-        return null; // Return null if no matching report is found
+        return null; // return null if no matching report is found
     }
 
+    @SuppressLint("PotentialBehaviorOverride")
     private void plotReportsOnMap() {
         if (googleMap != null) {
             googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                 @Override
                 public View getInfoWindow(Marker marker) {
-                    return null; // Return null to use the default info window background
+                    return null; // return null to use the default info window background
                 }
 
                 @SuppressLint("SetTextI18n")
@@ -127,7 +128,7 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
 
                     titleTextView.setText(marker.getTitle());
 
-                    // Get the Report associated with the marker and set data to TextViews
+                    // get the Report associated with the marker and set data to TextViews
                     Report report = getReportFromMarker(marker);
                     if (report != null) {
                         sizeTextView.setText("Size: " + report.getSize());
@@ -172,12 +173,12 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
             List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
             if (addresses != null && addresses.size() > 0) {
                 Address address = addresses.get(0);
-                return address.getAddressLine(0); // Return the first line of the address
+                return address.getAddressLine(0); // return the first line of the address
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ""; // Return an empty string if geocoding fails
+        return ""; // return an empty string if geocoding fails
     }
 
 }

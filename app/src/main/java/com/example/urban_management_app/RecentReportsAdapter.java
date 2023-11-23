@@ -69,9 +69,9 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
                     if (listener != null) {
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION) {
-                            // Get the report at this position
+                            // get the report at this position
                             Report clickedReport = reportList.get(position);
-                            // Call the onItemClick method on the listener
+                            // call the onItemClick method on the listener
                             listener.onItemClick(clickedReport.getReportId());
                         }
                     }

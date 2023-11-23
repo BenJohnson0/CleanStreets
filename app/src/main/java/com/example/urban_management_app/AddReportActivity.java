@@ -75,7 +75,7 @@ public class AddReportActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Uploading Report...");
 
-        // Initialize Firebase database and storage references
+        // initialize Firebase database and storage references
         databaseReference = FirebaseDatabase.getInstance().getReference("reports");
         storageReference = FirebaseStorage.getInstance().getReference("report_images");
 
@@ -164,12 +164,13 @@ public class AddReportActivity extends AppCompatActivity {
             return;
         }
 
+        // initialise report parameters
         final String title = editTextTitle.getText().toString().trim();
         final String size = spinnerSize.getSelectedItem().toString();
         final String urgency = spinnerUrgency.getSelectedItem().toString();
         final String status = null; //TODO: fix with notifications etc.
 
-        // Check if the title, size, and urgency values are not empty
+        // check if the title, size, and urgency values are not empty
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(size) || TextUtils.isEmpty(urgency)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -196,7 +197,7 @@ public class AddReportActivity extends AppCompatActivity {
                                 "Failed to upload image", Toast.LENGTH_SHORT).show();
                     });
         } else {
-            // If no image is attached, still create the report with empty image URL
+            // if no image is attached, still create the report with empty image URL
             Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude,
                     size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
             saveReportToDatabase(report);
