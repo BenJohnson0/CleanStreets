@@ -46,10 +46,10 @@ public class DetailedReportActivity extends AppCompatActivity {
 
         Button amendButton = findViewById(R.id.amendButton);
 
-        // Retrieve report_id from the intent
+        // retrieve report_id from the intent
         String reportId = getIntent().getStringExtra("report_id");
 
-        // Create a Firebase database reference to the specific report
+        // create a Firebase database reference to the specific report
         DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports").child(reportId);
 
         reportRef.addValueEventListener(new ValueEventListener() {
@@ -60,7 +60,7 @@ public class DetailedReportActivity extends AppCompatActivity {
                 if (report != null) {
                     titleTextView.setText("Title: " + report.getTitle());
 
-                    // Geocode coordinates to get an address
+                    // geocode coordinates to get an address
                     String address = geocodeLocation(DetailedReportActivity.this, report.getXCoordinates(), report.getYCoordinates());
                     locationTextView.setText("Location: " + address);
 
@@ -75,19 +75,19 @@ public class DetailedReportActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle database read error
+                // TODO: handle database read error
             }
         });
 
         amendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAmendOrDeleteDialog(reportId); // Pass the reportId to the dialog
+                showAmendOrDeleteDialog(reportId); // pass the reportId to the dialog
             }
         });
     }
 
-    // Geocode latitude and longitude coordinates into an address
+    // geocode latitude and longitude coordinates into an address
     private String geocodeLocation(Context context, double latitude, double longitude) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         String addressText = "Unknown Location";

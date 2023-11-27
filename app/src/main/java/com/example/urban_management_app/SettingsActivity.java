@@ -19,7 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
         LinearLayout notificationsOption = findViewById(R.id.notificationsOption);
         LinearLayout accessibilityOption = findViewById(R.id.accessibilityOption);
 
-        // Set a click listener for the Account option
+        // set a click listener for the Account option
         accountOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        // Set a click listener for the Accessibility option (placeholder)
+        // set a click listener for the Accessibility option (placeholder)
         accessibilityOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

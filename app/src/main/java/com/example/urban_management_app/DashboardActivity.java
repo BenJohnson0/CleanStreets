@@ -38,30 +38,27 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void loadChartData() {
-        // Replace "dataRef" with your actual Firebase Database reference
-        FirebaseDatabase.getInstance().getReference("dataRef")
+        // database reference "reports"
+        FirebaseDatabase.getInstance().getReference("reports")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         List<Entry> entries1 = new ArrayList<>();
-                        // Initialize other lists for other charts here
+                        // TODO: initialize other lists / other charts here
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             //TODO: firebase data
-                            // Parse your data from dataSnapshot and add to the corresponding lists
-                            // Example: For a field "value1", you can do:
-                            // float value = snapshot.child("value1").getValue(Float.class);
-                            // entries1.add(new Entry(xValue, value));
+                            // Parse  data from dataSnapshot and add to the corresponding lists
                         }
 
-                        // Set up chart data and display
+                        // set up chart data and display
                         setChartData(chart1, entries1, "Chart 1 Label");
-                        // Set up other charts here
+                        // TODO: set up other charts here
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Handle error if data retrieval is canceled
+                        // TODO: handle error if data retrieval is canceled
                     }
                 });
     }
@@ -74,20 +71,20 @@ public class DashboardActivity extends AppCompatActivity {
         LineData lineData = new LineData(dataSets);
         chart.setData(lineData);
 
-        // Customize chart appearance
+        // customize chart appearance
         dataSet.setColor(ContextCompat.getColor(this, R.color.colorPrimary));
         dataSet.setCircleColor(ContextCompat.getColor(this, R.color.colorAccent));
         dataSet.setLineWidth(2f);
         dataSet.setCircleRadius(4f);
         dataSet.setDrawValues(true);
 
-        // Customize X-axis
+        // customize X-axis
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setGranularity(1f);
         xAxis.setLabelCount(entries.size(), true);
 
-        // Refresh chart display
+        // refresh chart display
         chart.invalidate();
     }
 }

@@ -24,10 +24,10 @@ public class PasswordResetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
 
-        // Initialize FirebaseAuth
+        // initialize FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // Bind views
+        // bind views
         editTextEmail = findViewById(R.id.editTextEmail);
         buttonResetPassword = findViewById(R.id.buttonResetPassword);
 
@@ -36,7 +36,7 @@ public class PasswordResetActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = editTextEmail.getText().toString().trim();
 
-                // Send password reset email
+                // send password reset email
                 firebaseAuth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

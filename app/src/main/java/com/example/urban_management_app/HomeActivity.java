@@ -141,7 +141,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         // show or hide user-specific options based on login status
         if (userEmail != null) {
-            // User is logged in
+            // user is logged in
             navMenu.findItem(R.id.nav_home).setVisible(true);
             navMenu.findItem(R.id.nav_add_report).setVisible(true);
             navMenu.findItem(R.id.nav_statistics).setVisible(true);

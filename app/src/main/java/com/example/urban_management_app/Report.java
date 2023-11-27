@@ -13,7 +13,7 @@ public class Report {
     private String status;
 
     public Report() {
-        // Default constructor required for Firebase
+        // default constructor required for Firebase
     }
 
     public Report(String reportId, String timestamp, double xCoordinates, double yCoordinates,

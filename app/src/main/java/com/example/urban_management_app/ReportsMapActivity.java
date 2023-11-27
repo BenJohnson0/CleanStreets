@@ -53,14 +53,14 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
 
-        //load custom map style
+        // load custom map style
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.map_style);
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             String json = new String(buffer, "UTF-8");
 
-            // Set the map style
+            // set the map style
             googleMap.setMapStyle(new MapStyleOptions(json));
         } catch (IOException e) {
             e.printStackTrace();

@@ -68,7 +68,6 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         mapFragment.getMapAsync(this);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        getUserLocation();
 
         // on click listener for the nearest report button
         buttonFindNearest.setOnClickListener(new View.OnClickListener() {
