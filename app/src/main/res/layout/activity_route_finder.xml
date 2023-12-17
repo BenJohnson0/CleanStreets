@@ -8,28 +8,6 @@
     android:background="@color/colorPrimary"
     tools:context=".RouteFinderActivity">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btnFindReport"
-        android:layout_below="@+id/textView"
-        tools:context=".RouteFinderActivity" />
-
-    <Button
-        android:id="@+id/btnFindReport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Find Nearest Report"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:backgroundTint="@color/colorSecondary"
-        android:background="@drawable/round_corner"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:padding="20dp" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -39,5 +17,13 @@
         android:padding="16dp"
         android:textSize="20sp"
         android:layout_alignParentTop="true" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView"
+        tools:context=".RouteFinderActivity" />
 
 </RelativeLayout>
