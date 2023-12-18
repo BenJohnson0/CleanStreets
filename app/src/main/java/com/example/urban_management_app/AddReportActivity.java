@@ -62,7 +62,7 @@ public class AddReportActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_report);
+        setContentView(R.layout.activity_add_report); //set the layout
 
         editTextTitle = findViewById(R.id.edit_text_title); // title of the report
         imageViewAttachment = findViewById(R.id.image_view_attachment); // [optional] image attached to the report
@@ -86,10 +86,10 @@ public class AddReportActivity extends AppCompatActivity {
             }
         });
 
+        // call uploadReport() method with the selected latitude and longitude
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // call uploadReport() method with the selected latitude and longitude
                 uploadReport();
             }
         });
@@ -100,7 +100,6 @@ public class AddReportActivity extends AppCompatActivity {
                 startActivityForResult(new Intent(AddReportActivity.this, MapSelectionActivity.class), REQUEST_MAP_SELECTION);
             }
         });
-
     }
 
     private void checkCameraPermission() {
@@ -127,6 +126,7 @@ public class AddReportActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
             // display image in ImageViewAttachment
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -146,13 +146,6 @@ public class AddReportActivity extends AppCompatActivity {
                 Toast.makeText(AddReportActivity.this, "Location selected", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private Uri getImageUriFromBitmap(Bitmap bitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Image", null);
-        return Uri.parse(path);
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -181,6 +174,9 @@ public class AddReportActivity extends AppCompatActivity {
         final String reportId = databaseReference.push().getKey();
         final String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 .format(new Date());
+
+        //TODO: imageUri is null here??
+        //System.out.println(imageUri);
 
         if (imageUri != null) {
             final StorageReference fileReference = storageReference.child(reportId);

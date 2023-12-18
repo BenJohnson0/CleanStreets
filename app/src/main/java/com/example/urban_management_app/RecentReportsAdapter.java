@@ -80,8 +80,8 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
         }
 
         public void bind(Report report) {
-            reportTitleTextView.setText("Title: " + report.getTitle());
-            reportTimestampTextView.setText("Timestamp: " + report.getTimestamp());
+            reportTitleTextView.setText(report.getTitle());
+            reportTimestampTextView.setText(report.getTimestamp());
             reportSizeTextView.setText("Size: " + report.getSize());
             reportUrgencyTextView.setText("Urgency: " + report.getUrgency());
             reportStatusTextView.setText("Status: " + report.getStatus());

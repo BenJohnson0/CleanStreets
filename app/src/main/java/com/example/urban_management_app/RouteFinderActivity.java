@@ -1,7 +1,6 @@
 package com.example.urban_management_app;
 
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;

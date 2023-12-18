@@ -3,48 +3,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/rounded_corner_layout"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_marginBottom="8dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/report_title_textview"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorSecondary"
         android:textSize="60px"
-        android:textColor="@color/black"
-        android:textStyle="italic|bold"/>
+        android:textStyle="italic|bold"
+        android:layout_marginBottom="8dp"/>
 
     <TextView
         android:id="@+id/report_timestamp_textview"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="45px"
-        android:textColor="@color/black"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_size_textview"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="45px"
+        android:layout_height="wrap_content"
         android:textColor="@color/black"
-    />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_urgency_textview"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="45px"
+        android:layout_height="wrap_content"
         android:textColor="@color/black"
-    />
+        android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_status_textview"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="45px"
+        android:layout_height="wrap_content"
         android:textColor="@color/black"
-    />
+        android:textSize="45px" />
 
 </LinearLayout>
