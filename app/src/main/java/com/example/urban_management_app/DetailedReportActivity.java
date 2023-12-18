@@ -1,6 +1,7 @@
 package com.example.urban_management_app;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -119,10 +122,25 @@ public class DetailedReportActivity extends AppCompatActivity {
         builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // todo: deletion logic
-                Toast.makeText(DetailedReportActivity.this, "Report deleted", Toast.LENGTH_SHORT).show();
+                deleteReport(reportId);
             }
         });
         builder.show();
+    }
+
+    private void deleteReport(String reportId) {
+        DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports").child(reportId);
+        reportRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(DetailedReportActivity.this, "Report deleted", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DetailedReportActivity.this, HomeActivity.class));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(DetailedReportActivity.this, "Error deleting report, please try again.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
