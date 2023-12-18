@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/urgencyTextView"
-        android:text="Delete Report"
+        android:text="Edit Report"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
         android:layout_centerHorizontal="true"
