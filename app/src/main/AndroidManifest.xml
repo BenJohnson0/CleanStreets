@@ -57,6 +57,7 @@
         <activity android:name=".DashboardActivity" />
         <activity android:name=".DetailedReportActivity" />
         <activity android:name=".RouteFinderActivity" />
+        <activity android:name=".AmendReportActivity" />
     </application>
 
 </manifest>

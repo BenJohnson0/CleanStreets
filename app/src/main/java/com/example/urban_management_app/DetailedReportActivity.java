@@ -115,8 +115,10 @@ public class DetailedReportActivity extends AppCompatActivity {
         builder.setPositiveButton("Amend", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // todo: amendment logic
-                Toast.makeText(DetailedReportActivity.this, "Report amended", Toast.LENGTH_SHORT).show();
+                // Start the AmendReportActivity
+                Intent intent = new Intent(DetailedReportActivity.this, AmendReportActivity.class);
+                intent.putExtra("report_id", reportId);
+                startActivity(intent);
             }
         });
         builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
@@ -128,6 +130,7 @@ public class DetailedReportActivity extends AppCompatActivity {
         builder.show();
     }
 
+    // function for deleting the report
     private void deleteReport(String reportId) {
         DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports").child(reportId);
         reportRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -139,7 +142,8 @@ public class DetailedReportActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(DetailedReportActivity.this, "Error deleting report, please try again.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailedReportActivity.this, "Error deleting report, please try again later.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DetailedReportActivity.this, HomeActivity.class));
             }
         });
     }
