@@ -13,6 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Report Title"
+        android:textStyle="italic|bold"
+        android:textColor="@color/colorSecondary"
+        android:textSize="75px"
         android:textAppearance="?android:textAppearanceMedium" />
 
     <EditText
@@ -31,6 +34,9 @@
         android:layout_below="@id/edit_text_title"
         android:layout_marginTop="16dp"
         android:text="Location"
+        android:textStyle="italic|bold"
+        android:textColor="@color/black"
+        android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
     <Button
@@ -50,13 +56,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_select_map"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="35dp"
         android:text="Size"
+        android:textStyle="italic|bold"
+        android:textColor="@color/black"
+        android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/spinner_size"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_view_size"
         android:layout_marginTop="8dp"
@@ -67,13 +76,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_size"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="35dp"
         android:text="Urgency"
+        android:textStyle="italic|bold"
+        android:textColor="@color/black"
+        android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
     <Spinner
         android:id="@+id/spinner_urgency"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/text_view_urgency"
         android:layout_marginTop="8dp"
@@ -84,8 +96,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_urgency"
-        android:layout_marginTop="16dp"
-        android:text="Attachment"
+        android:layout_marginTop="35dp"
+        android:text="Attachment (optional)"
+        android:textStyle="italic|bold"
+        android:textColor="@color/black"
+        android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
     <ImageView

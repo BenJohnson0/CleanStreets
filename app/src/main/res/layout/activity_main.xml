@@ -22,7 +22,7 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="180dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/round_corner"
@@ -32,22 +32,22 @@
 
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="340dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_corner"
-        android:text="New? Register here!"
+        android:text="Sign up"
         android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary" />
 
 
     <Button
         android:id="@+id/anonymous_login_button"
-        android:layout_width="260dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_corner"
-        android:text="use as a Guest"
+        android:text="use as Guest"
         android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary" />
 
