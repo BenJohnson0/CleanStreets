@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:textSize="60px"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSecondary"
         android:textStyle="italic|bold"/>
 
     <TextView

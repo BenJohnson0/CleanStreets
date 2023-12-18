@@ -130,11 +130,14 @@ public class AddReportActivity extends AppCompatActivity {
             // display image in ImageViewAttachment
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
             imageBytes = byteArrayOutputStream.toByteArray();
             imageViewAttachment.setImageBitmap(imageBitmap);
-        } else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
+
+        }
+        else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
             if (data != null) {
                 // retrieve selected coordinates from MapSelectionActivity
                 selectedLatitude = data.getDoubleExtra("latitude", 0);
