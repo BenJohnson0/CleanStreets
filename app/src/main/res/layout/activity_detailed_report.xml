@@ -21,7 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/reportImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textSize="60px"
+        android:textColor="@color/black"
+        android:textStyle="italic|bold"/>
 
     <TextView
         android:id="@+id/locationTextView"
@@ -29,7 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/titleTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textSize="45px"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/sizeTextView"
@@ -37,7 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/locationTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textSize="45px"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/urgencyTextView"
@@ -45,7 +52,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/sizeTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textSize="45px"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/amendButton"
@@ -56,5 +65,5 @@
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="50dp"/>
 </RelativeLayout>
