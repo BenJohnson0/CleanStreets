@@ -35,28 +35,46 @@ public class LoginActivity extends AppCompatActivity {
         buttonForgotPassword = findViewById(R.id.buttonForgotPassword);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
+
+            private int loginAttempts = 0;
+
             @Override
             public void onClick(View v) {
                 String email = editTextEmail.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
 
-                //TODO: Validate the user inputs (e.g., check for empty fields)
+                // validate user inputs
+                if (!validateFields()) {
+                    return;
+                }
+
+                // only allow the user 5 tries to login successfully
+                if (loginAttempts >= 5) {
+                    Toast.makeText(LoginActivity.this, "You have exceeded the maximum login attempts. Please try again later.", Toast.LENGTH_SHORT).show();
+                    // redirect to HomeActivity
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    return;
+                }
+
+                // increment the counter after each try
+                loginAttempts++;
 
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // login success
+                                    // login success and reset counter
                                     Toast.makeText(LoginActivity.this, "Login successful.", Toast.LENGTH_SHORT).show();
+                                    loginAttempts = 0;
 
                                     // launch HomeActivity
                                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 } else {
                                     // login failed
-                                    // TODO: login failed handling (3 tries, etc...?)
                                     Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
                                 }
+
                             }
                         });
             }
@@ -77,5 +95,31 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class));
             }
         });
+    }
+
+    // function for user input validation
+    // valid password length + email
+    private boolean validateFields() {
+        boolean valid = true;
+
+        String email = editTextEmail.getText().toString().trim();
+        if (email.isEmpty()) {
+            editTextEmail.setError("Please enter your email address");
+            valid = false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editTextEmail.setError("Please enter a valid email address");
+            valid = false;
+        }
+
+        String password = editTextPassword.getText().toString().trim();
+        if (password.isEmpty()) {
+            editTextPassword.setError("Please enter your password");
+            valid = false;
+        } else if (password.length() < 8) {
+            editTextPassword.setError("Password must be at least 8 characters long");
+            valid = false;
+        }
+
+        return valid;
     }
 }

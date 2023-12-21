@@ -44,7 +44,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
 
-                // TODO: validate user inputs (check for empty fields, etc.)
+                // validate user inputs
+                if (!validateFields()) {
+                    return;
+                }
 
                 // register the user with Firebase Authentication
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -73,4 +76,38 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
+
+    // function for user input validation
+    // valid password length + email
+    private boolean validateFields() {
+        boolean valid = true;
+
+        String username = editTextUsername.getText().toString().trim();
+        if (username.isEmpty()) {
+            editTextUsername.setError("Please enter your username");
+            valid = false;
+        }
+
+        String email = editTextEmail.getText().toString().trim();
+        if (email.isEmpty()) {
+            editTextEmail.setError("Please enter your email address");
+            valid = false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            editTextEmail.setError("Please enter a valid email address");
+            valid = false;
+        }
+
+        String password = editTextPassword.getText().toString().trim();
+        if (password.isEmpty()) {
+            editTextPassword.setError("Please enter your password");
+            valid = false;
+        } else if (password.length() < 8) {
+            editTextPassword.setError("Password must be at least 8 characters long");
+            valid = false;
+        }
+
+        return valid;
+    }
 }
+
+
