@@ -60,6 +60,7 @@
         <activity android:name=".DetailedReportActivity" />
         <activity android:name=".RouteFinderActivity" />
         <activity android:name=".AmendReportActivity" />
+        <activity android:name=".EducationActivity" />
     </application>
 
 </manifest>

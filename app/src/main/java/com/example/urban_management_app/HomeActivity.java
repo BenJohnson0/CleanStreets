@@ -209,7 +209,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_education:
                 // educational resources
-                showToast("Education");
+                startActivity(new Intent(HomeActivity.this, EducationActivity.class));
                 break;
             case R.id.nav_sign_out:
                 // sign out (only logged-in users)
