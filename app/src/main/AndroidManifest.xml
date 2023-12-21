@@ -5,7 +5,6 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -24,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Urbanmanagementapp"
         tools:targetApi="31">
+        <activity
+            android:name=".YourReportsActivity"
+            android:exported="false" />
         <activity
             android:name=".AccessibilityActivity"
             android:exported="false" />

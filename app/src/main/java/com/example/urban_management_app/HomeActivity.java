@@ -205,7 +205,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_your_reports:
                 // user-created reports (only logged-in users)
-                showToast("Your reports");
+                startActivity(new Intent(HomeActivity.this, YourReportsActivity.class));
                 break;
             case R.id.nav_education:
                 // educational resources

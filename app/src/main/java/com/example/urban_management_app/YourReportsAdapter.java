@@ -1,6 +1,5 @@
 package com.example.urban_management_app;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,35 +8,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdapter.ViewHolder> {
-
-    public static void setReportList(ArrayList<Report> filteredReports) {
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(String reportId);
-    }
+public class YourReportsAdapter extends RecyclerView.Adapter<YourReportsAdapter.ViewHolder> {
 
     private List<Report> reportList;
-    private Context context;
-    private OnItemClickListener listener;
 
-    public RecentReportsAdapter(List<Report> reportList) {
+    public YourReportsAdapter(List<Report> reportList) {
         this.reportList = reportList;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recent_reports, parent, false);
-        return new ViewHolder(view);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_your_reports, parent, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -49,6 +34,11 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
     @Override
     public int getItemCount() {
         return reportList.size();
+    }
+
+    public void setReportList(List<Report> reportList) {
+        this.reportList = reportList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,21 +56,6 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
             reportSizeTextView = itemView.findViewById(R.id.report_size_textview);
             reportUrgencyTextView = itemView.findViewById(R.id.report_urgency_textview);
             reportStatusTextView = itemView.findViewById(R.id.report_status_textview);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            // get the report at this position
-                            Report clickedReport = reportList.get(position);
-                            // call the onItemClick method on the listener
-                            listener.onItemClick(clickedReport.getReportId());
-                        }
-                    }
-                }
-            });
         }
 
         public void bind(Report report) {
