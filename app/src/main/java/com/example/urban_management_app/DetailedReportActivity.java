@@ -61,14 +61,13 @@ public class DetailedReportActivity extends AppCompatActivity {
                 Report report = dataSnapshot.getValue(Report.class);
 
                 if (report != null) {
-                    titleTextView.setText("Title: " + report.getTitle());
+                    titleTextView.setText(report.getTitle());
 
                     // geocode coordinates to get an address
                     String address = geocodeLocation(DetailedReportActivity.this, report.getXCoordinates(), report.getYCoordinates());
-                    locationTextView.setText("Location: " + address);
-
-                    sizeTextView.setText("Size: " + report.getSize());
-                    urgencyTextView.setText("Urgency: " + report.getUrgency());
+                    locationTextView.setText("Near " + address);
+                    sizeTextView.setText("The reported size is '" + report.getSize()+"'");
+                    urgencyTextView.setText("The reported urgency is '" + report.getUrgency()+"'");
 
                     Glide.with(DetailedReportActivity.this)
                             .load(report.getImageUrl())
