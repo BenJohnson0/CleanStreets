@@ -166,9 +166,12 @@ public class AddReportActivity extends AppCompatActivity {
         final String urgency = spinnerUrgency.getSelectedItem().toString();
         final String status = null; //TODO: fix with notifications etc.
 
-        // check if the title, size, and urgency values are not empty
-        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(size) || TextUtils.isEmpty(urgency)) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+        // check if the title, size, and urgency values are not empty and the title length is within 60 characters
+        if (TextUtils.isEmpty(title) || TextUtils.isEmpty(size) || TextUtils.isEmpty(urgency) || title.length() > 60) {
+            if (title.length() > 40) {
+                editTextTitle.setError("Title must not exceed 40 characters!");
+            }
+            Toast.makeText(this, "Please fill in all fields and keep the title length within 40 characters", Toast.LENGTH_LONG).show();
             return;
         }
 
