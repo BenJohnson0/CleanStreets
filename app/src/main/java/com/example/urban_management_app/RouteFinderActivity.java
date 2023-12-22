@@ -1,6 +1,7 @@
 package com.example.urban_management_app;
 
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -231,11 +232,13 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
                         String polyline = step.polyline.encodedPolyline;
                         List<LatLng> polylinePoints = EncodedPolyline.decode(polyline);
 
+                        // Create a PolylineOptions object and add the decoded LatLng points to it
                         PolylineOptions polylineOptions = new PolylineOptions();
                         polylineOptions.addAll(polylinePoints);
                         polylineOptions.color(Color.BLUE);
                         polylineOptions.width(4);
 
+                        // Add the polyline to the map
                         Polyline polyline = mMap.addPolyline(polylineOptions);
                     }
                 }
