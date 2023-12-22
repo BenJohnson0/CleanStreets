@@ -1,19 +1,21 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp">
 
     <EditText
         android:id="@+id/titleEditText"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:hint="Updated Title"/>
 
     <Spinner
         android:id="@+id/sizeSpinner"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -21,7 +23,7 @@
 
     <Spinner
         android:id="@+id/urgencySpinner"
-        android:layout_width="match_parent"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -29,7 +31,11 @@
 
     <Button
         android:id="@+id/amendButton"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Amend Report"/>
+        android:text="Amend Report"
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
+        android:textSize="25sp"
+        android:layout_marginTop="50dp"/>
 </LinearLayout>
