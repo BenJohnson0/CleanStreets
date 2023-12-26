@@ -11,6 +11,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.model.EncodedPolyline;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -81,10 +83,6 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
     public void onMapReady(GoogleMap googleMap) {
         this.mMap = googleMap;
 
-        // set to Dublin
-        LatLng startingCamera = new LatLng(53.36254986466739, -6.349820583825544);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startingCamera, 12f));
-
         // apply custom map style
         try {
             InputStream inputStream = getResources().openRawResource(R.raw.map_style);
@@ -99,7 +97,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
 
     //TODO: remove for deployment (hardcoded)
     private void getHardcodedLocation() {
-        ORIGIN = new LatLng(53.35737638828084, -6.35031412259818);
+        ORIGIN = new LatLng(53.3455708378654, -6.27221675017766);
     }
 
     // function for getting the current user location
@@ -187,7 +185,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
 
     private void findRoute(LatLng origin, LatLng destination) {
 
-        //TODO: remove: https://maps.googleapis.com/maps/api/directions/json?origin=53.35737638828084,-6.35031412259818&destination=53.36254986466739,-6.349820583825544&mode=walking&key=AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM THIS WORKS
+        //TODO: remove (ITS HARDCODED): https://maps.googleapis.com/maps/api/directions/json?origin=53.35737638828084,-6.35031412259818&destination=53.36254986466739,-6.349820583825544&mode=walking&key=AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM THIS WORKS
 
         //TODO: hide
         String apiKey = "AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM";
@@ -223,26 +221,35 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
 
                 //TODO: some issue AFTER THIS POINT related to parsing the response
 
-                /*
-                Gson gson = new Gson();
-                DirectionsRoute directionsResult = gson.fromJson(data, DirectionsRoute.class);
+                String polyline = "u`rdIv`he@J??g@AE`@Cd@CNA?EZ??BFAVMTGV@l@OZQZAd@Cv@Af@A`@@XB?^?DF@CTj@DD?CJA@DVIFAJEX";
 
-                for (DirectionsLeg leg : directionsResult.legs) {
-                    for (DirectionsStep step : leg.steps) {
-                        String polyline = step.polyline.encodedPolyline;
-                        List<LatLng> polylinePoints = EncodedPolyline.decode(polyline);
+                List<LatLng> polylinePoints = PolyUtil.decode(polyline);
 
-                        // Create a PolylineOptions object and add the decoded LatLng points to it
-                        PolylineOptions polylineOptions = new PolylineOptions();
-                        polylineOptions.addAll(polylinePoints);
-                        polylineOptions.color(Color.BLUE);
-                        polylineOptions.width(4);
+                // Polyline can cause issues on main thread
+                // so, start the process in a separate thread
+                new Thread(() -> {
+                    PolylineOptions polylineOptions = new PolylineOptions();
+                    polylineOptions.addAll(polylinePoints);
+                    polylineOptions.color(Color.parseColor("#B48D26")); //accent colour
+                    polylineOptions.width(15);
 
-                        // Add the polyline to the map
-                        Polyline polyline = mMap.addPolyline(polylineOptions);
-                    }
-                }
-                 */
+                    // markers to show user & report location
+                    MarkerOptions startMarkerOptions = new MarkerOptions();
+                    startMarkerOptions.position(origin);
+                    startMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                    MarkerOptions endMarkerOptions = new MarkerOptions();
+                    endMarkerOptions.position(destination);
+                    endMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+
+                    runOnUiThread(() -> {
+                        // set camera to Report x,y & add polylines and markers
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 15f));
+                        mMap.addPolyline(polylineOptions);
+                        mMap.addMarker(startMarkerOptions);
+                        mMap.addMarker(endMarkerOptions);
+                    });
+                }).start();
             }
         });
     }
