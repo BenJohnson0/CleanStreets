@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.maps.model.EncodedPolyline;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,6 +36,7 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
+
 
 
 import java.io.IOException;
@@ -97,7 +100,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
 
     //TODO: remove for deployment (hardcoded)
     private void getHardcodedLocation() {
-        ORIGIN = new LatLng(53.3455708378654, -6.27221675017766);
+        ORIGIN = new LatLng(53.34687384010104, -6.265105683680536);
     }
 
     // function for getting the current user location
@@ -159,13 +162,6 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         });
     }
 
-    // TODO: get Directions
-
-    // TODO: make API call
-
-    // TODO: plot on map
-
-    //TODO: remove, just for debugging
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -183,9 +179,28 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         return coordinates;
     }
 
-    private void findRoute(LatLng origin, LatLng destination) {
+    private static String extractPolyline(String jsonResponse) {
+        // Parse the JSON response
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = jsonParser.parse(jsonResponse).getAsJsonObject();
 
-        //TODO: remove (ITS HARDCODED): https://maps.googleapis.com/maps/api/directions/json?origin=53.35737638828084,-6.35031412259818&destination=53.36254986466739,-6.349820583825544&mode=walking&key=AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM THIS WORKS
+        // Check if there are routes in the response
+        if (jsonObject.has("routes") && jsonObject.getAsJsonArray("routes").size() > 0) {
+            // Extract the polyline string from the "points" property of "overview_polyline"
+            JsonObject route = jsonObject.getAsJsonArray("routes").get(0).getAsJsonObject();
+            if (route.has("overview_polyline")) {
+                JsonObject overviewPolyline = route.getAsJsonObject("overview_polyline");
+                if (overviewPolyline.has("points")) {
+                    return overviewPolyline.get("points").getAsString();
+                }
+            }
+        }
+
+        // Return an empty string if the polyline is not found
+        return "";
+    }
+
+    private void findRoute(LatLng origin, LatLng destination) {
 
         //TODO: hide
         String apiKey = "AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM";
@@ -194,8 +209,8 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin="+extractCoordinates(String.valueOf(origin))+"&destination="+
                 extractCoordinates(String.valueOf(destination))+"&mode=walking&key="+apiKey;
 
-        // testing url, works fine (once both points are in dublin)
-        //System.out.println("url: " + url);
+        //TODO: remove after testing:
+        // https://maps.googleapis.com/maps/api/directions/json?origin=53.3455708378654,%20-6.27221675017766&destination=53.34585903227803,%20-6.4062932793566585&mode=walking&key=AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM
 
         // make a GET request to Google Directions API with OkHttpClient
         OkHttpClient client = new OkHttpClient();
@@ -216,12 +231,8 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
             public void onResponse(Call call, Response response) throws IOException {
                 String data = response.body().string();
 
-                // testing data output from http request, working fine
-                //System.out.println("data: " + data);
-
-                //TODO: some issue AFTER THIS POINT related to parsing the response
-
-                String polyline = "u`rdIv`he@J??g@AE`@Cd@CNA?EZ??BFAVMTGV@l@OZQZAd@Cv@Af@A`@@XB?^?DF@CTj@DD?CJA@DVIFAJEX";
+                // extract polyline string
+                String polyline = extractPolyline(data);
 
                 List<LatLng> polylinePoints = PolyUtil.decode(polyline);
 
