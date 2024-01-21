@@ -241,17 +241,17 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
                 new Thread(() -> {
                     PolylineOptions polylineOptions = new PolylineOptions();
                     polylineOptions.addAll(polylinePoints);
-                    polylineOptions.color(Color.parseColor("#B48D26")); //accent colour
+                    polylineOptions.color(Color.parseColor("#22668D"));
                     polylineOptions.width(15);
 
                     // markers to show user & report location
                     MarkerOptions startMarkerOptions = new MarkerOptions();
                     startMarkerOptions.position(origin);
-                    startMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    startMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
                     MarkerOptions endMarkerOptions = new MarkerOptions();
                     endMarkerOptions.position(destination);
-                    endMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                    endMarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
                     runOnUiThread(() -> {
                         // set camera to Report x,y & add polylines and markers
