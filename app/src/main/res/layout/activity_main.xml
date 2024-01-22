@@ -14,7 +14,6 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
         android:text="CleanStreets"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="60sp"
@@ -23,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome."
+        android:text="Strive for better."
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="italic"
@@ -32,32 +31,32 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="240dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/round_corner"
         android:text="Login"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary" />
 
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="240dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_corner"
         android:text="Sign up"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary" />
 
 
     <Button
         android:id="@+id/anonymous_login_button"
-        android:layout_width="240dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/round_corner"
         android:text="use as Guest"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary" />
 </LinearLayout>

@@ -24,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:textSize="100px"
         android:textAlignment="center"
-        android:textColor="@color/colorSecondary"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="italic|bold"/>
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_marginTop="16dp"
         android:textSize="55px"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/sizeTextView"
@@ -47,7 +47,7 @@
         android:layout_marginTop="16dp"
         android:textSize="55px"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/urgencyTextView"
@@ -58,7 +58,7 @@
         android:layout_marginTop="16dp"
         android:textSize="55px"
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="@color/colorPrimaryDark"/>
 
     <Button
         android:id="@+id/amendButton"

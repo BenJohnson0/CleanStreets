@@ -1,5 +1,3 @@
-<!-- item_recent_report.xml -->
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,37 +10,41 @@
         android:id="@+id/report_title_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSecondary"
-        android:textSize="75px"
-        android:textStyle="italic|bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="70px"
+        android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
     <TextView
         android:id="@+id/report_timestamp_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
+        android:textStyle="italic"
         android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_size_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
+        android:textStyle="italic"
         android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_urgency_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
+        android:textStyle="italic"
         android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_status_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
+        android:textStyle="italic"
         android:textSize="45px" />
 
 </LinearLayout>

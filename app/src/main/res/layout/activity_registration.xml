@@ -8,24 +8,49 @@
     android:gravity="center"
     android:padding="20dp">
 
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CleanStreets"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome."
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:layout_marginBottom="90dp"
+        android:layout_marginLeft="90dp"/>
+
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username" />
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
+        android:hint="ex. john123" />
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
+        android:hint="ex. john@example.com"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
+        android:hint="ex. password@123"
         android:inputType="textPassword" />
 
     <Button

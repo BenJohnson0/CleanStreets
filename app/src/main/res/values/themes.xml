@@ -1,7 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- base application theme. -->
     <style name="Theme.Urbanmanagementapp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- colour palette -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/colorPrimaryDark</item>

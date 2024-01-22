@@ -3,28 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#8ECDDD">
+    android:background="#161A67"
+    android:orientation="vertical"
+    android:gravity="center">
 
-        <fragment
-            android:id="@+id/map_fragment"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+    <fragment
+        android:id="@+id/map_fragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/buttonNearest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Find nearest "
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/round_corner"
-            app:backgroundTint="@color/colorSecondary"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-
+    <Button
+        android:id="@+id/buttonNearest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorSecondary"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Find nearest report"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:background="@drawable/round_corner"
+        android:textSize="23sp" />
+</LinearLayout>

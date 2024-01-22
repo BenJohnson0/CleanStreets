@@ -11,13 +11,17 @@
         android:id="@+id/titleEditText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:hint="Updated Title"/>
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
+        android:hint="ex. new report title"/>
 
     <Spinner
         android:id="@+id/sizeSpinner"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
         android:layout_marginBottom="8dp"
         />
 
@@ -26,6 +30,8 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
         android:layout_marginBottom="8dp"
         />
 

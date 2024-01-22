@@ -5,16 +5,18 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
-            android:tint="@color/colorSecondary"
-            android:title="Home" />
+            android:title="Home"
+            />
         <item
             android:id="@+id/nav_add_report"
             android:icon="@drawable/add"
-            android:title="Add New Report" />
+            android:title="Add New Report"
+            />
         <item
             android:id="@+id/nav_statistics"
             android:icon="@drawable/stats"
-            android:title="View Statistics Dashboard" />
+            android:title="View Statistics Dashboard"
+            />
         <item
             android:id="@+id/nav_saved_reports"
             android:icon="@drawable/bookmark"

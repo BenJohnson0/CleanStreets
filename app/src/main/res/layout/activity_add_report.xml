@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Report Title"
         android:textStyle="italic|bold"
-        android:textColor="@color/colorSecondary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="75px"
         android:textAppearance="?android:textAppearanceMedium" />
 
@@ -22,9 +22,11 @@
         android:id="@+id/edit_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
         android:layout_below="@id/text_view_title"
         android:layout_marginTop="8dp"
-        android:hint="Enter Report Title"
+        android:hint="ex. broken glass"
         android:inputType="text" />
 
     <TextView
@@ -33,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text_title"
         android:layout_marginTop="16dp"
-        android:text="Location"
+        android:text="Location:"
         android:textStyle="italic|bold"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
@@ -43,10 +45,13 @@
         android:id="@+id/button_select_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/location_title"
+        android:layout_below="@id/edit_text_title"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/location_title"
+        android:textSize="20sp"
         android:text="Select from map" />
 
 
@@ -59,7 +64,7 @@
         android:layout_marginTop="35dp"
         android:text="Size"
         android:textStyle="italic|bold"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
@@ -69,6 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_view_size"
         android:layout_marginTop="8dp"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
         android:entries="@array/size_options" />
 
     <TextView
@@ -79,7 +86,7 @@
         android:layout_marginTop="35dp"
         android:text="Urgency"
         android:textStyle="italic|bold"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
@@ -89,6 +96,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_view_urgency"
         android:layout_marginTop="8dp"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
         android:entries="@array/urgency_options" />
 
     <TextView
@@ -99,7 +108,7 @@
         android:layout_marginTop="35dp"
         android:text="Attachment (optional)"
         android:textStyle="italic|bold"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="50px"
         android:textAppearance="?android:textAppearanceMedium" />
 
@@ -118,6 +127,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
+        android:textSize="18sp"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
         android:text="Submit Report" />
@@ -129,6 +139,7 @@
         android:layout_alignParentEnd="false"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="16dp"
+        android:textSize="18sp"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
         android:text="Attach image" />

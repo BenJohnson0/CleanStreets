@@ -11,7 +11,7 @@
         android:id="@+id/report_title_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSecondary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="75px"
         android:textStyle="italic|bold"
         android:layout_marginBottom="8dp" />
@@ -20,27 +20,27 @@
         android:id="@+id/report_timestamp_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
         android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_size_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
         android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_urgency_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
         android:textSize="45px" />
 
     <TextView
         android:id="@+id/report_status_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/colorSubtitle"
         android:textSize="45px" />
 </LinearLayout>
