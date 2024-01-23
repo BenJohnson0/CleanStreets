@@ -26,7 +26,7 @@
         android:textColorHint="#807A77"
         android:layout_below="@id/text_view_title"
         android:layout_marginTop="8dp"
-        android:hint="ex. broken glass"
+        android:hint="eg. broken glass"
         android:inputType="text" />
 
     <TextView

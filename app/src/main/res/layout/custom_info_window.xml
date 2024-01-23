@@ -4,43 +4,43 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorSecondary">
 
     <TextView
         android:id="@+id/info_window_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@android:color/black" />
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/info_window_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/colorSubtitle" />
 
     <TextView
         android:id="@+id/info_window_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/colorSubtitle" />
 
     <TextView
         android:id="@+id/info_window_urgency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/colorSubtitle" />
 
     <TextView
         android:id="@+id/info_window_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/colorSubtitle" />
 
     <TextView
         android:id="@+id/info_window_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/colorSubtitle" />
 </LinearLayout>

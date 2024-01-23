@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         // otherwise the user is anonymous / guest
         else {
-            updateNavigationDrawer("Anonymous", null);
+            updateNavigationDrawer("Guest", null);
         }
 
         // initialize the RecyclerView and set layout

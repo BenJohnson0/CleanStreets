@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:hint="ex. john@example.com"
+        android:hint="Email"
         android:inputType="textEmailAddress"/>
 
     <EditText
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:hint="ex. password@123"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
