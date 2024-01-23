@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonRegister, buttonLogin, buttonAnon, route_finder_button;
+    private Button buttonRegister, buttonLogin, buttonAnon, buttonImg;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         buttonRegister = findViewById(R.id.buttonRegister);
         buttonLogin = findViewById(R.id.buttonLogin);
         buttonAnon = findViewById(R.id.anonymous_login_button);
+
+        buttonImg = findViewById(R.id.image_testing_btn); //TODO: remove after testing
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // call signInAnonymously() function
                 signInAnonymously();
+            }
+        });
+
+        //TODO: remove after testing
+        buttonImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ImageUploaderActivity.class));
             }
         });
     }

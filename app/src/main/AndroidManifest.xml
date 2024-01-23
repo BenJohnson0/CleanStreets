@@ -24,6 +24,9 @@
         android:theme="@style/Theme.Urbanmanagementapp"
         tools:targetApi="31">
         <activity
+            android:name=".ImageUploaderActivity"
+            android:exported="false" />
+        <activity
             android:name=".YourReportsActivity"
             android:exported="false" />
         <activity
