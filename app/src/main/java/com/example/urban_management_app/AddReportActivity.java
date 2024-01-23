@@ -200,6 +200,7 @@ public class AddReportActivity extends AppCompatActivity {
                     });
         } else {
             // if no image is attached, still create the report with empty image URL
+            //TODO: imageUrl appears null because hardcoded here
             Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude,
                     size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
             saveReportToDatabase(report);
