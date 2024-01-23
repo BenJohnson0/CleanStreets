@@ -9,21 +9,39 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CleanStreets"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Be yourself."
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="90dp"/>
+
+    <TextView
         android:id="@+id/text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="Name" />
+        android:text="Username" />
 
     <EditText
         android:id="@+id/edit_text_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:inputType="text"
-        android:hint="ex. John" />
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/text_view_email"
@@ -37,11 +55,10 @@
     <EditText
         android:id="@+id/edit_text_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:inputType="textEmailAddress"
-        android:hint="ex. john123@example.com" />
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/text_view_password"
@@ -55,17 +72,16 @@
     <EditText
         android:id="@+id/edit_text_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:inputType="textPassword"
-        android:hint="ex. password@123" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button_update"
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/round_corner"
         android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary"
@@ -74,7 +90,7 @@
 
     <Button
         android:id="@+id/button_change_password"
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/round_corner"
@@ -84,7 +100,7 @@
 
     <Button
         android:id="@+id/button_delete"
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/round_corner"

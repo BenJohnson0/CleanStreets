@@ -30,7 +30,7 @@
     <EditText
         android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:hint="Username" />
@@ -38,7 +38,7 @@
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:hint="Email"
@@ -47,7 +47,7 @@
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:hint="Password"
@@ -55,7 +55,7 @@
 
     <Button
         android:id="@+id/buttonRegister"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
@@ -65,7 +65,7 @@
 
     <Button
         android:id="@+id/buttonReturn"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
