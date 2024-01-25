@@ -9,15 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.urban_management_app.R;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
@@ -112,18 +107,20 @@ public class ImageUploaderActivity extends AppCompatActivity {
 
     private void uploadImage() {
         if (imageBytes != null) {
-            // Generate a unique id for the image
+            // generate unique id for the image
             String imageName = UUID.randomUUID().toString() + ".jpg";
-            // Create a reference to the image file in Firebase Storage
+
+            // create reference to the image file in Firebase
             StorageReference imageRef = storageReference.child("images/" + imageName);
-            // Upload byte array to Firebase Storage
+
+            // upload byte array to Firebase
             imageRef.putBytes(imageBytes)
                     .addOnSuccessListener(taskSnapshot -> {
-                        // Image uploaded successfully
+                        // image uploaded successfully
                         Toast.makeText(ImageUploaderActivity.this, "Image uploaded successfully", Toast.LENGTH_SHORT).show();
                     })
                     .addOnFailureListener(e -> {
-                        // Handle unsuccessful uploads
+                        // handle unsuccessful upload
                         Toast.makeText(ImageUploaderActivity.this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         } else {
