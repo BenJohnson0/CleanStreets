@@ -3,14 +3,17 @@ package com.example.urban_management_app;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +37,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -50,8 +56,8 @@ public class AddReportActivity extends AppCompatActivity {
     private EditText editTextTitle;
     private ImageView imageViewAttachment;
     private Uri imageUri;
+    private File imageFile;
 
-    private byte[] imageBytes;
     private ProgressDialog progressDialog;
     private Spinner spinnerSize;
     private Spinner spinnerUrgency;
@@ -77,7 +83,7 @@ public class AddReportActivity extends AppCompatActivity {
 
         // initialize Firebase database and storage references
         databaseReference = FirebaseDatabase.getInstance().getReference("reports");
-        storageReference = FirebaseStorage.getInstance().getReference("report_images");
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         buttonAttachImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,28 +120,44 @@ public class AddReportActivity extends AppCompatActivity {
     }
 
     private void captureImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            try {
+                // Create a temporary file to save the captured image
+                imageFile = createImageFile();
+                if (imageFile != null) {
+                    Uri photoUri = FileProvider.getUriForFile(this, "com.example.urban_management_app.fileprovider", imageFile);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Error creating image file", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
-    //TODO: Image doesn't get saved to the database as a file or as a URI ?????
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+        // Save a file: path for use with ACTION_VIEW intents
+        return imageFile;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if (imageFile != null) {
+                // Save the URI of the captured image
+                imageUri = Uri.fromFile(imageFile);
 
-            // display image in ImageViewAttachment
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-            imageBytes = byteArrayOutputStream.toByteArray();
-            imageViewAttachment.setImageBitmap(imageBitmap);
-
+                // Display image in ImageViewAttachment
+                imageViewAttachment.setImageURI(imageUri);
+            }
         }
         else if (requestCode == REQUEST_MAP_SELECTION && resultCode == RESULT_OK) {
             if (data != null) {
@@ -147,6 +169,25 @@ public class AddReportActivity extends AppCompatActivity {
 
                 // display a message to inform the user that the location is selected
                 Toast.makeText(AddReportActivity.this, "Location selected", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION_CAMERA) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                captureImage();
+            } else {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -181,28 +222,30 @@ public class AddReportActivity extends AppCompatActivity {
         final String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 .format(new Date());
 
-        //TODO: imageUri is null here??
-        //System.out.println(imageUri);
+        System.out.println("imageUri:" + imageUri);
 
         if (imageUri != null) {
-            final StorageReference fileReference = storageReference.child(reportId);
+            // upload image to Firebase Storage
+            StorageReference fileReference = storageReference.child("images/" + System.currentTimeMillis() + "." + getFileExtension(imageUri));
             fileReference.putFile(imageUri)
-                    .addOnSuccessListener(taskSnapshot -> fileReference.getDownloadUrl()
-                            .addOnSuccessListener(uri -> {
-                                Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude, size,
-                                        urgency, uri.toString(), FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
-                                saveReportToDatabase(report);
-                            }))
+                    .addOnSuccessListener(taskSnapshot -> {
+                        fileReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                            // image uploaded successfully, get download URL
+                            String imageUrl = uri.toString();
+                            // create and save report to database with image URL
+                            Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude, size,
+                                    urgency, imageUrl, FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
+                            saveReportToDatabase(report);
+                        });
+                    })
                     .addOnFailureListener(e -> {
                         progressDialog.dismiss();
-                        Toast.makeText(AddReportActivity.this,
-                                "Failed to upload image", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddReportActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
                     });
         } else {
-            // if no image is attached, still create the report with empty image URL
-            //TODO: imageUrl appears null because hardcoded here
-            Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude,
-                    size, urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
+            // no image attached, save report with empty image URL
+            Report report = new Report(reportId, timeStamp, selectedLatitude, selectedLongitude, size,
+                    urgency, "", FirebaseAuth.getInstance().getCurrentUser().getUid(), title, status);
             saveReportToDatabase(report);
         }
     }
@@ -223,18 +266,5 @@ public class AddReportActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION_CAMERA) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                captureImage();
-            } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 }
