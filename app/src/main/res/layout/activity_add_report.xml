@@ -142,10 +142,23 @@
         android:layout_toRightOf="@id/image_view_attachment"
         android:layout_below="@id/text_view_attachment"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
-        android:text="add image" />
+        android:text="Use camera" />
+
+    <Button
+        android:id="@+id/button_upload_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_view_attachment"
+        android:layout_below="@id/button_attach_image"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        app:backgroundTint="@color/colorSecondary"
+        android:background="@drawable/round_corner"
+        android:text="upload image" />
 
 </RelativeLayout>

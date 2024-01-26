@@ -27,7 +27,7 @@ public class Report {
         this.imageUrl = imageUrl;
         this.userId = userId;
         this.title = title;
-        this.status = "";
+        this.status = status;
     }
 
     public String getReportId() {
