@@ -43,7 +43,7 @@
         android:id="@+id/report_status_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
+        android:textColor="@color/purple_200"
         android:textStyle="italic"
         android:textSize="45px" />
 

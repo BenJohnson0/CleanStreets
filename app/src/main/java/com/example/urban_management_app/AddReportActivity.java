@@ -65,6 +65,8 @@ public class AddReportActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
 
+    //TODO: ADD REPORT IMAGE USING UPLOAD FROM GALLERY
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,10 +154,10 @@ public class AddReportActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (imageFile != null) {
-                // Save the URI of the captured image
+                // save the URI of the captured image
                 imageUri = Uri.fromFile(imageFile);
 
-                // Display image in ImageViewAttachment
+                // display image in ImageViewAttachment
                 imageViewAttachment.setImageURI(imageUri);
             }
         }
@@ -205,7 +207,7 @@ public class AddReportActivity extends AppCompatActivity {
         final String title = editTextTitle.getText().toString().trim();
         final String size = spinnerSize.getSelectedItem().toString();
         final String urgency = spinnerUrgency.getSelectedItem().toString();
-        final String status = null; //TODO: fix with notifications etc.
+        final String status = "null"; //TODO: fix with notifications etc.
 
         // check if the title, size, and urgency values are not empty and the title length is within 60 characters
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(size) || TextUtils.isEmpty(urgency) || title.length() > 60) {

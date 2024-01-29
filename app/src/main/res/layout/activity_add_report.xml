@@ -157,7 +157,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:textSize="18sp"
-        app:backgroundTint="@color/colorSecondary"
+        android:textColor="@color/colorPrimary"
+        app:backgroundTint="@color/colorSubtitle"
         android:background="@drawable/round_corner"
         android:text="upload image" />
 
