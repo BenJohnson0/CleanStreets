@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:padding="16dp"
@@ -24,6 +24,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/account"
+            app:tint="@color/colorSecondary"
             android:layout_gravity="center_vertical"
             android:contentDescription="Account Icon" />
 
@@ -52,6 +53,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/notifications"
+            app:tint="@color/colorSecondary"
             android:layout_gravity="center_vertical"
             android:contentDescription="Notifications Icon" />
 
@@ -80,6 +82,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            app:tint="@color/colorSecondary"
             android:src="@drawable/accessibility"
             android:layout_gravity="center_vertical"
             android:contentDescription="Accessibility Icon" />

@@ -7,11 +7,31 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CleanStreets"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank you."
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="90dp"/>
+
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#807A77"
+        android:textColor="@color/colorPrimaryDark"
         android:textColorHint="#807A77"
         android:hint="ex. new report title"/>
 
@@ -20,6 +40,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textColor="@color/colorPrimaryDark"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_marginBottom="8dp"
@@ -31,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="#807A77"
+        android:textColor="@color/colorPrimaryDark"
         android:textColorHint="#807A77"
         android:layout_marginBottom="8dp"
         />
