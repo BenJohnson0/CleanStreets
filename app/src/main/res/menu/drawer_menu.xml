@@ -15,16 +15,12 @@
         <item
             android:id="@+id/nav_statistics"
             android:icon="@drawable/stats"
-            android:title="View Statistics Dashboard"
+            android:title="Analytics"
             />
         <item
-            android:id="@+id/nav_saved_reports"
-            android:icon="@drawable/bookmark"
-            android:title="View Saved Reports" />
-        <item
-            android:id="@+id/nav_your_reports"
-            android:icon="@drawable/people"
-            android:title="Your Reports" />
+            android:id="@+id/nav_noticeboard"
+            android:icon="@drawable/noticeboard"
+            android:title="Noticeboard" />
         <item
             android:id="@+id/nav_map"
             android:icon="@drawable/map"
@@ -36,7 +32,15 @@
         <item
             android:id="@+id/nav_account"
             android:icon="@drawable/account"
-            android:title="Account Management" />
+            android:title="Your Account" />
+        <item
+            android:id="@+id/nav_your_reports"
+            android:icon="@drawable/people"
+            android:title="Your Reports" />
+        <item
+            android:id="@+id/nav_saved_reports"
+            android:icon="@drawable/bookmark"
+            android:title="Saved Reports" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/setting"

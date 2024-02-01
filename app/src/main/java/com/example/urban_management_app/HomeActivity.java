@@ -152,6 +152,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_account).setVisible(true);
             navMenu.findItem(R.id.nav_settings).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(true);
+            navMenu.findItem(R.id.nav_noticeboard).setVisible(true);
             // hide "Register" & "Login" options
             navMenu.findItem(R.id.nav_register).setVisible(false);
             navMenu.findItem(R.id.nav_login).setVisible(false);
@@ -210,6 +211,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_education:
                 // educational resources
                 startActivity(new Intent(HomeActivity.this, EducationActivity.class));
+                break;
+            case R.id.nav_noticeboard:
+                // noticeboard
+                startActivity(new Intent(HomeActivity.this, NoticeboardActivity.class));
                 break;
             case R.id.nav_sign_out:
                 // sign out (only logged-in users)
