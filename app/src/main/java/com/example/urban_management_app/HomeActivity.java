@@ -168,6 +168,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_account).setVisible(false);
             navMenu.findItem(R.id.nav_settings).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(false);
+            navMenu.findItem(R.id.nav_noticeboard).setVisible(false);
             // show "Register" & "Login" options
             navMenu.findItem(R.id.nav_register).setVisible(true);
             navMenu.findItem(R.id.nav_login).setVisible(true);

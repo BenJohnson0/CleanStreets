@@ -70,7 +70,7 @@ public class YourReportsActivity extends AppCompatActivity {
                 // update the adapter with the filtered report list
                 yourReportsAdapter.setReportList(yourReports);
 
-                // Hide empty reports if required
+                // hide empty reports if required
                 if (yourReports.size() > 0) {
                     emptyReportsTextView.setVisibility(View.GONE);
                 } else {
