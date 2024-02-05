@@ -17,5 +17,39 @@
         <item>High urgency</item>
         <item>Very urgent</item>
     </string-array>
+
+    <string-array name="postcode_options">
+        <item>Dublin 1 (D1)</item>
+        <item>Dublin 2 (D2)</item>
+        <item>Dublin 3 (D3): North Strand, Fairview, Clontarf</item>
+        <item>Dublin 4 (D4): Ringsend, Sandymount, Ballsbridge, Donnybrook</item>
+        <item>Dublin 5 (D5): Raheny</item>
+        <item>Dublin 6 (D6): Ranelagh, Rathmines, Rathgar, Dartry, Milltown</item>
+        <item>Dublin 6 West (D6W): Harold\'s Cross, Terenure, Kimmage</item>
+        <item>Dublin 7 (D7)</item>
+        <item>Dublin 8 (D8): Kilmainham, Inchicore, Dolphin\'s Barn</item>
+        <item>Dublin 9 (D9): Whitehall</item>
+        <item>Dublin 10 (D10): Ballyfermot</item>
+        <item>Dublin 11 (D11): Finglas</item>
+        <item>Dublin 12 (D12): Crumlin, Drimnagh, Walkinstown</item>
+        <item>Dublin 13 (D13): Bayside, Sutton, Baldoyle, Howth</item>
+        <item>Dublin 14 (D14): Churchtown, Dundrum, Balally, Rathfarnham</item>
+        <item>Dublin 15 (D15): Castleknock, Clonsilla, Blanchardstown</item>
+        <item>Dublin 16 (D16): Lesser Dundrum, Ballinteer, Sandyford</item>
+        <item>Dublin 17 (D17): Coolock</item>
+        <item>Dublin 18 (D18): Foxrock, Cornelscourt, Cabinteely, Stepaside</item>
+        <item>Dublin 20 (D20): Lucan, Palmerstown</item>
+        <item>Dublin 22 (D22): Clondalkin</item>
+        <item>Dublin 24 (D24): Tallaght</item>
+    </string-array>
+
+    <string-array name="tags_options">
+        <item>Fundraiser</item>
+        <item>Cleanup</item>
+        <item>Online meeting</item>
+        <item>In-person meeting</item>
+        <item>Help</item>
+    </string-array>
+
     <string name="title_activity_maps_test">MapsActivityTEST</string>
 </resources>

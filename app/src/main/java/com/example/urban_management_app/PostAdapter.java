@@ -1,5 +1,6 @@
 package com.example.urban_management_app;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,19 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private List<Post> posts;
+    private Context context;
+    private PostAdapter.OnItemClickListener listener;
 
     public PostAdapter(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String reportId);
+    }
+
+    public void setOnItemClickListener(PostAdapter.OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @Override

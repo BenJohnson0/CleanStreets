@@ -8,13 +8,14 @@ public class Post {
     private String postTitle;
     private String postContent;
     private String postTags;
+    private String postCode;
 
     public Post() {
         // default constructor required for Firebase
     }
 
     public Post(String userId, String referencedReportId, String postId, String timestamp,
-                String postTitle, String postContent, String postTags) {
+                String postTitle, String postContent, String postTags, String postCode) {
         this.userId = userId;
         this.referencedReportId = referencedReportId;
         this.postId = postId;
@@ -22,6 +23,7 @@ public class Post {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.postTags = postTags;
+        this.postCode = postCode;
     }
 
     public String getUserId() {
@@ -79,4 +81,8 @@ public class Post {
     public void setPostTags(String postTags) {
         this.postTags = postTags;
     }
+
+    public String getPostCode() {return postCode;}
+
+    public void setPostCode(String postDistrict) {this.postCode = postCode;}
 }

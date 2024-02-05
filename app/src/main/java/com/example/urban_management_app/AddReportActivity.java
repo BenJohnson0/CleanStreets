@@ -224,8 +224,6 @@ public class AddReportActivity extends AppCompatActivity {
         final String timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
                 .format(new Date());
 
-        System.out.println("imageUri:" + imageUri);
-
         if (imageUri != null) {
             // upload image to Firebase Storage
             StorageReference fileReference = storageReference.child("images/" + System.currentTimeMillis() + "." + getFileExtension(imageUri));
