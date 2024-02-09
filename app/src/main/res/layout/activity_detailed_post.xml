@@ -8,36 +8,47 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp" />
+
+    <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
+        android:background="@drawable/posts_rounded_corner"
+        android:textSize="100px"
         android:padding="16dp" />
 
     <TextView
         android:id="@+id/postIDTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
-        android:textColor="@color/colorPrimaryDark"
+        android:textSize="50px"
+        android:textAlignment="center"
+        android:textColor="@color/colorSubtitle"
         android:textStyle="bold"
-        android:padding="8dp" />
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="0dp" />
 
     <TextView
         android:id="@+id/tagsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="textStart"
+        android:textSize="50px"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
-        android:padding="8dp" />
+        android:layout_marginBottom="8dp"/>
 
     <TextView
         android:id="@+id/contentTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="50px"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"

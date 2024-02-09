@@ -29,6 +29,7 @@ public class DetailedPostActivity extends AppCompatActivity {
 
         // create a Firebase database reference to the specific post
         DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postId);
+        System.out.println(postRef);
 
         postRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -37,7 +38,8 @@ public class DetailedPostActivity extends AppCompatActivity {
 
                 if (post != null) {
                     titleTextView.setText(post.getPostTitle());
-                    tagsTextView.setText("Tags: " + post.getPostTags());
+                    postIDTextView.setText("ID: " + post.getPostId());
+                    tagsTextView.setText("Tag: " + post.getPostTags());
                     contentTextView.setText(post.getPostContent());
                 }
             }
