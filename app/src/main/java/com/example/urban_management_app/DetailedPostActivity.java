@@ -27,8 +27,6 @@ public class DetailedPostActivity extends AppCompatActivity {
         // retrieve post_id from the intent
         String postId = getIntent().getStringExtra("post_id");
 
-        //System.out.println(postId);
-
         // create a Firebase database reference to the specific post
         DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("posts").child(postId);
 

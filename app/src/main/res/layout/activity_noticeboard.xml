@@ -25,7 +25,7 @@
         android:padding="10dp"
         android:text="Add Post"
         android:textColor="@color/colorPrimaryDark"
-        app:backgroundTint="@color/colorSecondary"
+        app:backgroundTint="@color/thirdColor"
         android:background="@drawable/round_corner"
         android:textSize="26dp"/>
 
