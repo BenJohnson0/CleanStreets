@@ -33,7 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
@@ -95,8 +94,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         // load recent reports and populate RecyclerView
         loadRecentReports();
     }
-
-    //TODO: the reports should show title, size, urgency, timestamp, status, image and (geocoded?) location
 
     private void loadRecentReports() {
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");

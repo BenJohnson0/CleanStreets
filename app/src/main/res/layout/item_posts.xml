@@ -17,13 +17,6 @@
         android:layout_marginBottom="8dp" />
 
     <TextView
-        android:id="@+id/post_id_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textSize="45px" />
-
-    <TextView
         android:id="@+id/timestamp_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

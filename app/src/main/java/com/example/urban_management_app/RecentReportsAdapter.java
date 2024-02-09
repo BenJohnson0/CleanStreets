@@ -1,28 +1,20 @@
 package com.example.urban_management_app;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdapter.ViewHolder> {
-
-    public static void setReportList(ArrayList<Report> filteredReports) {
-    }
 
     public interface OnItemClickListener {
         void onItemClick(String reportId);
     }
 
     private List<Report> reportList;
-    private Context context;
     private OnItemClickListener listener;
 
     public RecentReportsAdapter(List<Report> reportList) {

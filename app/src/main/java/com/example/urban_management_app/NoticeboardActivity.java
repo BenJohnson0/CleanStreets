@@ -34,10 +34,6 @@ public class NoticeboardActivity extends AppCompatActivity {
 
         Button buttonAddPost = findViewById(R.id.add_post_button);
 
-        // database references
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference postsRef = database.getReference("posts");
-
         // initialize recyclerview and set layout
         postRecyclerView = findViewById(R.id.post_recycler_view);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -48,7 +44,6 @@ public class NoticeboardActivity extends AppCompatActivity {
         // set adapter for recyclerview
         postAdapter = new PostAdapter(recentPostsList);
         postRecyclerView.setAdapter(postAdapter);
-
 
         postAdapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
             @Override

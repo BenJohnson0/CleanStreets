@@ -1,6 +1,5 @@
 package com.example.urban_management_app;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +11,15 @@ import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
-    private List<Post> posts;
-    private Context context;
-    private PostAdapter.OnItemClickListener listener;
+    private static List<Post> posts;
+    private static OnItemClickListener listener;
 
-    public PostAdapter(List<Post> posts) {
-        this.posts = posts;
-    }
+    public PostAdapter(List<Post> posts) { this.posts = posts; }
+
+    public void setOnItemClickListener(OnItemClickListener listener) { this.listener = listener; }
 
     public interface OnItemClickListener {
-        void onItemClick(String reportId);
-    }
-
-    public void setOnItemClickListener(PostAdapter.OnItemClickListener listener) {
-        this.listener = listener;
+        void onItemClick(String postId);
     }
 
     @Override
@@ -38,8 +32,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(PostViewHolder holder, int position) {
         Post post = posts.get(position);
         holder.postTitleTextView.setText(post.getPostTitle());
-        holder.postIdTextView.setText("Post ID: " + post.getPostId());
-        holder.timestampTextView.setText(post.getTimestamp());
+        holder.timestampTextView.setText("Posted at: " + post.getTimestamp());
     }
 
     @Override
@@ -49,15 +42,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView postIdTextView;
         public TextView postTitleTextView;
         public TextView timestampTextView;
 
         public PostViewHolder(View itemView) {
             super(itemView);
-            postIdTextView = itemView.findViewById(R.id.post_id_text_view);
             postTitleTextView = itemView.findViewById(R.id.post_title_text_view);
             timestampTextView = itemView.findViewById(R.id.timestamp_text_view);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            // get the report at this position
+                            Post clickedPost = posts.get(position);
+                            // call the onItemClick method on the listener
+                            listener.onItemClick(clickedPost.getPostId());
+                        }
+                    }
+                }
+            });
         }
     }
 }

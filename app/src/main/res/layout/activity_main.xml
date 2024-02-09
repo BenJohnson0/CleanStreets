@@ -44,20 +44,29 @@
         android:id="@+id/buttonRegister"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_corner"
         android:text="Sign up"
         android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary" />
 
-
     <Button
         android:id="@+id/anonymous_login_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_corner"
         android:text="use as Guest"
+        android:textSize="25sp"
+        app:backgroundTint="@color/colorSecondary" />
+
+    <Button
+        android:id="@+id/dcc_login_button"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/round_corner"
+        android:text="DCC Login"
         android:textSize="25sp"
         app:backgroundTint="@color/colorSecondary" />
 
