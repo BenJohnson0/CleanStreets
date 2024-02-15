@@ -32,6 +32,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(PostViewHolder holder, int position) {
         Post post = posts.get(position);
         holder.postTitleTextView.setText(post.getPostTitle());
+        holder.postcodeTextView.setText("Area: " + post.getPostCode());
+        holder.tagTextView.setText("Type: " + post.getPostTags());
         holder.timestampTextView.setText("Posted at: " + post.getTimestamp());
     }
 
@@ -44,11 +46,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         public TextView postTitleTextView;
         public TextView timestampTextView;
+        public TextView postcodeTextView;
+        public TextView tagTextView;
 
         public PostViewHolder(View itemView) {
             super(itemView);
             postTitleTextView = itemView.findViewById(R.id.post_title_text_view);
             timestampTextView = itemView.findViewById(R.id.timestamp_text_view);
+            postcodeTextView = itemView.findViewById(R.id.postcode_text_view);
+            tagTextView = itemView.findViewById(R.id.tag_text_view);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

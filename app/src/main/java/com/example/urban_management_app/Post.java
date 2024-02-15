@@ -84,5 +84,5 @@ public class Post {
 
     public String getPostCode() {return postCode;}
 
-    public void setPostCode(String postDistrict) {this.postCode = postCode;}
+    public void setPostCode(String postCode) {this.postCode = postCode;}
 }
