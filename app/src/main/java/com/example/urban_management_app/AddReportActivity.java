@@ -39,6 +39,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -98,7 +99,11 @@ public class AddReportActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadReport();
+                try {
+                    uploadReport();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -195,7 +200,7 @@ public class AddReportActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private void uploadReport() {
+    private void uploadReport() throws IOException {
 
         // check if the location data is added
         if (!isLocationSelected) {
@@ -215,6 +220,14 @@ public class AddReportActivity extends AppCompatActivity {
                 editTextTitle.setError("Title must not exceed 40 characters!");
             }
             Toast.makeText(this, "Please fill in all fields and keep the title length within 40 characters", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // bad words check
+        BadWordsFilter badWordsFilter = new BadWordsFilter(getResources().getAssets().open("bad-words.txt"));
+
+        if (badWordsFilter.containsSwearWord(title)) {
+            Toast.makeText(this, "Report title contains inappropriate language", Toast.LENGTH_SHORT).show();
             return;
         }
 
