@@ -81,6 +81,7 @@
         <activity android:name=".RouteFinderActivity" />
         <activity android:name=".AmendReportActivity" />
         <activity android:name=".EducationActivity" />
+        <activity android:name=".ReplyToPost" />
     </application>
 
 </manifest>
