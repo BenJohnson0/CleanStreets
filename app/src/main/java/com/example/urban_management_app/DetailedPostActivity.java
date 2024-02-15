@@ -21,7 +21,7 @@ import java.util.List;
 
 public class DetailedPostActivity extends AppCompatActivity {
 
-    private TextView titleTextView, postIDTextView, tagsTextView, contentTextView;
+    private TextView titleTextView, postIDTextView, tagsTextView, contentTextView, noRepliesTextView;
     private RecyclerView repliesRecyclerView;
     private List<Reply> repliesList;
     private RepliesAdapter repliesAdapter;
@@ -37,6 +37,7 @@ public class DetailedPostActivity extends AppCompatActivity {
         tagsTextView = findViewById(R.id.tagsTextView);
         contentTextView = findViewById(R.id.contentTextView);
         replyButton = findViewById(R.id.replyButton);
+        noRepliesTextView = findViewById(R.id.noRepliesTextView);
 
         repliesRecyclerView = findViewById(R.id.repliesRecyclerView);
         repliesList = new ArrayList<>();
@@ -69,7 +70,7 @@ public class DetailedPostActivity extends AppCompatActivity {
 
                 if (post != null) {
                     titleTextView.setText(post.getPostTitle());
-                    postIDTextView.setText("ID: " + post.getPostId());
+                    postIDTextView.setText("Post ID: " + post.getPostId());
                     tagsTextView.setText("Tag: " + post.getPostTags());
                     contentTextView.setText(post.getPostContent());
                 }
@@ -84,7 +85,41 @@ public class DetailedPostActivity extends AppCompatActivity {
     }
 
     private void fetchRepliesFromFirebase() {
-        // todo: implement Firebase database query to fetch replies
-        // todo: populate repliesList with fetched replies
+        // retrieve post_id from the intent
+        String postId = getIntent().getStringExtra("post_id");
+
+        // firebase database reference
+        DatabaseReference repliesRef = FirebaseDatabase.getInstance().getReference("replies").child(postId);
+
+        repliesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // clear existing
+                repliesList.clear();
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    // fetch reply object
+                    Reply reply = snapshot.getValue(Reply.class);
+
+                    // add the reply to the repliesList
+                    if (reply != null) {
+                        repliesList.add(reply);
+                    }
+                }
+                // notify the adapter
+                repliesAdapter.notifyDataSetChanged();
+
+                if (repliesList.isEmpty()) {
+                    noRepliesTextView.setVisibility(View.VISIBLE);
+                } else {
+                    noRepliesTextView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // todo: handle database read error
+            }
+        });
     }
 }

@@ -7,10 +7,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp" />
+
 
     <TextView
         android:id="@+id/titleTextView"
@@ -72,5 +69,15 @@
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/noRepliesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No replies yet."
+        android:visibility="gone"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"/>
 
 </LinearLayout>

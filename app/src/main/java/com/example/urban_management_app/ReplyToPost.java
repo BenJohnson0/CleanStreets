@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +25,10 @@ public class ReplyToPost extends AppCompatActivity {
         editTextReply = findViewById(R.id.editTextReply);
         buttonSendReply = findViewById(R.id.buttonSendReply);
 
-        // Get postId from intent
+        // get postId from intent
         String postId = getIntent().getStringExtra("post_id");
 
-        // Firebase database reference for replies
+        // firebase reference for replies
         repliesRef = FirebaseDatabase.getInstance().getReference("replies").child(postId);
 
         buttonSendReply.setOnClickListener(new View.OnClickListener() {
@@ -43,24 +42,23 @@ public class ReplyToPost extends AppCompatActivity {
     private void sendReply() {
         String replyMessage = editTextReply.getText().toString().trim();
 
-        // Check if reply message is not empty
+        // error checking todo: expand
         if (replyMessage.isEmpty()) {
             Toast.makeText(this, "Please enter a reply message", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Get current user's ID
+        // current user's ID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        // Create a new reply object
+        // new reply object
         Reply reply = new Reply(userId, replyMessage);
 
-        // Push the reply to Firebase database
+        // Push reply to firebase
         repliesRef.push().setValue(reply);
 
         Toast.makeText(this, "Reply sent successfully", Toast.LENGTH_SHORT).show();
 
-        // Finish the activity
         finish();
     }
 }
