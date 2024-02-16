@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.FirebaseApp;
 
+import java.io.IOException;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     private EditText editTextUsername, editTextEmail, editTextPassword;
@@ -45,8 +47,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 String password = editTextPassword.getText().toString().trim();
 
                 // validate user inputs
-                if (!validateFields()) {
-                    return;
+                try {
+                    if (!validateFields()) {
+                        return;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
 
                 // register the user with Firebase Authentication
@@ -79,7 +85,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     // function for user input validation
     // valid password length + email
-    private boolean validateFields() {
+    private boolean validateFields() throws IOException {
         boolean valid = true;
 
         String username = editTextUsername.getText().toString().trim();
@@ -103,6 +109,14 @@ public class RegistrationActivity extends AppCompatActivity {
             valid = false;
         } else if (password.length() < 8) {
             editTextPassword.setError("Password must be at least 8 characters long");
+            valid = false;
+        }
+
+        // bad words check
+        BadWordsFilter badWordsFilter = new BadWordsFilter(getResources().getAssets().open("bad-words.txt"));
+
+        if (badWordsFilter.containsSwearWord(username)) {
+            Toast.makeText(this, "Do not use inappropriate language, try again.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
 

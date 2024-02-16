@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -50,12 +51,16 @@ public class AddPostActivity extends AppCompatActivity {
         findViewById(R.id.button_submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitPost();
+                try {
+                    submitPost();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
 
-    private void submitPost() {
+    private void submitPost() throws IOException {
         // initialise post parameters
         final String title = postTitle.getText().toString().trim();
         final String content = postContent.getText().toString().trim();
@@ -68,6 +73,19 @@ public class AddPostActivity extends AppCompatActivity {
                 postTitle.setError("Title must not exceed 40 characters!");
             }
             Toast.makeText(this, "Please fill in all fields and keep the title length within 40 characters", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // bad words check
+        BadWordsFilter badWordsFilter = new BadWordsFilter(getResources().getAssets().open("bad-words.txt"));
+
+        if (badWordsFilter.containsSwearWord(title)) {
+            Toast.makeText(this, "Do not use inappropriate language, try again.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (badWordsFilter.containsSwearWord(content)) {
+            Toast.makeText(this, "Do not use inappropriate language, try again.", Toast.LENGTH_SHORT).show();
             return;
         }
 

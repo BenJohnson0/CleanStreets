@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.IOException;
+
 public class ReplyToPost extends AppCompatActivity {
 
     private EditText editTextReply;
@@ -34,17 +36,29 @@ public class ReplyToPost extends AppCompatActivity {
         buttonSendReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendReply();
+                try {
+                    sendReply();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
 
-    private void sendReply() {
+    private void sendReply() throws IOException {
         String replyMessage = editTextReply.getText().toString().trim();
 
-        // error checking todo: expand
+        // error checking
         if (replyMessage.isEmpty()) {
             Toast.makeText(this, "Please enter a reply message", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // bad words check
+        BadWordsFilter badWordsFilter = new BadWordsFilter(getResources().getAssets().open("bad-words.txt"));
+
+        if (badWordsFilter.containsSwearWord(replyMessage)) {
+            Toast.makeText(this, "Do not use inappropriate language, try again.", Toast.LENGTH_SHORT).show();
             return;
         }
 

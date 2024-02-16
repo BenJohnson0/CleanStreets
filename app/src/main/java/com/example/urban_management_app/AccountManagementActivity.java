@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import java.io.IOException;
+
 public class AccountManagementActivity extends AppCompatActivity {
 
     private EditText editTextName;
@@ -63,7 +65,11 @@ public class AccountManagementActivity extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateAccount();
+                try {
+                    updateAccount();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -82,12 +88,20 @@ public class AccountManagementActivity extends AppCompatActivity {
         });
     }
 
-    private void updateAccount() {
+    private void updateAccount() throws IOException {
         String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
 
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // bad words check
+        BadWordsFilter badWordsFilter = new BadWordsFilter(getResources().getAssets().open("bad-words.txt"));
+
+        if (badWordsFilter.containsSwearWord(name)) {
+            Toast.makeText(this, "Name value contains inappropriate language", Toast.LENGTH_SHORT).show();
             return;
         }
 

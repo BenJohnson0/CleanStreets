@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.IOException;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextEmail, editTextPassword;
@@ -44,8 +46,12 @@ public class LoginActivity extends AppCompatActivity {
                 String password = editTextPassword.getText().toString().trim();
 
                 // validate user inputs
-                if (!validateFields()) {
-                    return;
+                try {
+                    if (!validateFields()) {
+                        return;
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
 
                 // only allow the user 5 tries to login successfully
@@ -99,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // function for user input validation
     // valid password length + email
-    private boolean validateFields() {
+    private boolean validateFields() throws IOException {
         boolean valid = true;
 
         String email = editTextEmail.getText().toString().trim();
