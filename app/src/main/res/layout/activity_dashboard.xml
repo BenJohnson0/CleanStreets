@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/colorPrimary"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <com.github.mikephil.charting.charts.LineChart
+    <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart1"
         android:layout_width="match_parent"
+        android:background="@color/chartColor"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
+        tools:ignore="MissingClass" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart2"
+        android:layout_width="match_parent"
+        android:background="@color/chartColor"
+        android:layout_height="200dp"
+        android:layout_below="@id/chart1"
+        android:layout_marginTop="32dp"
         tools:ignore="MissingClass" />
 
 </RelativeLayout>
