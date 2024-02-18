@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
@@ -61,6 +62,13 @@ public class RegistrationActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    // get the generated user ID
+                                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                                    // store user details in user profile database
+                                    User user = new User(username, email);
+                                    FirebaseDatabase.getInstance().getReference("users").child(userId).setValue(user);
+
                                     // registration success
                                     Toast.makeText(RegistrationActivity.this, "Registration successful.", Toast.LENGTH_SHORT).show();
                                     // launch HomeActivity
