@@ -1,20 +1,22 @@
 <resources>
     <string name="app_name">CleanStreets</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string-array name="size_options">
-        <item>Very small</item>
+        <!-- <item>Very small</item> -->
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
-        <item>Very large</item>
+        <!-- <item>Very large</item> -->
     </string-array>
 
     <string-array name="urgency_options">
         <item>Not urgent</item>
-        <item>Low urgency</item>
-        <item>Medium urgency</item>
-        <item>High urgency</item>
+        <!-- <item>Low urgency</item> -->
+        <item>Urgent</item>
+        <!-- <item>High urgency</item> -->
         <item>Very urgent</item>
     </string-array>
 
