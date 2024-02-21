@@ -25,8 +25,7 @@
         android:layout_marginTop="16dp"
         android:textSize="100px"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold"/>
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/locationTextView"

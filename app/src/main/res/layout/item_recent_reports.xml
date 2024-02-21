@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_marginBottom="8dp"
     android:background="@drawable/rounded_corner_layout"
-    android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
@@ -11,40 +11,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="70px"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:textSize="28sp"
+        android:layout_marginBottom="1dp" />
 
     <TextView
         android:id="@+id/report_timestamp_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorSubtitle"
-        android:textStyle="italic"
-        android:textSize="45px" />
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
 
-    <TextView
-        android:id="@+id/report_size_textview"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textStyle="italic"
-        android:textSize="45px" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/report_urgency_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textStyle="italic"
-        android:textSize="45px" />
+        <TextView
+            android:id="@+id/report_size_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight="0.7"
+            android:background="@drawable/rounded_bubbles"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/report_status_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textStyle="italic"
-        android:textSize="45px" />
+        <TextView
+            android:id="@+id/report_urgency_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_bubbles"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/report_status_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight="0.5"
+            android:background="@drawable/rounded_bubbles"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </LinearLayout>
