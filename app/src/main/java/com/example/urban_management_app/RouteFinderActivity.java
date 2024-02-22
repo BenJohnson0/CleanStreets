@@ -72,8 +72,8 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         // TODO: Uncomment after testing
-        //getUserLocation();
-        getHardcodedLocation(); //WALKING results will break unless its possible, so use this for now
+        getUserLocation();
+        //getHardcodedLocation(); //WALKING results will break unless its possible, so use this for now
 
         getReportCoordinates();
 
@@ -98,7 +98,6 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         }
     }
 
-    //TODO: remove for deployment (hardcoded)
     private void getHardcodedLocation() {
         ORIGIN = new LatLng(53.34687384010104, -6.265105683680536);
     }
