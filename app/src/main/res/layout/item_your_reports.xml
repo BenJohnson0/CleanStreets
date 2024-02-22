@@ -7,40 +7,66 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
     <TextView
         android:id="@+id/report_title_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="75px"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
+        android:textSize="28sp"
+        android:layout_marginBottom="1dp" />
+
+        <TextView
+            android:id="@+id/report_status_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_bubbles"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/report_timestamp_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorSubtitle"
-        android:textSize="45px" />
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <TextView
         android:id="@+id/report_size_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textSize="45px" />
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/report_urgency_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textSize="45px" />
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:maxLines="1"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/report_status_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textSize="45px" />
 </LinearLayout>

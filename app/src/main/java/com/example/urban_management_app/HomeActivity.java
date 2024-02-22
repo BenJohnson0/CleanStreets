@@ -142,7 +142,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_home).setVisible(true);
             navMenu.findItem(R.id.nav_add_report).setVisible(true);
             navMenu.findItem(R.id.nav_statistics).setVisible(true);
-            navMenu.findItem(R.id.nav_saved_reports).setVisible(true);
             navMenu.findItem(R.id.nav_your_reports).setVisible(true);
             navMenu.findItem(R.id.nav_map).setVisible(true);
             navMenu.findItem(R.id.nav_education).setVisible(true);
@@ -158,7 +157,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_home).setVisible(true);
             navMenu.findItem(R.id.nav_add_report).setVisible(true);
             navMenu.findItem(R.id.nav_statistics).setVisible(true);
-            navMenu.findItem(R.id.nav_saved_reports).setVisible(false);
             navMenu.findItem(R.id.nav_your_reports).setVisible(false);
             navMenu.findItem(R.id.nav_map).setVisible(true);
             navMenu.findItem(R.id.nav_education).setVisible(true);
@@ -193,10 +191,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_statistics:
                 // statistics dashboard
                 startActivity(new Intent(HomeActivity.this, DashboardActivity.class));
-                break;
-            case R.id.nav_saved_reports:
-                // saved reports (only logged-in users)
-                showToast("Saved reports");
                 break;
             case R.id.nav_add_report:
                 // add new report
