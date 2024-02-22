@@ -1,12 +1,19 @@
 package com.example.urban_management_app;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -41,6 +48,7 @@ import com.google.maps.model.DirectionsStep;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -68,14 +76,14 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_finder);
 
+        // initial check for location services
+        checkLocationServiceEnabled();
+
         // request or access user location before calling functions
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // TODO: Uncomment after testing
         getUserLocation();
         //getHardcodedLocation(); //WALKING results will break unless its possible, so use this for now
-
-        getReportCoordinates();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -91,7 +99,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
             InputStream inputStream = getResources().openRawResource(R.raw.map_style);
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
-            String json = new String(buffer, "UTF-8");
+            String json = new String(buffer, UTF_8);
             googleMap.setMapStyle(new MapStyleOptions(json));
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,21 +111,21 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
     }
 
     // function for getting the current user location
-    private void getUserLocation()
-    {
+    private void getUserLocation() {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient.getLastLocation()
                     .addOnSuccessListener(this, location -> {
                         if (location != null) {
                             ORIGIN = new LatLng(location.getLatitude(), location.getLongitude());
-                            //TODO: remove toast when fixed
-                            showToast(String.valueOf(ORIGIN));
+                            getReportCoordinates(); // Call getReportCoordinates() here
                         } else {
+                            Log.e("RouteFinderActivity", "User location is null");
                             Toast.makeText(this, "Location not available. Allow location services to proceed.", Toast.LENGTH_SHORT).show();
                         }
                     });
         } else {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            Log.e("RouteFinderActivity", "Location permission not granted");
         }
     }
 
@@ -200,6 +208,10 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
     }
 
     private void findRoute(LatLng origin, LatLng destination) {
+        if (origin == null || destination == null) {
+            Log.e("RouteFinderActivity", "Origin or destination is null");
+            return;
+        }
 
         //TODO: hide
         String apiKey = "AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM";
@@ -262,6 +274,34 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
                 }).start();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getUserLocation();
+            } else {
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void checkLocationServiceEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            // Prompt the user to enable location services
+            new AlertDialog.Builder(this)
+                    .setTitle("Location Services Not Enabled")
+                    .setMessage("Please enable location services to proceed.")
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                    .show();
+        }
     }
 }
 
