@@ -32,8 +32,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(PostViewHolder holder, int position) {
         Post post = posts.get(position);
         holder.postTitleTextView.setText(post.getPostTitle());
-        holder.postcodeTextView.setText("Area: " + post.getPostCode());
-        holder.tagTextView.setText("Type: " + post.getPostTags());
+        holder.postcodeTextView.setText(post.getPostCode());
+        holder.tagTextView.setText(post.getPostTags());
         holder.timestampTextView.setText("Posted at: " + post.getTimestamp());
     }
 

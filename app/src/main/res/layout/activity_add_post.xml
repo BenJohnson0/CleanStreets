@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/edit_text_post_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_below="@id/text_view_post"
@@ -46,7 +46,7 @@
     <EditText
         android:id="@+id/edit_text_post_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_below="@id/text_view_content"
@@ -70,8 +70,8 @@
     <Spinner
         android:id="@+id/spinner_postcode"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/text_view_postcode"
         android:layout_below="@id/edit_text_post_content"
         android:layout_marginLeft="16dp"
@@ -94,8 +94,8 @@
     <Spinner
         android:id="@+id/spinner_tags"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/text_view_postcode"
         android:layout_below="@id/spinner_postcode"
         android:layout_marginLeft="16dp"
@@ -111,6 +111,7 @@
         android:layout_below="@id/spinner_tags"
         android:layout_centerHorizontal="true"
         android:textSize="25sp"
+        android:textStyle="bold"
         android:background="@drawable/round_corner"
         android:text="Submit Post"
         android:textColor="@color/colorSecondary"
