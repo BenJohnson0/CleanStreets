@@ -38,9 +38,7 @@ public class Post {
         return referencedReportId;
     }
 
-    public void setReferencedReportId(String referencedReportId) {
-        this.referencedReportId = referencedReportId;
-    }
+    public void setReferencedReportId(String referencedReportId) {this.referencedReportId = referencedReportId;}
 
     public String getPostId() {
         return postId;
