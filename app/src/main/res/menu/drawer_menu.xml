@@ -38,9 +38,13 @@
             android:icon="@drawable/people"
             android:title="Your Reports" />
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/setting"
-            android:title="App Settings" />
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/notifications"
+            android:title="Notifications" />
+        <item
+            android:id="@+id/nav_accessibility"
+            android:icon="@drawable/accessibility"
+            android:title="Accessibility" />
     </group>
 
     <item

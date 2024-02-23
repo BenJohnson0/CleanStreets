@@ -146,7 +146,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_map).setVisible(true);
             navMenu.findItem(R.id.nav_education).setVisible(true);
             navMenu.findItem(R.id.nav_account).setVisible(true);
-            navMenu.findItem(R.id.nav_settings).setVisible(true);
+            navMenu.findItem(R.id.nav_notifications).setVisible(true);
+            navMenu.findItem(R.id.nav_accessibility).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(true);
             navMenu.findItem(R.id.nav_noticeboard).setVisible(true);
             // hide "Register" & "Login" options
@@ -161,7 +162,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             navMenu.findItem(R.id.nav_map).setVisible(true);
             navMenu.findItem(R.id.nav_education).setVisible(true);
             navMenu.findItem(R.id.nav_account).setVisible(false);
-            navMenu.findItem(R.id.nav_settings).setVisible(true);
+            navMenu.findItem(R.id.nav_notifications).setVisible(false);
+            navMenu.findItem(R.id.nav_accessibility).setVisible(true);
             navMenu.findItem(R.id.nav_sign_out).setVisible(false);
             navMenu.findItem(R.id.nav_noticeboard).setVisible(false);
             // show "Register" & "Login" options
@@ -183,10 +185,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 // account management (only logged-in users)
                 startActivity(new Intent(HomeActivity.this, AccountManagementActivity.class));
                 break;
-            case R.id.nav_settings:
-                // app settings TODO: need to be buttons, not imageview / icon
-                showToast("Settings");
-                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+            case R.id.nav_notifications:
+                // notification settings
+                showToast("Notifications");
+                break;
+            case R.id.nav_accessibility:
+                // notification settings
+                showToast("Accessibility");
+                startActivity(new Intent(HomeActivity.this, AccessibilityActivity.class));
                 break;
             case R.id.nav_statistics:
                 // statistics dashboard
