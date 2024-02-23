@@ -15,32 +15,32 @@
         android:textColor="@color/colorPrimaryDark" />
 
     <TextView
-        android:id="@+id/info_window_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle" />
-
-    <TextView
         android:id="@+id/info_window_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle" />
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/info_window_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/info_window_urgency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle" />
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/info_window_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle" />
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/info_window_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle" />
+        android:textColor="@color/colorPrimaryDark" />
 </LinearLayout>

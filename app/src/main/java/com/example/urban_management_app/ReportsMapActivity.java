@@ -1,17 +1,23 @@
 package com.example.urban_management_app;
 
 import android.annotation.SuppressLint;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -37,15 +43,24 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
     private GoogleMap googleMap;
     private List<Report> reportList;
     private Button buttonNearest;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private boolean locationPermissionGranted;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports_map);
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_fragment);
         assert mapFragment != null;
+        mapFragment.getMapAsync(this);
+
+        getLocationPermission();
+
         mapFragment.getMapAsync(this);
 
         reportList = new ArrayList<>();
@@ -77,6 +92,64 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
             googleMap.setMapStyle(new MapStyleOptions(json));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if (locationPermissionGranted) {
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
+            googleMap.setMyLocationEnabled(true);
+        }
+
+        moveCameraToUserLocation();
+    }
+
+    private void moveCameraToUserLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.getLastLocation()
+                    .addOnSuccessListener(location -> {
+                        if (location != null) {
+                            LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 12f));
+                        }
+                    });
+        }
+    }
+
+    private void getLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        locationPermissionGranted = false;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    locationPermissionGranted = true;
+                    if (googleMap != null) {
+                        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        googleMap.setMyLocationEnabled(true);
+                    }
+                } else {
+                    Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 
@@ -145,10 +218,10 @@ public class ReportsMapActivity extends FragmentActivity implements OnMapReadyCa
                     Report report = getReportFromMarker(marker);
                     if (report != null) {
                         sizeTextView.setText("Size: " + report.getSize());
-                        timestampTextView.setText("Timestamp: " + report.getTimestamp());
-                        urgencyTextView.setText("Urgency: " + report.getUrgency());
+                        timestampTextView.setText("at " + report.getTimestamp());
+                        urgencyTextView.setText(report.getUrgency());
                         statusTextView.setText("Status: " + report.getStatus());
-                        addressTextView.setText("Location: " + geocodeToAddress(report.getXCoordinates(), report.getYCoordinates()));
+                        addressTextView.setText("Near " + geocodeToAddress(report.getXCoordinates(), report.getYCoordinates()));
                     }
 
                     return infoView;
