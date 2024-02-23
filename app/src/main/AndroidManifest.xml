@@ -46,10 +46,6 @@
         <activity
             android:name=".AccessibilityActivity"
             android:exported="false" />
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM" />
