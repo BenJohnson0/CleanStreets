@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/rounded_corner_layout"
     android:orientation="vertical"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/rounded_corner_layout"
     android:padding="16dp">
 
     <LinearLayout
@@ -13,15 +12,15 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/report_title_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="1dp" />
+        <TextView
+            android:id="@+id/report_title_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="1dp" />
 
         <TextView
             android:id="@+id/report_status_textview"
@@ -30,8 +29,8 @@
             android:background="@drawable/rounded_bubbles"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:padding="8dp"
+            android:textSize="15sp"
+            android:padding="6dp"
             android:layout_marginStart="8dp" />
 
     </LinearLayout>
@@ -49,28 +48,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <TextView
-        android:id="@+id/report_size_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/report_urgency_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:maxLines="1"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp" />
+        <TextView
+            android:id="@+id/report_size_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/report_urgency_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -11,6 +11,8 @@ public class Report {
     private String userId;
     private String title;
     private String status;
+    private int thumbsUpCount;
+    private int thumbsDownCount;
 
     public Report() {
         // default constructor required for Firebase
@@ -107,6 +109,18 @@ public class Report {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getThumbsUpCount() {return thumbsUpCount;}
+
+    public void setThumbsUpCount(int thumbsUpCount) {this.thumbsUpCount = thumbsUpCount;}
+
+    public int getThumbsDownCount() {return thumbsDownCount;}
+
+    public void setThumbsDownCount(int thumbsDownCount) {this.thumbsDownCount = thumbsDownCount;}
+
+    public void incrementThumbsUpCount() {thumbsUpCount++;}
+
+    public void incrementThumbsDownCount() {thumbsDownCount++;}
 
     }
 

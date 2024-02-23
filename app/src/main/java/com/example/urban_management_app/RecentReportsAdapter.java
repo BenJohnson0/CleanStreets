@@ -3,9 +3,13 @@ package com.example.urban_management_app;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdapter.ViewHolder> {
@@ -50,6 +54,8 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
         private TextView reportSizeTextView;
         private TextView reportUrgencyTextView;
         private TextView reportStatusTextView;
+        private TextView thumbsUpCounter;
+        private ImageView thumbsUpIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +64,29 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
             reportSizeTextView = itemView.findViewById(R.id.report_size_textview);
             reportUrgencyTextView = itemView.findViewById(R.id.report_urgency_textview);
             reportStatusTextView = itemView.findViewById(R.id.report_status_textview);
+            thumbsUpCounter = itemView.findViewById(R.id.thumbs_up_counter);
+            thumbsUpIcon = itemView.findViewById(R.id.thumbs_up_icon);
+
+            thumbsUpIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        // Get the report at this position
+                        Report clickedReport = reportList.get(position);
+                        // Increment the thumbs up count for this report
+                        clickedReport.incrementThumbsUpCount();
+                        // Update the UI
+                        thumbsUpCounter.setText(String.valueOf(clickedReport.getThumbsUpCount()));
+
+                        // Update the thumbs up count in the database
+                        FirebaseDatabase.getInstance().getReference("reports")
+                                .child(clickedReport.getReportId())
+                                .child("thumbsUpCount")
+                                .setValue(clickedReport.getThumbsUpCount());
+                    }
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,10 +106,11 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
 
         public void bind(Report report) {
             reportTitleTextView.setText(report.getTitle());
-            reportTimestampTextView.setText(report.getTimestamp());
+            reportTimestampTextView.setText("at " + report.getTimestamp());
             reportSizeTextView.setText(report.getSize());
             reportUrgencyTextView.setText(report.getUrgency());
             reportStatusTextView.setText(report.getStatus());
+            thumbsUpCounter.setText(String.valueOf(report.getThumbsUpCount()));
         }
     }
 }

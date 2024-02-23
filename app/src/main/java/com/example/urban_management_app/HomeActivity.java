@@ -108,7 +108,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Report report = snapshot.getValue(Report.class);
                     // add report to the list
-                    recentReportsList.add(report);
+                    if (report != null) {
+                        // Ensure the thumbs up count is initialized in the Report object
+                        if (snapshot.child("thumbsUpCount").getValue() != null) {
+                            report.setThumbsUpCount(Math.toIntExact((Long) snapshot.child("thumbsUpCount").getValue()));
+                        }
+                        recentReportsList.add(report);
+                    }
                 }
                 // notify adapter of data change
                 recentReportsAdapter.notifyDataSetChanged();

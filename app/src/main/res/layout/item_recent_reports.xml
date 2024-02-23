@@ -1,8 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/rounded_corner_layout"
     android:padding="16dp">
 
@@ -18,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="28sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:layout_marginBottom="1dp" />
 
@@ -29,8 +30,8 @@
             android:background="@drawable/rounded_bubbles"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:padding="8dp"
+            android:textSize="15sp"
+            android:padding="6dp"
             android:layout_marginStart="8dp" />
 
     </LinearLayout>
@@ -51,26 +52,59 @@
 
         <TextView
             android:id="@+id/report_size_textview"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/report_urgency_textview"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:textAlignment="center"
+            android:textAlignment="textStart"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:maxLines="1"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"/>
+
+        <ImageView
+            android:id="@+id/thumbs_up_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/thumbs_up_icon"
+            app:tint="#8BC34A"
+            android:contentDescription="thumbs up icon"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/thumbs_up_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="16dp" />
+
+       <!-- <ImageView
+            android:id="@+id/thumbs_down_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/thumbs_down_icon"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/thumbs_down_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            android:textStyle="bold" /> -->
     </LinearLayout>
 
 </LinearLayout>
