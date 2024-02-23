@@ -34,7 +34,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.postTitleTextView.setText(post.getPostTitle());
         holder.postcodeTextView.setText(post.getPostCode());
         holder.tagTextView.setText(post.getPostTags());
-        holder.timestampTextView.setText("Posted at: " + post.getTimestamp());
+        holder.timestampTextView.setText(post.getTimestamp());
     }
 
     @Override

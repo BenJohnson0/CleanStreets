@@ -7,12 +7,12 @@
     <color name="purple_700">#0C3B2E</color>
     <color name="teal_200">#B46617</color>
 
-    <color name="colorSubtitle">#BBB2AD</color>
-    <color name="colorPrimary">#161A67</color>
-    <color name="colorPrimaryDark">#FAF9F6</color>
+    <color name="colorSubtitle">#8D929B</color>
+    <color name="colorPrimary">#2b2d42</color>
+    <color name="colorPrimaryDark">#edf2f4</color>
     <color name="colorAccent">#000</color>
-    <color name="colorSecondary">#993314</color>
-    <color name="thirdColor">#933B3B</color>
+    <color name="colorSecondary">#13647f</color>
+    <color name="thirdColor">#319ab9</color>
     <color name="chartColor">#E37B6F</color>
 
 </resources>

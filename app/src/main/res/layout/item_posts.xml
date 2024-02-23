@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="28sp"
         android:layout_marginBottom="1dp" />
 
@@ -21,8 +22,9 @@
         android:id="@+id/timestamp_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="13sp"
         android:layout_marginBottom="16dp" />
 
     <LinearLayout
@@ -35,7 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="textStart"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="18sp" />
 
     <TextView
@@ -43,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_bubbles"
-        app:backgroundTint="#00BCD4"
+        app:backgroundTint="#319ab9"
         android:textColor="@color/black"
         android:textAlignment="center"
         android:layout_marginTop="5dp"

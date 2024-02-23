@@ -61,9 +61,9 @@ public class YourReportsAdapter extends RecyclerView.Adapter<YourReportsAdapter.
         public void bind(Report report) {
             reportTitleTextView.setText(report.getTitle());
             reportTimestampTextView.setText(report.getTimestamp());
-            reportSizeTextView.setText("Size: " + report.getSize());
-            reportUrgencyTextView.setText("Urgency: " + report.getUrgency());
-            reportStatusTextView.setText("Status: " + report.getStatus());
+            reportSizeTextView.setText(report.getSize());
+            reportUrgencyTextView.setText(report.getUrgency());
+            reportStatusTextView.setText(report.getStatus());
         }
     }
 }

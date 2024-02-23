@@ -19,6 +19,7 @@
             android:layout_weight="1"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="28sp"
+            android:textStyle="bold"
             android:layout_marginBottom="1dp" />
 
         <TextView
@@ -38,8 +39,9 @@
         android:id="@+id/report_timestamp_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorSubtitle"
-        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13sp"
+        android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
     <LinearLayout
@@ -52,6 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp" />
@@ -61,6 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"

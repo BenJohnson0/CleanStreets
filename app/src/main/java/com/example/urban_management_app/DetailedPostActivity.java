@@ -70,8 +70,8 @@ public class DetailedPostActivity extends AppCompatActivity {
 
                 if (post != null) {
                     titleTextView.setText(post.getPostTitle());
-                    postIDTextView.setText("Post ID: " + post.getPostId());
-                    tagsTextView.setText("Tag: " + post.getPostTags());
+                    postIDTextView.setText("ID: " + post.getPostId());
+                    tagsTextView.setText(post.getPostTags());
                     contentTextView.setText(post.getPostContent());
                 }
             }
