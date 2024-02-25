@@ -2,39 +2,21 @@ package com.example.urban_management_app;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -60,7 +42,7 @@ public class DashboardActivity extends AppCompatActivity {
         List<BarEntry> entries = new ArrayList<>();
 
         // initialize counters for each size category
-        int[] sizeCounts = new int[5]; // Assuming 5 size categories
+        int[] sizeCounts = new int[3]; // 3 size categories
 
         // query Firebase reports
         FirebaseDatabase.getInstance().getReference("reports")
@@ -73,20 +55,14 @@ public class DashboardActivity extends AppCompatActivity {
 
                             // increment counter for corresponding sizes
                             switch (size) {
-                                case "Very Small":
+                                case "Small":
                                     sizeCounts[0]++;
                                     break;
-                                case "Small":
+                                case "Medium":
                                     sizeCounts[1]++;
                                     break;
-                                case "Medium":
-                                    sizeCounts[2]++;
-                                    break;
                                 case "Large":
-                                    sizeCounts[3]++;
-                                    break;
-                                case "Very Large":
-                                    sizeCounts[4]++;
+                                    sizeCounts[2]++;
                                     break;
                                 default:
                                     break;
@@ -118,9 +94,11 @@ public class DashboardActivity extends AppCompatActivity {
         chart.setData(barData);
 
         // customize chart appearance
-        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         dataSet.setValueTextColor(Color.BLACK);
         dataSet.setValueTextSize(15f);
+        chart.getAxisLeft().setDrawLabels(false);
+        chart.getAxisRight().setDrawLabels(false);
 
         // customize X-axis
         XAxis xAxis = chart.getXAxis();
@@ -134,13 +112,13 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     private void loadPostTypeChartData() {
-        // Initialize chart entries
+        // initialize charts
         List<BarEntry> entries = new ArrayList<>();
 
-        // Initialize counters for each event type
-        int[] eventCounts = new int[5]; // Assuming 5 event types
+        // initialize counters for each event
+        int[] eventCounts = new int[5]; // todo: how many event types
 
-        // Query Firebase database for posts
+        // query firebase for posts
         FirebaseDatabase.getInstance().getReference("posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -149,7 +127,7 @@ public class DashboardActivity extends AppCompatActivity {
                             Post post = snapshot.getValue(Post.class);
                             String eventType = post.getPostTags();
 
-                            // Increment the counter for the corresponding event type
+                            // increment the counter for the corresponding event type
                             switch (eventType) {
                                 case "Fundraiser":
                                     eventCounts[0]++;
@@ -171,18 +149,18 @@ public class DashboardActivity extends AppCompatActivity {
                             }
                         }
 
-                        // Populate chart entries
+                        // populate chart
                         for (int i = 0; i < eventCounts.length; i++) {
                             entries.add(new BarEntry(i, eventCounts[i]));
                         }
 
-                        // Set up chart data and display
+                        // set up chart data and display
                         setPostTagBarChartData(chart2, entries, "Post Tags Distribution");
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Handle cancelled database query
+                        // todo: handle cancelled database query
                     }
                 });
     }
@@ -196,9 +174,11 @@ public class DashboardActivity extends AppCompatActivity {
         chart.setData(barData);
 
         // customize chart appearance
-        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
         dataSet.setValueTextColor(Color.BLACK);
         dataSet.setValueTextSize(15f);
+        chart.getAxisLeft().setDrawLabels(false);
+        chart.getAxisRight().setDrawLabels(false);
 
         // customize X-axis
         XAxis xAxis = chart.getXAxis();
