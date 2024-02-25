@@ -17,8 +17,9 @@
         android:textStyle="italic|bold"
         android:paddingEnd="15dp"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="27sp"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="29sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <EditText
         android:id="@+id/edit_text_post_title"
@@ -42,8 +43,9 @@
         android:paddingEnd="15dp"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="50px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <EditText
         android:id="@+id/edit_text_post_content"
@@ -58,26 +60,51 @@
         android:inputType="text" />
 
     <TextView
-        android:id="@+id/text_view_postcode"
+        android:id="@+id/text_view_refReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text_post_content"
+        android:layout_marginTop="16dp"
+        android:text="Referenced Report: "
+        android:paddingEnd="15dp"
+        android:textStyle="italic|bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
+
+    <Spinner
+        android:id="@+id/spinner_refReport"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_toEndOf="@id/text_view_refReport"
+        android:layout_below="@id/edit_text_post_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"/>
+
+    <TextView
+        android:id="@+id/text_view_postcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_refReport"
         android:layout_marginTop="16dp"
         android:paddingEnd="15dp"
         android:text="Postcode"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="50px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <Spinner
         android:id="@+id/spinner_postcode"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/text_view_postcode"
-        android:layout_below="@id/edit_text_post_content"
-        android:layout_marginLeft="16dp"
+        android:layout_toEndOf="@id/text_view_postcode"
+        android:layout_below="@id/spinner_refReport"
+        android:layout_marginStart="16dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:entries="@array/postcode_options" />
@@ -92,17 +119,18 @@
         android:paddingEnd="15dp"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="50px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <Spinner
         android:id="@+id/spinner_tags"
         android:layout_width="150dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/text_view_postcode"
+        android:layout_toEndOf="@id/text_view_postcode"
         android:layout_below="@id/spinner_postcode"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:entries="@array/tags_options" />

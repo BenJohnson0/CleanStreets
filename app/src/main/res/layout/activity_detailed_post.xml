@@ -7,8 +7,6 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-
-
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
@@ -17,14 +15,14 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:background="@drawable/posts_rounded_corner"
-        android:textSize="100px"
+        android:textSize="34sp"
         android:padding="16dp" />
 
     <TextView
         android:id="@+id/postIDTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="50px"
+        android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
@@ -35,7 +33,7 @@
         android:id="@+id/tagsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50px"
+        android:textSize="18sp"
         android:background="@drawable/rounded_corner_layout"
         android:textAlignment="center"
         android:layout_gravity="center"
@@ -43,13 +41,24 @@
         android:paddingStart="10dp"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/refReportTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:layout_marginBottom="8px"/>
 
     <TextView
         android:id="@+id/contentTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="50px"
+        android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"

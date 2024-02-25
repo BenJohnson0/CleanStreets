@@ -21,7 +21,7 @@ import java.util.List;
 
 public class DetailedPostActivity extends AppCompatActivity {
 
-    private TextView titleTextView, postIDTextView, tagsTextView, contentTextView, noRepliesTextView;
+    private TextView titleTextView, postIDTextView, tagsTextView, contentTextView, noRepliesTextView, refReportTextView;
     private RecyclerView repliesRecyclerView;
     private List<Reply> repliesList;
     private RepliesAdapter repliesAdapter;
@@ -36,6 +36,7 @@ public class DetailedPostActivity extends AppCompatActivity {
         postIDTextView = findViewById(R.id.postIDTextView);
         tagsTextView = findViewById(R.id.tagsTextView);
         contentTextView = findViewById(R.id.contentTextView);
+        refReportTextView = findViewById(R.id.refReportTextView);
         replyButton = findViewById(R.id.replyButton);
         noRepliesTextView = findViewById(R.id.noRepliesTextView);
 
@@ -73,6 +74,7 @@ public class DetailedPostActivity extends AppCompatActivity {
                     postIDTextView.setText("ID: " + post.getPostId());
                     tagsTextView.setText(post.getPostTags());
                     contentTextView.setText(post.getPostContent());
+                    refReportTextView.setText("Referring to report '"+post.getReferencedReportId()+"'");
                 }
             }
 
