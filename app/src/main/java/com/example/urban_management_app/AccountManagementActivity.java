@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
@@ -44,6 +46,7 @@ public class AccountManagementActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.edit_text_name);
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextPassword = findViewById(R.id.edit_text_password);
+
         buttonUpdate = findViewById(R.id.button_update);
         buttonChangePassword = findViewById(R.id.button_change_password);
         buttonDelete = findViewById(R.id.button_delete);
@@ -89,10 +92,10 @@ public class AccountManagementActivity extends AppCompatActivity {
     }
 
     private void updateAccount() throws IOException {
-        String name = editTextName.getText().toString().trim();
+        String newUsername = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
 
-        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(newUsername) || TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -100,7 +103,7 @@ public class AccountManagementActivity extends AppCompatActivity {
         // bad words check
         BadWordsFilter badWordsFilter = new BadWordsFilter(getResources().getAssets().open("bad-words.txt"));
 
-        if (badWordsFilter.containsSwearWord(name)) {
+        if (badWordsFilter.containsSwearWord(newUsername)) {
             Toast.makeText(this, "Name value contains inappropriate language", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -108,30 +111,51 @@ public class AccountManagementActivity extends AppCompatActivity {
         progressDialog.show();
 
         if (currentUser != null) {
+            // Update email
             currentUser.updateEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            progressDialog.dismiss();
                             if (task.isSuccessful()) {
-                                currentUser.updateProfile(new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(name)
-                                                .build())
+                                // Update display name (username)
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(newUsername)
+                                        .build();
+
+                                currentUser.updateProfile(profileUpdates)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(AccountManagementActivity.this,
-                                                            "Account updated successfully",
-                                                            Toast.LENGTH_SHORT).show();
+                                                    // Update username in the separate database
+                                                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
+                                                    String userId = currentUser.getUid();
+                                                    userRef.child(userId).child("username").setValue(newUsername)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    progressDialog.dismiss();
+                                                                    if (task.isSuccessful()) {
+                                                                        Toast.makeText(AccountManagementActivity.this,
+                                                                                "Account Updated. Sign-in again to view changes",
+                                                                                Toast.LENGTH_LONG).show();
+                                                                    } else {
+                                                                        Toast.makeText(AccountManagementActivity.this,
+                                                                                "Failed to update username",
+                                                                                Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                            });
                                                 } else {
+                                                    progressDialog.dismiss();
                                                     Toast.makeText(AccountManagementActivity.this,
-                                                            "Failed to update account",
+                                                            "Failed to update username",
                                                             Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
                             } else {
+                                progressDialog.dismiss();
                                 Toast.makeText(AccountManagementActivity.this,
                                         "Failed to update email",
                                         Toast.LENGTH_SHORT).show();
@@ -140,6 +164,7 @@ public class AccountManagementActivity extends AppCompatActivity {
                     });
         }
     }
+
 
     private void changePassword() {
         String newPassword = editTextPassword.getText().toString().trim();
