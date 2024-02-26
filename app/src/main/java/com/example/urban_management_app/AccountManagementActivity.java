@@ -111,13 +111,13 @@ public class AccountManagementActivity extends AppCompatActivity {
         progressDialog.show();
 
         if (currentUser != null) {
-            // Update email
+            // update email
             currentUser.updateEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                // Update display name (username)
+                                // update username
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(newUsername)
                                         .build();
@@ -127,7 +127,7 @@ public class AccountManagementActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    // Update username in the separate database
+                                                    // update username in users database
                                                     DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users");
                                                     String userId = currentUser.getUid();
                                                     userRef.child(userId).child("username").setValue(newUsername)
