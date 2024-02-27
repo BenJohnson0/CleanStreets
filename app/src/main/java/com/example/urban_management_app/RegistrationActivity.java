@@ -66,7 +66,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                                     // store user details in user profile database
-                                    User user = new User(username, email);
+                                    User user = new User(username, email, "No");
                                     FirebaseDatabase.getInstance().getReference("users").child(userId).setValue(user);
 
                                     // registration success

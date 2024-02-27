@@ -136,9 +136,33 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         TextView userNameTextView = headerView.findViewById(R.id.user_name_textview);
         TextView userEmailTextView = headerView.findViewById(R.id.user_email_textview);
 
-        // TODO: show name or username?
-        userNameTextView.setText(userName);
-        userEmailTextView.setText(userEmail);
+        String currentUserId = firebaseAuth.getCurrentUser().getUid();
+        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users").child(currentUserId);
+
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // get username and email from users database
+                    String username = dataSnapshot.child("username").getValue(String.class);
+                    String email = dataSnapshot.child("email").getValue(String.class);
+
+                    // set username and email in the nav drawer
+                    userNameTextView.setText(username);
+                    userEmailTextView.setText(email);
+                } else {
+                    // if the user data doesn't exist, set default values
+                    userNameTextView.setText("Guest");
+                    userEmailTextView.setText("Create account for more features!");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // todo: handle error
+                Toast.makeText(HomeActivity.this, "Failed to load user data.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Menu navMenu = navigationView.getMenu();
 

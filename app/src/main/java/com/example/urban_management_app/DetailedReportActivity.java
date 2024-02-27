@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +33,8 @@ public class DetailedReportActivity extends AppCompatActivity {
 
     private TextView titleTextView, locationTextView, sizeTextView, urgencyTextView;
     private ImageView imageView;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,10 @@ public class DetailedReportActivity extends AppCompatActivity {
         imageView = findViewById(R.id.reportImageView);
 
         Button amendButton = findViewById(R.id.amendButton);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        usersRef = FirebaseDatabase.getInstance().getReference("users");
+        String currentUserId = firebaseAuth.getCurrentUser().getUid();
 
         // retrieve report_id from the intent
         String reportId = getIntent().getStringExtra("report_id");
@@ -82,6 +89,26 @@ public class DetailedReportActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showAmendOrDeleteDialog(reportId); // pass the reportId to the dialog
+            }
+        });
+
+        usersRef.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // check if the current user isAdmin
+                if (dataSnapshot.exists() && dataSnapshot.child("isAdmin").getValue(String.class).equals("Yes")) {
+                    // show amend button
+                    amendButton.setVisibility(View.VISIBLE);
+                } else {
+                    // hide amend button
+                    amendButton.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(DetailedReportActivity.this, "Failed to load user data.", Toast.LENGTH_SHORT).show();
             }
         });
     }
