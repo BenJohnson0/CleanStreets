@@ -1,14 +1,19 @@
 package com.example.urban_management_app;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +47,13 @@ public class YourReportsActivity extends AppCompatActivity {
 
         // set adapter on RecyclerView
         yourReportsRecyclerView.setAdapter(yourReportsAdapter);
+
+        yourReportsAdapter.setOnReportDeleteListener(new YourReportsAdapter.OnReportDeleteListener() {
+            @Override
+            public void onReportDelete(Report report) {
+                YourReportsActivity.this.onReportDelete(report);
+            }
+        });
 
         // retrieve reports from Firebase and update adapter
         retrieveAndShowYourReports();
@@ -84,4 +96,42 @@ public class YourReportsActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onReportDelete(Report report) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Deletion")
+                .setMessage("Are you sure you want to delete this report?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Perform report deletion
+                        // Remove the report from the database
+                        DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports").child(report.getReportId());
+                        reportRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Report deleted successfully from database
+                                // Now remove the report from the list
+                                yourReportsAdapter.deleteReport(report);
+                                // Notify the adapter that data set has changed
+                                yourReportsAdapter.notifyDataSetChanged();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Report deletion failed
+                                Toast.makeText(YourReportsActivity.this, "Failed to delete report.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing, user canceled deletion
+                    }
+                })
+                .show();
+    }
+
 }
