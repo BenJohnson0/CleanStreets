@@ -17,8 +17,8 @@
         android:layout_height="200dp"
         tools:ignore="MissingClass" />
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/chart2"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart3"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
@@ -27,7 +27,16 @@
         tools:ignore="MissingClass" />
 
     <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/chart3"
+        android:id="@+id/chart2"
+        android:layout_width="match_parent"
+        android:background="@color/thirdColor"
+        android:layout_height="200dp"
+        android:layout_below="@id/chart3"
+        android:layout_marginTop="32dp"
+        tools:ignore="MissingClass" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart4"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
@@ -35,12 +44,12 @@
         android:layout_marginTop="32dp"
         tools:ignore="MissingClass" />
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/chart4"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart5"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
-        android:layout_below="@id/chart3"
+        android:layout_below="@id/chart4"
         android:layout_marginTop="32dp"
         tools:ignore="MissingClass" />
 

@@ -5,23 +5,51 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private BarChart chart1;
-    private BarChart chart2;
+    private BarChart chart1, chart2;
+    private PieChart chart3, chart4;
+    private LineChart chart5;
+
+    // for pie chart 1
+    int reportsWithImages = 0;
+    int reportsWithoutImages = 0;
+
+    // for pie chart 2
+    int activeReports = 0;
+    int inProgressReports = 0;
+    int completedReports = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +58,183 @@ public class DashboardActivity extends AppCompatActivity {
 
         chart1 = findViewById(R.id.chart1);
         chart2 = findViewById(R.id.chart2);
-
+        chart3 = findViewById(R.id.chart3);
+        chart4 = findViewById(R.id.chart4);
+        chart5 = findViewById(R.id.chart5);
 
         // load data from Firebase Database and update the charts
         loadSizeChartData();
         loadPostTypeChartData();
+        loadReportImageData();
+        loadReportStatusData();
+        loadReportsData();
+    }
+
+    private void loadReportsData() {
+        // Initialize a HashMap to store the count of reports made each day
+        HashMap<String, Integer> reportsPerDay = new HashMap<>();
+
+        // Query Firebase to count reports made each day
+        DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");
+        reportsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Report report = snapshot.getValue(Report.class);
+                    if (report != null) {
+                        // Extract the timestamp and format it to get the date (day)
+                        long timestamp = parseTimestamp(report.getTimestamp());
+                        String date = getFormattedDate(timestamp);
+
+                        // Increment the count of reports made on that day
+                        if (reportsPerDay.containsKey(date)) {
+                            reportsPerDay.put(date, reportsPerDay.get(date) + 1);
+                        } else {
+                            reportsPerDay.put(date, 1);
+                        }
+                    }
+                }
+
+                // Create entries for the line chart
+                List<Entry> entries = new ArrayList<>();
+                List<String> labels = new ArrayList<>();
+
+                for (Map.Entry<String, Integer> entry : reportsPerDay.entrySet()) {
+                    String date = entry.getKey();
+                    int count = entry.getValue();
+                    entries.add(new Entry(labels.size(), count));
+                    labels.add(date);
+                }
+
+                // Display data on the line chart
+                displayLineChart(entries, labels);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle onCancelled
+            }
+        });
+    }
+
+    private long parseTimestamp(String timestamp) {
+        try {
+            // Define the date format of your timestamp string
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            // Parse the timestamp string into a Date object
+            Date date = sdf.parse(timestamp);
+            // Return the milliseconds since the Unix epoch
+            return date.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0; // Return 0 or handle the error as appropriate for your application
+        }
+    }
+
+
+    private String getFormattedDate(long timestamp) {
+        // Convert timestamp to Date object
+        Date date = new Date(timestamp);
+        // Format the date as "yyyy-MM-dd"
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return sdf.format(date);
+    }
+
+    private void displayLineChart(List<Entry> entries, List<String> labels) {
+        LineDataSet dataSet = new LineDataSet(entries, "Reports per Day");
+        LineData lineData = new LineData(dataSet);
+
+        chart5.setData(lineData);
+        chart5.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+        chart5.invalidate();
+    }
+
+    private void loadReportStatusData() {
+        DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");
+        reportsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Report report = snapshot.getValue(Report.class);
+                    if (report != null) {
+                        String status = report.getStatus();
+                        switch (status) {
+                            case "Active":
+                                activeReports++;
+                                break;
+                            case "In-progress":
+                                inProgressReports++;
+                                break;
+                            case "Completed":
+                                completedReports++;
+                                break;
+                        }
+                    }
+                }
+
+                displayPieChart(chart4, activeReports, inProgressReports, completedReports);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle onCancelled
+            }
+        });
+    }
+
+    private void displayPieChart(PieChart pieChart, int... counts) {
+        List<PieEntry> entries = new ArrayList<>();
+        String[] labels = {"Active", "In-progress", "Completed"};
+
+        for (int i = 0; i < counts.length; i++) {
+            entries.add(new PieEntry(counts[i], labels[i]));
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setValueTextColor(Color.BLACK);
+
+        PieData data = new PieData(dataSet);
+        pieChart.setData(data);
+        pieChart.setEntryLabelColor(Color.BLACK);
+        pieChart.invalidate();
+    }
+
+    private void loadReportImageData() {
+        DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");
+        reportsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Report report = snapshot.getValue(Report.class);
+                    if (report != null && !report.getImageUrl().isEmpty()) {
+                        reportsWithImages++;
+                    } else {
+                        reportsWithoutImages++;
+                    }
+                }
+
+                displayPieChart(reportsWithImages, reportsWithoutImages);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void displayPieChart(int reportsWithImages, int reportsWithoutImages) {
+        List<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(reportsWithImages, "Reports with Images"));
+        entries.add(new PieEntry(reportsWithoutImages, "Reports without Images"));
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        PieData data = new PieData(dataSet);
+        chart3.setData(data);
+        chart3.setEntryLabelColor(Color.BLACK);
+        chart3.invalidate();
     }
 
     private void loadSizeChartData() {
