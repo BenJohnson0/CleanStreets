@@ -2,14 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
     android:padding="16dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select Status:"
+        android:textColor="@color/colorPrimaryDark"
         android:id="@+id/status_textview"
-        android:textSize="18sp"
+        android:textSize="25sp"
+        android:layout_marginTop="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="16dp"/>
@@ -17,7 +21,9 @@
     <Spinner
         android:id="@+id/status_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:backgroundTint="#807A77"
+        android:textColorHint="#807A77"
         android:layout_below="@+id/status_textview"
         android:layout_marginTop="8dp" />
 
@@ -27,6 +33,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/status_spinner"
         android:layout_alignParentEnd="true"
+        android:textColor="@color/colorPrimaryDark"
+        app:backgroundTint="@color/colorSecondary"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:layout_marginTop="24dp"
         android:text="Confirm" />
 
