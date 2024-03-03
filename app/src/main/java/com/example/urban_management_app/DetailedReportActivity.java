@@ -133,9 +133,9 @@ public class DetailedReportActivity extends AppCompatActivity {
 
     private void showAmendOrDeleteDialog(final String reportId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Amend or Delete Report");
-        builder.setMessage("Are you sure you want to amend or delete this report?");
-        builder.setPositiveButton("Amend", new DialogInterface.OnClickListener() {
+        builder.setTitle("Edit Report");
+        builder.setMessage("Are you sure you want to change, delete or update the status of this report?");
+        builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Start the AmendReportActivity
@@ -150,6 +150,17 @@ public class DetailedReportActivity extends AppCompatActivity {
                 deleteReport(reportId);
             }
         });
+
+        builder.setNeutralButton("Change Status", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Start the ChangeStatusActivity
+                Intent intent = new Intent(DetailedReportActivity.this, UpdateStatusActivity.class);
+                intent.putExtra("report_id", reportId);
+                startActivity(intent);
+            }
+        });
+
         builder.show();
     }
 

@@ -53,5 +53,11 @@
         <item>Help</item>
     </string-array>
 
+    <string-array name="status_options">
+        <item>Active</item>
+        <item>In-progress</item>
+        <item>Completed</item>
+    </string-array>
+
     <string name="title_activity_maps_test">MapsActivityTEST</string>
 </resources>

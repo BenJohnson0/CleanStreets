@@ -78,6 +78,7 @@
         <activity android:name=".AmendReportActivity" />
         <activity android:name=".EducationActivity" />
         <activity android:name=".ReplyToPost" />
+        <activity android:name=".UpdateStatusActivity" />
     </application>
 
 </manifest>
