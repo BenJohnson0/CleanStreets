@@ -40,6 +40,26 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Report report = reportList.get(position);
         holder.bind(report);
+
+        /*
+        String status = report.getStatus();
+        if (status != null) {
+            switch (status) {
+                case "Active":
+                    holder.reportStatusTextView.setBackgroundResource(R.drawable.rounded_bubbles);
+                    break;
+                case "In-progress":
+                    holder.reportStatusTextView.setBackgroundResource(R.drawable.orange_rounded_bubbles);
+                    break;
+                case "Completed":
+                    holder.reportStatusTextView.setBackgroundResource(R.drawable.purple_rounded_bubbles);
+                    break;
+                default:
+                    // Default background color or do nothing
+                    break;
+            }
+        }
+        */
     }
 
     @Override
