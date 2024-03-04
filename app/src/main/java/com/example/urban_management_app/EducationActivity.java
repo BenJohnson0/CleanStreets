@@ -17,7 +17,7 @@ public class EducationActivity extends AppCompatActivity {
         WebView webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
 
-        String url = "https://www.epa.ie/";
+        String url = "https://www.dublincity.ie/residential/environment/waste-and-recycling";
         webView.loadUrl(url);
     }
 }
