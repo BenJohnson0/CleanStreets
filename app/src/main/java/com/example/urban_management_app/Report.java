@@ -120,7 +120,7 @@ public class Report {
 
     public void incrementThumbsUpCount() {thumbsUpCount++;}
 
-    public void incrementThumbsDownCount() {thumbsDownCount++;}
+    public void decrementThumbsUpCount() {thumbsDownCount--;}
 
     }
 
