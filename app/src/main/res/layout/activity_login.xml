@@ -10,29 +10,28 @@
     android:padding="10dp"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/textViewTitle"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CleanStreets"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="55sp"
-        android:textStyle="bold" />
+        android:src="@drawable/main_logo_white"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome back."
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:layout_marginBottom="100dp"
-        android:layout_marginLeft="70dp"/>
+        android:textSize="25sp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="center"
+        android:textStyle="italic" />
 
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:hint="Email"
@@ -42,7 +41,7 @@
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:hint="Password"

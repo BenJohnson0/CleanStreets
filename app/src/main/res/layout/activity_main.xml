@@ -8,27 +8,15 @@
     android:background="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp"
+    android:padding="5dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textViewTitle"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CleanStreets"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="55sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Strive for better."
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        android:layout_marginBottom="120dp"
-        android:layout_marginLeft="70dp"/>
+        android:src="@drawable/main_logo_white"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="0dp" />
 
     <Button
         android:id="@+id/buttonLogin"

@@ -8,21 +8,19 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textViewTitle"
+    <ImageView
+        android:id="@+id/logoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CleanStreets"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="60sp"
-        android:textStyle="bold" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/secondary_lb" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Thank you."
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="italic"
         android:layout_marginBottom="100dp"
         android:layout_marginLeft="90dp"/>
@@ -30,7 +28,7 @@
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="#807A77"

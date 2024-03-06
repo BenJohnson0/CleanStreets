@@ -4,16 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="0dp"
     android:background="@color/colorPrimary"
     tools:context=".DetailedReportActivity">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/secondary_lb" />
 
     <ImageView
         android:id="@+id/reportImageView"
         android:layout_width="220dp"
         android:layout_height="220dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/logoImageView"
         android:background="@drawable/no_image"/>
 
     <TextView

@@ -17,9 +17,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logomark_lb"
         android:label="CleanStreets"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logomark_lb"
         android:supportsRtl="true"
         android:theme="@style/Theme.Urbanmanagementapp"
         tools:targetApi="31">

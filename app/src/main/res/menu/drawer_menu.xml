@@ -4,60 +4,56 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/home"
+            android:icon="@drawable/home_lb"
             android:title="Home"
             />
         <item
             android:id="@+id/nav_add_report"
-            android:icon="@drawable/add"
+            android:icon="@drawable/add_report_lb"
             android:title="Add New Report"
             />
         <item
             android:id="@+id/nav_statistics"
-            android:icon="@drawable/stats"
+            android:icon="@drawable/analytics_lb"
             android:title="Analytics"
             />
         <item
             android:id="@+id/nav_noticeboard"
-            android:icon="@drawable/noticeboard"
+            android:icon="@drawable/noticeboard_lb"
             android:title="Noticeboard" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/map"
+            android:icon="@drawable/map_lb"
             android:title="Map" />
         <item
             android:id="@+id/nav_education"
-            android:icon="@drawable/education"
+            android:icon="@drawable/education_lb"
             android:title="Educational Resources" />
         <item
             android:id="@+id/nav_account"
-            android:icon="@drawable/account"
+            android:icon="@drawable/account_lb"
             android:title="Your Account" />
         <item
             android:id="@+id/nav_your_reports"
-            android:icon="@drawable/people"
+            android:icon="@drawable/artboard"
             android:title="Your Reports" />
         <item
-            android:id="@+id/nav_notifications"
-            android:icon="@drawable/notifications"
-            android:title="Notifications" />
-        <item
             android:id="@+id/nav_accessibility"
-            android:icon="@drawable/accessibility"
+            android:icon="@drawable/accessibility_lb"
             android:title="Accessibility" />
     </group>
 
     <item
         android:id="@+id/nav_sign_out"
-        android:icon="@drawable/logout"
+        android:icon="@drawable/sign_out_lb"
         android:title="Sign Out" />
     <item
         android:id="@+id/nav_register"
-        android:icon="@drawable/register"
+        android:icon="@drawable/register_lb"
         android:title="Register" />
     <item
         android:id="@+id/nav_login"
-        android:icon="@drawable/login"
+        android:icon="@drawable/login_lb"
         android:title="Login" />
 
 </menu>
