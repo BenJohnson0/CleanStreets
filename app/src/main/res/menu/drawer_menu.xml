@@ -4,34 +4,34 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/home_lb"
+            android:icon="@drawable/artboard_3"
             android:title="Home"
             />
         <item
             android:id="@+id/nav_add_report"
-            android:icon="@drawable/add_report_lb"
+            android:icon="@drawable/artboard_2"
             android:title="Add New Report"
             />
         <item
             android:id="@+id/nav_statistics"
-            android:icon="@drawable/analytics_lb"
+            android:icon="@drawable/artboard_4"
             android:title="Analytics"
             />
         <item
             android:id="@+id/nav_noticeboard"
-            android:icon="@drawable/noticeboard_lb"
+            android:icon="@drawable/artboard_5"
             android:title="Noticeboard" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/map_lb"
+            android:icon="@drawable/artboard_6"
             android:title="Map" />
         <item
             android:id="@+id/nav_education"
-            android:icon="@drawable/education_lb"
+            android:icon="@drawable/artboard_7"
             android:title="Educational Resources" />
         <item
             android:id="@+id/nav_account"
-            android:icon="@drawable/account_lb"
+            android:icon="@drawable/artboard_8"
             android:title="Your Account" />
         <item
             android:id="@+id/nav_your_reports"
@@ -39,21 +39,21 @@
             android:title="Your Reports" />
         <item
             android:id="@+id/nav_accessibility"
-            android:icon="@drawable/accessibility_lb"
+            android:icon="@drawable/artboard_11"
             android:title="Accessibility" />
     </group>
 
     <item
         android:id="@+id/nav_sign_out"
-        android:icon="@drawable/sign_out_lb"
+        android:icon="@drawable/artboard_12"
         android:title="Sign Out" />
     <item
         android:id="@+id/nav_register"
-        android:icon="@drawable/register_lb"
+        android:icon="@drawable/artboard_9"
         android:title="Register" />
     <item
         android:id="@+id/nav_login"
-        android:icon="@drawable/login_lb"
+        android:icon="@drawable/artboard_13"
         android:title="Login" />
 
 </menu>
