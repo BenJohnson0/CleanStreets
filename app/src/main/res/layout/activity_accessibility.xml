@@ -8,11 +8,17 @@
     android:background="@color/colorPrimary"
     android:padding="16dp">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/secondary_lb"
+        android:layout_gravity="center"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Font Size Adjustment"
-        android:layout_marginTop="120dp"
+        android:text="Font Size"
+        android:layout_marginTop="30dp"
         android:textSize="24sp"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
@@ -23,8 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:color="@color/colorPrimaryDark"
-        android:max="30"
-        android:progress="16"
+        android:max="32"
+        android:min="16"
+        android:progress="24"
         android:layout_marginBottom="16dp"/>
 
     <TextView
@@ -40,19 +47,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Colour Inversion"
+        android:layout_marginTop="40dp"
+        android:text="App Colours"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
 
     <CheckBox
-        android:id="@+id/color_inversion_checkbox"
+        android:id="@+id/color_simple_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
-        android:text="Invert Colours"/>
+        android:text="Simplify Colours"/>
 
 </LinearLayout>
