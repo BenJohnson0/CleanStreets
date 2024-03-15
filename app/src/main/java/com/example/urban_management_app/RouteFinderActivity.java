@@ -220,9 +220,6 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin="+extractCoordinates(String.valueOf(origin))+"&destination="+
                 extractCoordinates(String.valueOf(destination))+"&mode=walking&key="+apiKey;
 
-        //TODO: remove after testing:
-        // https://maps.googleapis.com/maps/api/directions/json?origin=53.3455708378654,%20-6.27221675017766&destination=53.34585903227803,%20-6.4062932793566585&mode=walking&key=AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM
-
         // make a GET request to Google Directions API with OkHttpClient
         OkHttpClient client = new OkHttpClient();
 
