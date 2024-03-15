@@ -3,9 +3,12 @@ package com.example.urban_management_app;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -18,6 +21,8 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Locale;
 
 public class MapSelectionActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -74,14 +79,73 @@ public class MapSelectionActivity extends FragmentActivity implements OnMapReady
             double selectedLatitude = latLng.latitude;
             double selectedLongitude = latLng.longitude;
 
-            // pass the selected coordinates back to the AddReportActivity
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("latitude", selectedLatitude);
-            resultIntent.putExtra("longitude", selectedLongitude);
-            setResult(RESULT_OK, resultIntent);
-            finish();
+            // Check if the selected coordinates are inside Dublin city
+            if (isInsideDublin(selectedLatitude, selectedLongitude)) {
+                // Get the geocoded address for the selected location
+                String address = geocodeLocation(selectedLatitude, selectedLongitude);
+
+                // Show a popup asking the user to confirm the geocoded location
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Confirm Location");
+                builder.setMessage("Selected location:\n" + address + "\n\nDo you want to use this location?");
+                builder.setPositiveButton("Yes", (dialog, which) -> {
+                    // Pass the selected coordinates and address back to the AddReportActivity
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("latitude", selectedLatitude);
+                    resultIntent.putExtra("longitude", selectedLongitude);
+                    resultIntent.putExtra("address", address);
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                });
+                builder.setNegativeButton("No", (dialog, which) -> {
+                    // Dismiss the dialog
+                    dialog.dismiss();
+                });
+                builder.show();
+            } else {
+                // show message popup indicating that the user needs to select a location within Dublin city
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Location Outside Dublin");
+                builder.setMessage("Please select a location within Dublin city.");
+                builder.setPositiveButton("OK", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+                builder.show();
+            }
         });
     }
+
+    // function to geocode latitude and longitude coordinates into an address
+    private String geocodeLocation(double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        String addressText = "Unknown Location";
+
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && addresses.size() > 0) {
+                Address address = addresses.get(0);
+                addressText = address.getAddressLine(0);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return addressText;
+    }
+
+    // function to check if the selected coordinates are inside Dublin city
+    private boolean isInsideDublin(double latitude, double longitude) {
+        // define boundaries of Dublin city
+        double minLatitude = 53.3064;
+        double maxLatitude = 53.4239;
+        double minLongitude = -6.4010;
+        double maxLongitude = -6.1025;
+
+        // check if the selected coordinates are within the boundaries
+        return (latitude >= minLatitude && latitude <= maxLatitude &&
+                longitude >= minLongitude && longitude <= maxLongitude);
+    }
+
 
     private void getLocationPermission() {
         if (ActivityCompat.checkSelfPermission(this.getApplicationContext(),
