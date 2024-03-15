@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -79,17 +80,17 @@ public class MapSelectionActivity extends FragmentActivity implements OnMapReady
             double selectedLatitude = latLng.latitude;
             double selectedLongitude = latLng.longitude;
 
-            // Check if the selected coordinates are inside Dublin city
+            // check if the selected coordinates are inside Dublin city
             if (isInsideDublin(selectedLatitude, selectedLongitude)) {
-                // Get the geocoded address for the selected location
+                // get the geocoded address for the selected location
                 String address = geocodeLocation(selectedLatitude, selectedLongitude);
 
-                // Show a popup asking the user to confirm the geocoded location
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                // show a confirmation popup
+                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
                 builder.setTitle("Confirm Location");
                 builder.setMessage("Selected location:\n" + address + "\n\nDo you want to use this location?");
                 builder.setPositiveButton("Yes", (dialog, which) -> {
-                    // Pass the selected coordinates and address back to the AddReportActivity
+                    // pass the selected coordinates and address back to the AddReportActivity
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("latitude", selectedLatitude);
                     resultIntent.putExtra("longitude", selectedLongitude);
@@ -98,13 +99,12 @@ public class MapSelectionActivity extends FragmentActivity implements OnMapReady
                     finish();
                 });
                 builder.setNegativeButton("No", (dialog, which) -> {
-                    // Dismiss the dialog
                     dialog.dismiss();
                 });
                 builder.show();
             } else {
                 // show message popup indicating that the user needs to select a location within Dublin city
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
                 builder.setTitle("Location Outside Dublin");
                 builder.setMessage("Please select a location within Dublin city.");
                 builder.setPositiveButton("OK", (dialog, which) -> {

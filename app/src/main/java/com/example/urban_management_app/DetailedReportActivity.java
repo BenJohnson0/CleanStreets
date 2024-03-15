@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -135,7 +136,7 @@ public class DetailedReportActivity extends AppCompatActivity {
     }
 
     private void showAmendOrDeleteDialog(final String reportId) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
         builder.setTitle("Edit Report");
         builder.setMessage("Are you sure you want to change, delete or update the status of this report?");
         builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
