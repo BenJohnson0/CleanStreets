@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -104,22 +106,42 @@ public class YourReportsActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Perform report deletion
-                        // Remove the report from the database
+                        // reference report in the database
                         DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports").child(report.getReportId());
+
+                        // delete the report data from the database
                         reportRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                // Report deleted successfully from database
-                                // Now remove the report from the list
+                                // report deleted successfully
                                 yourReportsAdapter.deleteReport(report);
-                                // Notify the adapter that data set has changed
                                 yourReportsAdapter.notifyDataSetChanged();
+
+                                // check if the report has an image URL associated with it
+                                if (report.getImageUrl() != null && !report.getImageUrl().isEmpty()) {
+                                    // get the reference to the image
+                                    StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(report.getImageUrl());
+
+                                    // delete the image from storage
+                                    imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // image deleted successfully
+                                            Toast.makeText(YourReportsActivity.this, "Report and associated image deleted successfully.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // failed to delete image
+                                            Toast.makeText(YourReportsActivity.this, "Failed to delete report image.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                // Report deletion failed
+                                // failed to delete report
                                 Toast.makeText(YourReportsActivity.this, "Failed to delete report.", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -128,10 +150,11 @@ public class YourReportsActivity extends AppCompatActivity {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing, user canceled deletion
+                        // cancel deletion
                     }
                 })
                 .show();
     }
+
 
 }

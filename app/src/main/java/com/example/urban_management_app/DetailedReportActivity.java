@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -138,7 +141,7 @@ public class DetailedReportActivity extends AppCompatActivity {
         builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Start the AmendReportActivity
+                // start the AmendReportActivity
                 Intent intent = new Intent(DetailedReportActivity.this, AmendReportActivity.class);
                 intent.putExtra("report_id", reportId);
                 startActivity(intent);
@@ -154,7 +157,7 @@ public class DetailedReportActivity extends AppCompatActivity {
         builder.setNeutralButton("Change Status", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Start the ChangeStatusActivity
+                // start the UpdateStatusActivity
                 Intent intent = new Intent(DetailedReportActivity.this, UpdateStatusActivity.class);
                 intent.putExtra("report_id", reportId);
                 startActivity(intent);
@@ -166,6 +169,45 @@ public class DetailedReportActivity extends AppCompatActivity {
 
     // function for deleting the report
     private void deleteReport(String reportId) {
+        DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports").child(reportId);
+        reportRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // get report object
+                Report report = dataSnapshot.getValue(Report.class);
+                if (report != null && report.getImageUrl() != null && !report.getImageUrl().isEmpty()) {
+                    // get the reference to the image
+                    StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(report.getImageUrl());
+
+                    // delete the image from storage
+                    imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // image deleted
+                            deleteReportFromDatabase(reportId);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // failed to delete image
+                            Toast.makeText(DetailedReportActivity.this, "Failed to delete report image.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    // if no image URL or report object found, just delete the report from the database
+                    deleteReportFromDatabase(reportId);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // handle error
+                Toast.makeText(DetailedReportActivity.this, "Failed to delete report, please try again later.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void deleteReportFromDatabase(String reportId) {
         DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports").child(reportId);
         reportRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
