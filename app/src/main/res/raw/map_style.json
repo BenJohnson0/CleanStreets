@@ -111,6 +111,18 @@
     ]
   },
   {
+    "featureType": "road",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "simplified"
+      },
+      {
+        "color": "#666666"
+      }
+    ]
+  },
+  {
     "featureType": "road.highway",
     "elementType": "geometry.fill",
     "stylers": [

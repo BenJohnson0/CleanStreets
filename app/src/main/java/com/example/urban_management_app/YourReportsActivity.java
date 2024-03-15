@@ -2,6 +2,7 @@ package com.example.urban_management_app;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -100,7 +101,7 @@ public class YourReportsActivity extends AppCompatActivity {
     }
 
     public void onReportDelete(Report report) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogCustom));
         builder.setTitle("Confirm Deletion")
                 .setMessage("Are you sure you want to delete this report?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
