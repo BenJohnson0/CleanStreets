@@ -20,16 +20,17 @@
         android:layout_height="wrap_content"
         android:text="@string/thank_you"
         android:textColor="@color/colorPrimaryDark"
+        android:layout_gravity="center"
         android:textSize="25sp"
         android:textStyle="italic"
-        android:layout_marginBottom="100dp"
-        android:layout_marginStart="90dp"/>
+        android:layout_marginBottom="100dp" />
 
     <EditText
         android:id="@+id/titleEditText"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:backgroundTint="#807A77"
+        android:paddingHorizontal="50dp"
         android:textColor="@color/colorPrimaryDark"
         android:textColorHint="#807A77"
         android:hint="@string/ex_new_report_title"

@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/text_view_title"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:paddingEnd="10dp"
         android:layout_marginTop="20dp"
@@ -27,7 +27,7 @@
         android:src="@drawable/logomark_lb"
         android:layout_toEndOf="@id/text_view_title"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:contentDescription="@string/small_cleanstreets_logo" />
 
     <EditText
@@ -36,6 +36,7 @@
         android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
+        android:paddingHorizontal="50dp"
         android:layout_below="@id/text_view_title"
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimaryDark"
@@ -66,6 +67,7 @@
         android:background="@drawable/round_corner"
         android:layout_marginTop="10dp"
         android:layout_marginStart="30dp"
+        android:textStyle="bold"
         android:layout_toEndOf="@id/location_title"
         android:textSize="20sp"
         android:text="@string/map" />
@@ -74,7 +76,7 @@
 
     <TextView
         android:id="@+id/text_view_size"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_select_map"
         android:layout_marginTop="35dp"
@@ -102,7 +104,7 @@
 
     <TextView
         android:id="@+id/text_view_urgency"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_size"
         android:layout_marginTop="35dp"
@@ -178,6 +180,7 @@
         android:textSize="20sp"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
+        android:textStyle="bold"
         android:text="@string/camera" />
 
 </RelativeLayout>

@@ -18,12 +18,11 @@
         android:id="@+id/title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
+
         android:text="@string/noticeboard"
         android:textColor="@color/colorPrimaryDark"
         android:background="@color/colorPrimary"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textAlignment="center" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -41,7 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="10dp"
-        android:padding="10dp"
         android:text="@string/add_post"
         android:textStyle="bold"
         android:textColor="@color/black"
