@@ -16,50 +16,112 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
-        android:src="@drawable/secondary_lb" />
+        android:src="@drawable/secondary_lb"
+        android:contentDescription="@string/cleanstreets_logo" />
+
+    <TextView
+        android:id="@+id/chart1_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/logoImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="@string/report_sizes_distribution"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:textStyle="italic"
+        />
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart1"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
-        android:layout_below="@id/logoImageView"
+        android:layout_below="@id/chart1_title"
         tools:ignore="MissingClass" />
+
+    <TextView
+        android:id="@+id/chart3_title"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chart1"
+        android:layout_centerHorizontal="true"
+        android:text="@string/reports_with_images"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:textStyle="italic" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart3"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
-        android:layout_below="@id/chart1"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/chart3_title"
         tools:ignore="MissingClass" />
+
+    <TextView
+        android:id="@+id/chart2_title"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chart3"
+        android:layout_centerHorizontal="true"
+        android:text="@string/post_tags_distribution"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:textStyle="italic" />
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart2"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
-        android:layout_below="@id/chart3"
-        android:layout_marginTop="32dp"
+        android:layout_below="@id/chart2_title"
+        android:layout_marginTop="10dp"
         tools:ignore="MissingClass" />
+
+    <TextView
+        android:id="@+id/chart4_title"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chart2"
+        android:layout_centerHorizontal="true"
+        android:text="@string/report_status"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:textStyle="italic" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart4"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
-        android:layout_below="@id/chart2"
-        android:layout_marginTop="32dp"
+        android:layout_below="@id/chart4_title"
+        android:layout_marginTop="10dp"
         tools:ignore="MissingClass" />
+
+    <TextView
+        android:id="@+id/chart5_title"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chart4"
+        android:layout_centerHorizontal="true"
+        android:text="@string/reports_made"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"
+        android:textStyle="italic" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart5"
         android:layout_width="match_parent"
         android:background="@color/thirdColor"
         android:layout_height="200dp"
-        android:layout_below="@id/chart4"
-        android:layout_marginTop="32dp"
+        android:layout_below="@id/chart5_title"
+        android:layout_marginTop="10dp"
         tools:ignore="MissingClass" />
 
 </RelativeLayout>

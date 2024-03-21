@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="You haven't made any reports!"
+        android:text="@string/you_haven_t_made_any_reports"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:visibility="gone" />

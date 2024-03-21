@@ -12,44 +12,50 @@
         android:id="@+id/text_view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingEnd="10dp"
         android:layout_marginTop="20dp"
-        android:text="Report Title"
+        android:text="@string/report_title"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="75px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="30sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:src="@drawable/logomark_lb"
-        android:layout_toRightOf="@id/text_view_title"
+        android:layout_toEndOf="@id/text_view_title"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginStart="10dp"
+        android:contentDescription="@string/small_cleanstreets_logo" />
 
     <EditText
         android:id="@+id/edit_text_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_below="@id/text_view_title"
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimaryDark"
-        android:hint="eg. broken glass"
-        android:inputType="text" />
+        android:hint="@string/eg_broken_glass"
+        android:inputType="text"
+        android:autofillHints="title" />
 
     <TextView
         android:id="@+id/location_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text_title"
+        android:paddingEnd="10dp"
         android:layout_marginTop="18dp"
-        android:text="Location: "
+        android:text="@string/location"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="50px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="22sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <Button
         android:id="@+id/button_select_map"
@@ -59,10 +65,10 @@
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/location_title"
+        android:layout_marginStart="30dp"
+        android:layout_toEndOf="@id/location_title"
         android:textSize="20sp"
-        android:text="Map" />
+        android:text="@string/map" />
 
 
 
@@ -72,11 +78,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button_select_map"
         android:layout_marginTop="35dp"
-        android:text="Size "
+        android:paddingEnd="10dp"
+        android:text="@string/size"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="50px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="22sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <Spinner
         android:id="@+id/spinner_size"
@@ -98,11 +106,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_size"
         android:layout_marginTop="35dp"
-        android:text="Urgency "
+        android:paddingEnd="10dp"
+        android:text="@string/urgency"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="50px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="22sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <Spinner
         android:id="@+id/spinner_urgency"
@@ -124,11 +134,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_urgency"
         android:layout_marginTop="35dp"
-        android:text="Attachment (optional)"
+        android:paddingEnd="10dp"
+        android:text="@string/attachment_optional"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="50px"
-        android:textAppearance="?android:textAppearanceMedium" />
+        android:textSize="22sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        tools:ignore="RtlSymmetry" />
 
     <ImageView
         android:id="@+id/image_view_attachment"
@@ -136,9 +148,10 @@
         android:layout_height="150dp"
         android:layout_below="@id/text_view_attachment"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:scaleType="centerCrop"
-        android:background="#F1EFED"/>
+        android:background="#F1EFED"
+        android:contentDescription="@string/image_view_of_report" />
 
     <Button
         android:id="@+id/button_submit"
@@ -150,7 +163,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:background="@drawable/round_corner"
-        android:text="Submit Report"
+        android:text="@string/submit_report"
         android:textColor="@color/colorSecondary"
         app:backgroundTint="@color/colorPrimaryDark"/>
 
@@ -158,13 +171,13 @@
         android:id="@+id/button_attach_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/image_view_attachment"
+        android:layout_toEndOf="@id/image_view_attachment"
         android:layout_below="@id/text_view_attachment"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="60dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
-        android:text="camera" />
+        android:text="@string/camera" />
 
 </RelativeLayout>

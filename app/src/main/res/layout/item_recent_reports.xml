@@ -79,7 +79,7 @@
             android:layout_height="20dp"
             android:src="@drawable/thumbs_up_icon"
             app:tint="#8BC34A"
-            android:contentDescription="thumbs up icon"
+            android:contentDescription="@string/thumbs_up_icon"
             android:layout_marginEnd="8dp" />
 
         <TextView
@@ -90,21 +90,6 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_marginEnd="16dp" />
-
-       <!-- <ImageView
-            android:id="@+id/thumbs_down_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/thumbs_down_icon"
-            android:layout_marginEnd="8dp" />
-
-        <TextView
-            android:id="@+id/thumbs_down_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp"
-            android:textStyle="bold" /> -->
     </LinearLayout>
 
 </LinearLayout>

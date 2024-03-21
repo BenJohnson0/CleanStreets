@@ -25,15 +25,15 @@
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_weight="1"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/secondary_lb" />
+            android:src="@drawable/secondary_lb"
+            android:contentDescription="@string/cleanstreets_logo" />
 
         <Button
             android:id="@+id/buttonNearest"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Find nearest report"
+            android:text="@string/find_nearest_report"
             android:textSize="23sp"
             android:layout_margin="5dp"
             android:backgroundTint="@color/colorSecondary"

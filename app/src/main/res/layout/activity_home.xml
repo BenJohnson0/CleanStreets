@@ -24,13 +24,26 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <TextView
+            android:id="@+id/title_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="@string/reports"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
+            android:textSize="30sp"
+            android:layout_below="@id/toolbar"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recent_reports_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
+            android:layout_below="@id/title_view"
             android:background="@color/colorPrimary"
-            android:padding="16dp"
+            android:padding="8dp"
             android:visibility="visible" />
 
     </RelativeLayout>

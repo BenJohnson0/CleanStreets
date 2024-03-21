@@ -12,18 +12,21 @@
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/secondary_lb" />
+        android:src="@drawable/secondary_lb"
+        android:contentDescription="@string/cleanstreets_logo" />
 
     <EditText
         android:id="@+id/editTextReply"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_marginTop="188dp"
         android:textColor="@color/colorPrimaryDark"
-        android:hint="Type your reply here, be nice!"
-        android:inputType="text"/>
+        android:hint="@string/type_your_reply_here_be_nice"
+        android:inputType="text"
+        android:autofillHints="text" />
 
     <Button
         android:id="@+id/buttonSendReply"
@@ -37,6 +40,6 @@
         android:background="@drawable/round_corner"
         android:textColor="@color/colorSecondary"
         app:backgroundTint="@color/colorPrimaryDark"
-        android:text="Send Reply"/>
+        android:text="@string/send_reply"/>
 
 </RelativeLayout>

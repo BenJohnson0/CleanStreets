@@ -13,13 +13,13 @@
         android:id="@+id/logoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/secondary_lb" />
+        android:src="@drawable/secondary_lb"
+        android:contentDescription="@string/cleanstreets_logo"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Be yourself."
+        android:text="@string/be_yourself"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
         android:textStyle="italic"
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/text_view_name"
@@ -43,24 +43,25 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Username: " />
+                android:text="@string/username" />
 
             <EditText
                 android:id="@+id/edit_text_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:backgroundTint="#807A77"
                 android:textColorHint="#807A77"
                 android:textColor="@color/colorPrimaryDark"
-                android:hint="New username here"
-                android:inputType="text" />
+                android:hint="@string/new_username_here"
+                android:inputType="text"
+                android:autofillHints="username" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:layout_marginTop="16dp">
 
             <TextView
@@ -69,24 +70,25 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Email: " />
+                android:text="@string/email" />
 
             <EditText
                 android:id="@+id/edit_text_email"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:backgroundTint="#807A77"
                 android:textColorHint="#807A77"
                 android:textColor="@color/colorPrimaryDark"
-                android:hint="New email here"
-                android:inputType="textEmailAddress" />
+                android:hint="@string/new_email_here"
+                android:inputType="textEmailAddress"
+                android:autofillHints="emailAddress" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:layout_marginTop="16dp">
 
             <TextView
@@ -95,48 +97,52 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Password: " />
+                android:text="@string/password" />
 
             <EditText
                 android:id="@+id/edit_text_password"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:backgroundTint="#807A77"
                 android:textColorHint="#807A77"
                 android:textColor="@color/colorPrimaryDark"
                 android:inputType="textPassword"
-                android:hint="New password here"/>
+                android:hint="@string/new_password_here"
+                android:autofillHints="password" />
         </LinearLayout>
 
         <Button
             android:id="@+id/button_update"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="45dp"
             android:background="@drawable/round_corner"
-            android:textSize="25sp"
+            android:textSize="23sp"
             app:backgroundTint="@color/colorSecondary"
-            android:text="Update username"
+            android:text="@string/update_username"
             />
 
         <Button
             android:id="@+id/button_change_password"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/round_corner"
-            android:textSize="24sp"
+            android:textSize="23sp"
             app:backgroundTint="@color/colorSecondary"
-            android:text="change Password" />
+            android:text="@string/change_password" />
 
         <Button
             android:id="@+id/button_delete"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/round_corner"
-            android:textSize="25sp"
+            android:textSize="23sp"
             app:backgroundTint="@color/colorSecondary"
-            android:text="Delete Account" />
+            android:text="@string/delete_account" />
     </LinearLayout>
 </LinearLayout>

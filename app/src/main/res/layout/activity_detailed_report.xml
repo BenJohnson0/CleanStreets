@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="140dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/secondary_lb" />
+        android:src="@drawable/secondary_lb"
+        android:contentDescription="@string/cleanstreets_logo" />
 
     <ImageView
         android:id="@+id/reportImageView"
@@ -21,7 +22,8 @@
         android:layout_height="220dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/logoImageView"
-        android:background="@drawable/no_image"/>
+        android:background="@drawable/no_image"
+        android:contentDescription="@string/detailed_post_image" />
 
     <TextView
         android:id="@+id/titleTextView"
@@ -30,7 +32,7 @@
         android:layout_below="@id/reportImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textSize="100px"
+        android:textSize="30sp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark" />
 
@@ -41,7 +43,7 @@
         android:layout_below="@id/titleTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textSize="55px"
+        android:textSize="22sp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -52,7 +54,7 @@
         android:layout_below="@id/locationTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textSize="55px"
+        android:textSize="22sp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -63,7 +65,7 @@
         android:layout_below="@id/sizeTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textSize="55px"
+        android:textSize="22sp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -72,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/urgencyTextView"
-        android:text="Edit Report"
+        android:text="@string/edit_report"
         app:backgroundTint="@color/colorSecondary"
         android:background="@drawable/round_corner"
         android:layout_centerHorizontal="true"

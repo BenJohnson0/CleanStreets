@@ -79,7 +79,7 @@
             android:layout_height="35dp"
             android:src="@drawable/delete_icon"
             app:tint="#F44336"
-            android:contentDescription="delete icon" />
+            android:contentDescription="@string/delete_icon" />
     </LinearLayout>
 
 </LinearLayout>

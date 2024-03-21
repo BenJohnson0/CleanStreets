@@ -13,12 +13,13 @@
         android:layout_height="wrap_content"
         android:src="@drawable/main_logo_white"
         android:layout_marginBottom="0dp"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="0dp"
+        android:contentDescription="@string/cleanstreets_logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Join the club!"
+        android:text="@string/join_the_club"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"
         android:layout_marginBottom="50dp"
@@ -32,7 +33,9 @@
         android:textColor="@color/colorPrimaryDark"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:hint="Username" />
+        android:hint="@string/username"
+        android:autofillHints="username"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -41,8 +44,9 @@
         android:textColor="@color/colorPrimaryDark"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:autofillHints="emailAddress" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -51,8 +55,9 @@
         android:textColor="@color/colorPrimaryDark"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:autofillHints="password" />
 
     <Button
         android:id="@+id/buttonRegister"
@@ -62,7 +67,7 @@
         android:background="@drawable/round_corner"
         android:layout_marginTop="55dp"
         android:textSize="25sp"
-        android:text="Register" />
+        android:text="@string/register" />
 
     <Button
         android:id="@+id/buttonReturn"
@@ -72,6 +77,6 @@
         android:background="@drawable/round_corner"
         android:layout_marginTop="20dp"
         android:textSize="25sp"
-        android:text="go back" />
+        android:text="@string/go_back" />
 
 </LinearLayout>

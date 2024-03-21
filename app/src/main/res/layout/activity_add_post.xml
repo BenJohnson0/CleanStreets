@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:text="Post Title"
+        android:text="@string/post_title"
         android:textStyle="italic|bold"
         android:paddingEnd="15dp"
         android:textColor="@color/colorPrimaryDark"
@@ -23,15 +23,16 @@
 
     <EditText
         android:id="@+id/edit_text_post_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_below="@id/text_view_post"
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimaryDark"
-        android:hint="Organising an event...?"
-        android:inputType="text" />
+        android:hint="@string/organising_an_event"
+        android:inputType="text"
+        android:autofillHints="text" />
 
     <TextView
         android:id="@+id/text_view_content"
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text_post_title"
         android:layout_marginTop="16dp"
-        android:text="Details"
+        android:text="@string/details"
         android:paddingEnd="15dp"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
@@ -49,15 +50,16 @@
 
     <EditText
         android:id="@+id/edit_text_post_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_below="@id/text_view_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimaryDark"
-        android:hint="Enter details about your post!"
-        android:inputType="text" />
+        android:hint="@string/enter_details_about_your_post"
+        android:inputType="text"
+        android:autofillHints="text" />
 
     <TextView
         android:id="@+id/text_view_refReport"
@@ -65,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text_post_content"
         android:layout_marginTop="16dp"
-        android:text="Referenced Report: "
+        android:text="@string/referenced_report"
         android:paddingEnd="15dp"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
@@ -90,7 +92,7 @@
         android:layout_below="@id/spinner_refReport"
         android:layout_marginTop="16dp"
         android:paddingEnd="15dp"
-        android:text="Postcode"
+        android:text="@string/postcode"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
@@ -115,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_postcode"
         android:layout_marginTop="16dp"
-        android:text="Tags"
+        android:text="@string/tags"
         android:paddingEnd="15dp"
         android:textStyle="italic|bold"
         android:textColor="@color/colorPrimaryDark"
@@ -145,7 +147,7 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:background="@drawable/round_corner"
-        android:text="Submit Post"
+        android:text="@string/submit_post"
         android:textColor="@color/colorSecondary"
         app:backgroundTint="@color/colorPrimaryDark"/>
 

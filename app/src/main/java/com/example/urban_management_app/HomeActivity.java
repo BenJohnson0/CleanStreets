@@ -214,7 +214,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_accessibility:
                 // notification settings
-                showToast("Accessibility");
                 startActivity(new Intent(HomeActivity.this, AccessibilityActivity.class));
                 break;
             case R.id.nav_statistics:

@@ -24,7 +24,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="5dp"
         android:padding="10dp"
-        android:text="Route Finder"
+        android:text="@string/route_finder"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="23sp"
         android:textStyle="bold" />

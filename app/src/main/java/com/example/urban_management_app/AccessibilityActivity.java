@@ -65,6 +65,6 @@ public class AccessibilityActivity extends AppCompatActivity {
     }
 
     private void applyAppWideFontSize(int fontSize) {
-        //todo: if needed
+        //todo: accessibility feature to be implemented
     }
 }
