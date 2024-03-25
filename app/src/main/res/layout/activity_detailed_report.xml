@@ -21,17 +21,17 @@
         android:layout_width="220dp"
         android:layout_height="220dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/logoImageView"
-        android:background="@drawable/no_image"
+        android:layout_below="@id/titleTextView"
+        android:background="@drawable/no_image_v4"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/detailed_post_image" />
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/reportImageView"
+        android:layout_below="@id/logoImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
         android:textSize="30sp"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark" />
@@ -40,7 +40,7 @@
         android:id="@+id/locationTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
+        android:layout_below="@id/reportImageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:textSize="22sp"
