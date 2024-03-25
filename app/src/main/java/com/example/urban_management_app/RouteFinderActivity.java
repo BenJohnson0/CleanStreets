@@ -1,7 +1,7 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import static java.nio.charset.StandardCharsets.UTF_8;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,18 +11,15 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.maps.model.EncodedPolyline;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,36 +27,24 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
 import com.google.maps.android.PolyUtil;
-import com.google.maps.model.DirectionsLeg;
-import com.google.maps.model.DirectionsResult;
-import com.google.maps.model.DirectionsRoute;
-import com.google.maps.model.DirectionsStep;
-
-
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.Route;
 
 public class RouteFinderActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -187,13 +172,14 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
     }
 
     private static String extractPolyline(String jsonResponse) {
-        // Parse the JSON response
+        // parse the JSON response
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = jsonParser.parse(jsonResponse).getAsJsonObject();
 
-        // Check if there are routes in the response
+        // check if there are routes in the response
         if (jsonObject.has("routes") && jsonObject.getAsJsonArray("routes").size() > 0) {
-            // Extract the polyline string from the "points" property of "overview_polyline"
+
+            // extract the polyline string from the "points" property of "overview_polyline"
             JsonObject route = jsonObject.getAsJsonArray("routes").get(0).getAsJsonObject();
             if (route.has("overview_polyline")) {
                 JsonObject overviewPolyline = route.getAsJsonObject("overview_polyline");
@@ -203,7 +189,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
             }
         }
 
-        // Return an empty string if the polyline is not found
+        // return an empty string if the polyline is not found
         return "";
     }
 
@@ -213,7 +199,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
             return;
         }
 
-        //TODO: hide
+        //TODO: hide?
         String apiKey = "AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM";
 
         // URL for Google Directions API
@@ -244,7 +230,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
 
                 List<LatLng> polylinePoints = PolyUtil.decode(polyline);
 
-                // Polyline can cause issues on main thread
+                // polyline can cause issues on main thread
                 // so, start the process in a separate thread
                 new Thread(() -> {
                     PolylineOptions polylineOptions = new PolylineOptions();
@@ -288,7 +274,7 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
     private void checkLocationServiceEnabled() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            // Prompt the user to enable location services
+            // prompt the user to enable location services
             new AlertDialog.Builder(this)
                     .setTitle("Location Services Not Enabled")
                     .setMessage("Please enable location services to proceed.")

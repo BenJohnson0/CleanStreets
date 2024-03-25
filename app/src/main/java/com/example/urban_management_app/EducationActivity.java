@@ -1,13 +1,15 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import android.os.Bundle;
 import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//TODO: expand on this if I have time
+//TODO: expand on this in future versions
 public class EducationActivity extends AppCompatActivity {
 
+    // simple screen that loads DCC Waste Management website
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

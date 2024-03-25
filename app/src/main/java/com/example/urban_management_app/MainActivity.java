@@ -1,5 +1,6 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

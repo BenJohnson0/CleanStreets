@@ -1,5 +1,6 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -25,11 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -71,10 +70,10 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void loadReportsData() {
-        // Initialize a HashMap to store the count of reports made each day
+        // initialize HashMap to store the count of reports made each day
         HashMap<String, Integer> reportsPerDay = new HashMap<>();
 
-        // Query Firebase to count reports made each day
+        // query Firebase to count reports made each day
         DatabaseReference reportsRef = FirebaseDatabase.getInstance().getReference("reports");
         reportsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -82,11 +81,11 @@ public class DashboardActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Report report = snapshot.getValue(Report.class);
                     if (report != null) {
-                        // Extract the timestamp and format it to get the date (day)
+                        // extract the timestamp and format to get the date
                         long timestamp = parseTimestamp(report.getTimestamp());
                         String date = getFormattedDate(timestamp);
 
-                        // Increment the count of reports made on that day
+                        // increment the count of reports made on that day
                         if (reportsPerDay.containsKey(date)) {
                             reportsPerDay.put(date, reportsPerDay.get(date) + 1);
                         } else {
@@ -95,7 +94,7 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                 }
 
-                // Create entries for the line chart
+                // create entries for the line chart
                 List<Entry> entries = new ArrayList<>();
                 List<String> labels = new ArrayList<>();
 
@@ -106,36 +105,37 @@ public class DashboardActivity extends AppCompatActivity {
                     labels.add(date);
                 }
 
-                // Display data on the line chart
+                // display data on the line chart
                 displayLineChart(entries, labels);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle onCancelled
+                // todo: handle cancelled
             }
         });
     }
 
     private long parseTimestamp(String timestamp) {
         try {
-            // Define the date format of your timestamp string
+            // define the date format of your timestamp string
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-            // Parse the timestamp string into a Date object
+            // parse the timestamp string into a Date object
             Date date = sdf.parse(timestamp);
-            // Return the milliseconds since the Unix epoch
+            // return the milliseconds since the Unix epoch
             return date.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
-            return 0; // Return 0 or handle the error as appropriate for your application
+            // return 0 (error)
+            return 0;
         }
     }
 
 
     private String getFormattedDate(long timestamp) {
-        // Convert timestamp to Date object
+        // convert timestamp to Date object
         Date date = new Date(timestamp);
-        // Format the date as "yyyy-MM-dd"
+        // format date as "yyyy-MM-dd"
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return sdf.format(date);
     }
@@ -177,7 +177,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle onCancelled
+                // todo: handle cancelled
             }
         });
     }
@@ -219,6 +219,7 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                // todo: handle cancelled
             }
         });
     }

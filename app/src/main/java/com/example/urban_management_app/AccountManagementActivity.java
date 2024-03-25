@@ -1,5 +1,6 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -11,10 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,12 +26,10 @@ import java.io.IOException;
 
 public class AccountManagementActivity extends AppCompatActivity {
 
+    // declare UI and Firebase elements
     private EditText editTextName;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private Button buttonUpdate;
-    private Button buttonChangePassword;
-    private Button buttonDelete;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser currentUser;
@@ -44,13 +41,14 @@ public class AccountManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_management);
 
+        // initialize UI and Firebase elements
         editTextName = findViewById(R.id.edit_text_name);
         editTextEmail = findViewById(R.id.edit_text_email);
         editTextPassword = findViewById(R.id.edit_text_password);
 
-        buttonUpdate = findViewById(R.id.button_update);
-        buttonChangePassword = findViewById(R.id.button_change_password);
-        buttonDelete = findViewById(R.id.button_delete);
+        Button buttonUpdate = findViewById(R.id.button_update);
+        Button buttonChangePassword = findViewById(R.id.button_change_password);
+        Button buttonDelete = findViewById(R.id.button_delete);
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
@@ -58,6 +56,7 @@ public class AccountManagementActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Updating account...");
 
+        // check if currentUser is not null and set name and email
         if (currentUser != null) {
             String name = currentUser.getDisplayName();
             String email = currentUser.getEmail();
@@ -66,6 +65,7 @@ public class AccountManagementActivity extends AppCompatActivity {
             editTextEmail.setText(email);
         }
 
+        // method to update user account information
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +77,7 @@ public class AccountManagementActivity extends AppCompatActivity {
             }
         });
 
+        // method to change user password
         buttonChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +85,7 @@ public class AccountManagementActivity extends AppCompatActivity {
             }
         });
 
+        // method for deleting an account
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,9 +95,11 @@ public class AccountManagementActivity extends AppCompatActivity {
     }
 
     private void updateAccount() throws IOException {
+        // get username and email
         String newUsername = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
 
+        // check if any field is empty
         if (TextUtils.isEmpty(newUsername) || TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -168,8 +172,10 @@ public class AccountManagementActivity extends AppCompatActivity {
 
 
     private void changePassword() {
+        // get new password
         String newPassword = editTextPassword.getText().toString().trim();
 
+        // check if new password is empty
         if (TextUtils.isEmpty(newPassword)) {
             Toast.makeText(this, "Please enter a new password", Toast.LENGTH_SHORT).show();
             return;
@@ -178,6 +184,7 @@ public class AccountManagementActivity extends AppCompatActivity {
         progressDialog.setMessage("Changing password...");
         progressDialog.show();
 
+        // update password if user exists
         if (currentUser != null) {
             currentUser.updatePassword(newPassword)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {

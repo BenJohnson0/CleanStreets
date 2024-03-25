@@ -1,14 +1,14 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
+// adapter class used for each Post
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private static List<Post> posts;

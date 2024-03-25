@@ -1,8 +1,8 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -82,6 +80,7 @@ public class AddPostActivity extends AppCompatActivity {
                         reportTitles.add(report.getTitle());
                     }
                 }
+
                 // populate spinner with report titles
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(AddPostActivity.this,
                         android.R.layout.simple_spinner_item, reportTitles);
@@ -106,10 +105,10 @@ public class AddPostActivity extends AppCompatActivity {
 
         // check if the title and content values are not empty and the title length is within 60 characters
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(content) || title.length() > 60) {
-            if (title.length() > 40) {
-                postTitle.setError("Title must not exceed 40 characters!");
+            if (title.length() > 60) {
+                postTitle.setError("Title must not exceed 60 characters!");
             }
-            Toast.makeText(this, "Please fill in all fields and keep the title length within 40 characters", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please fill in all fields and keep the title length within 60 characters", Toast.LENGTH_LONG).show();
             return;
         }
 

@@ -1,7 +1,7 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import com.google.android.gms.maps.model.LatLng;
-
 import java.util.List;
 
 public class DistanceCalculator {
@@ -46,7 +46,7 @@ public class DistanceCalculator {
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        // Earth radius in km
+        // earth radius in km
         double radius = 6371.0;
 
         return radius * c;

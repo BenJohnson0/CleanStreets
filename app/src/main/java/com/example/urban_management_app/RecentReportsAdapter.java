@@ -1,15 +1,21 @@
 package com.example.urban_management_app;
 
+// necessary imports
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.List;
 
 public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdapter.ViewHolder> {
@@ -72,18 +78,35 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        // Get the report at this position
+                        // get report at this position
                         Report clickedReport = reportList.get(position);
-                        // Increment the thumbs up count for this report
+                        // increment the thumbs up count for this report
                         clickedReport.incrementThumbsUpCount();
-                        // Update the UI
-                        thumbsUpCounter.setText(String.valueOf(clickedReport.getThumbsUpCount()));
+                        // update the UI
+                        updateThumbsUpCountLocally(clickedReport.getThumbsUpCount());
 
                         // Update the thumbs up count in the database
-                        FirebaseDatabase.getInstance().getReference("reports")
+                        DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference("reports")
                                 .child(clickedReport.getReportId())
-                                .child("thumbsUpCount")
-                                .setValue(clickedReport.getThumbsUpCount());
+                                .child("thumbsUpCount");
+                        reportRef.setValue(clickedReport.getThumbsUpCount())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        // successful thumbs up
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(itemView.getContext(), "Apologies, like could not be added", Toast.LENGTH_SHORT).show();
+
+                                        // restart the app using an Intent
+                                        Intent intent = new Intent(itemView.getContext(), MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        itemView.getContext().startActivity(intent);
+                                    }
+                                });
                     }
                 }
             });
@@ -102,6 +125,10 @@ public class RecentReportsAdapter extends RecyclerView.Adapter<RecentReportsAdap
                     }
                 }
             });
+        }
+
+        public void updateThumbsUpCountLocally(int thumbsUpCount) {
+            thumbsUpCounter.setText(String.valueOf(thumbsUpCount));
         }
 
         public void bind(Report report) {

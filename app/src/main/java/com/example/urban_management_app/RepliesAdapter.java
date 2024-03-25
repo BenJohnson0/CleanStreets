@@ -1,5 +1,6 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -1,12 +1,12 @@
 package com.example.urban_management_app;
 
+// necessary imports
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,14 +19,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,12 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -65,8 +59,6 @@ public class AddReportActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
-
-    //TODO: ADD REPORT IMAGE USING UPLOAD FROM GALLERY
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,12 +137,13 @@ public class AddReportActivity extends AppCompatActivity {
     }
 
     private File createImageFile() throws IOException {
-        // Create an image file name
+        // create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
-        // Save a file: path for use with ACTION_VIEW intents
+
+        // save a file path for use with ACTION_VIEW intents
         return imageFile;
     }
 
@@ -216,10 +209,10 @@ public class AddReportActivity extends AppCompatActivity {
 
         // check if the title, size, and urgency values are not empty and the title length is within 60 characters
         if (TextUtils.isEmpty(title) || TextUtils.isEmpty(size) || TextUtils.isEmpty(urgency) || title.length() > 60) {
-            if (title.length() > 40) {
-                editTextTitle.setError("Title must not exceed 40 characters!");
+            if (title.length() > 60) {
+                editTextTitle.setError("Title must not exceed 60 characters!");
             }
-            Toast.makeText(this, "Please fill in all fields and keep the title length within 40 characters", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please fill in all fields and keep the title length within 60 characters", Toast.LENGTH_LONG).show();
             return;
         }
 
