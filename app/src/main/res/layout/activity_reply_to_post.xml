@@ -23,6 +23,7 @@
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
         android:layout_marginTop="188dp"
+        android:paddingHorizontal="30dp"
         android:textColor="@color/colorPrimaryDark"
         android:hint="@string/type_your_reply_here_be_nice"
         android:inputType="text"

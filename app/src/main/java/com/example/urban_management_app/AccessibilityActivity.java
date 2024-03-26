@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,6 +61,14 @@ public class AccessibilityActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+
+        CheckBox colorSimpleCheckBox = findViewById(R.id.color_simple_checkbox);
+        colorSimpleCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                toggleColorTheme(isChecked);
+            }
+        });
     }
 
     // todo: save font size to shared preferences
@@ -70,5 +80,23 @@ public class AccessibilityActivity extends AppCompatActivity {
 
     private void applyAppWideFontSize(int fontSize) {
         //todo: accessibility feature to be implemented
+    }
+
+    private void toggleColorTheme(boolean isSimplified) {
+        if (isSimplified) {
+            // apply simplified color theme
+            findViewById(R.id.font_size_seek_bar).setBackgroundColor(getResources().getColor(R.color.colorSecondarySimple));
+            findViewById(R.id.example_text_view).setBackgroundColor(getResources().getColor(R.color.colorPrimarySimple));
+            findViewById(R.id.fontSizeTextView).setBackgroundColor(getResources().getColor(R.color.colorPrimarySimple));
+            findViewById(R.id.appColoursTextView).setBackgroundColor(getResources().getColor(R.color.colorPrimarySimple));
+            findViewById(R.id.color_simple_checkbox).setBackgroundColor(getResources().getColor(R.color.colorPrimarySimple));
+        } else {
+            // apply regular color theme
+            findViewById(R.id.font_size_seek_bar).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            findViewById(R.id.example_text_view).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            findViewById(R.id.fontSizeTextView).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            findViewById(R.id.appColoursTextView).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            findViewById(R.id.color_simple_checkbox).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        }
     }
 }

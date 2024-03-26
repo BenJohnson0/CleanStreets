@@ -22,7 +22,7 @@
         android:layout_height="220dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/titleTextView"
-        android:background="@drawable/no_image_v4"
+        android:background="@drawable/image13"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/detailed_post_image" />
 

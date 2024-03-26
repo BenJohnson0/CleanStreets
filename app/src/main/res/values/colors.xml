@@ -15,4 +15,8 @@
     <color name="thirdColor">#319ab9</color>
     <color name="chartColor">#E37B6F</color>
 
+    <color name="colorPrimarySimple">#000</color>
+    <color name="colorSecondarySimple">#fff</color>
+    <color name="thirdColorSimple">#6B6D71</color>
+
 </resources>

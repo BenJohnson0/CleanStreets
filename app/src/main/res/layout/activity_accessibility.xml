@@ -9,6 +9,7 @@
     android:padding="16dp">
 
     <ImageView
+        android:id="@+id/logoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/secondary_lb"
@@ -16,6 +17,7 @@
         android:contentDescription="@string/cleanstreets_logo"/>
 
     <TextView
+        android:id="@+id/fontSizeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/font_size"
@@ -23,6 +25,7 @@
         android:textSize="24sp"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
+        android:paddingEnd="10dp"
         android:layout_marginBottom="16dp"/>
 
     <SeekBar
@@ -41,16 +44,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/example_text"
+        android:paddingEnd="10dp"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginBottom="24dp"/>
 
     <TextView
+        android:id="@+id/appColoursTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/app_colours"
+        android:paddingEnd="10dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -60,8 +66,11 @@
         android:id="@+id/color_simple_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:shadowColor="@color/colorPrimaryDark"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
+        android:textColorHighlight="@color/colorPrimaryDark"
+        android:paddingEnd="10dp"
         android:text="@string/simplify_colours"/>
 
     <Button

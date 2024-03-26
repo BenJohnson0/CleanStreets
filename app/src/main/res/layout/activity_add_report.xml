@@ -36,13 +36,14 @@
         android:layout_height="48dp"
         android:backgroundTint="#807A77"
         android:textColorHint="#807A77"
-        android:paddingHorizontal="50dp"
+        android:paddingEnd="70dp"
         android:layout_below="@id/text_view_title"
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimaryDark"
         android:hint="@string/eg_broken_glass"
         android:inputType="text"
-        android:autofillHints="title" />
+        android:autofillHints="title"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/location_title"
