@@ -42,7 +42,7 @@ public class AccessibilityActivity extends AppCompatActivity {
         button_demo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtu.be/BknZLsyEfJE")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtu.be/VUXDetq8VEg")));
             }
         });
 
