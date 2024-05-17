@@ -199,8 +199,8 @@ public class RouteFinderActivity extends FragmentActivity implements OnMapReadyC
             return;
         }
 
-        //TODO: hide?
-        String apiKey = "AIzaSyC9LPKCQXaX0xMECbk9y-vEPjwgDjxeuUM";
+        // <removed personal API key>
+        String apiKey = "<use API key here>";
 
         // URL for Google Directions API
         String url = "https://maps.googleapis.com/maps/api/directions/json?origin="+extractCoordinates(String.valueOf(origin))+"&destination="+
